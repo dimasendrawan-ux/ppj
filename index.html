@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan Digital - Politeknik Penerbangan Jayapura</title>
+    
+    <!-- GOOGLE FONTS & FONTAWESOME ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- FIREBASE REALTIME DATABASE SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            --poltekbang-blue: #002868;
+            --poltekbang-blue-light: #0044a8;
+            --poltekbang-gold: #f59e0b;
+            --poltekbang-dark: #0f172a;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --bg-light: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* RUNNING TEXT TICKER DENGAN HARI & ZONA WAKTU (WIT) */
+        .ticker-bar {
+            background: #001e4e;
+            color: #fbbf24;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 3px solid var(--poltekbang-gold);
+            flex-wrap: wrap;
+        }
+
+        .ticker-label {
+            background: var(--poltekbang-gold);
+            color: #000;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 11px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .ticker-content {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-bar marquee {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fef08a;
+        }
+
+        .ticker-clock {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* HEADER DENGAN LOGO1.PNG */
+        .official-header {
+            background: var(--poltekbang-blue);
+            color: white;
+            padding: 12px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-logo img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .brand-text h2 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .brand-text p {
+            font-size: 11px;
+            color: #93c5fd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* TAB NAVIGATION HEADER */
+        .tab-buttons {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px;
+            border-radius: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 18px;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .tab-btn.active {
+            background: var(--poltekbang-gold);
+            color: #000;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.5);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 25px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        /* HERO BANNER SLIDER DENGAN GAMBAR 1.PNG, 3.PNG, & 11.JPG */
+        .hero-slider-container {
+            position: relative;
+            width: 100%;
+            height: 270px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(0, 40, 104, 0.2);
+            border-bottom: 4px solid var(--poltekbang-gold);
+        }
+
+        .slide-item {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide-item.active { opacity: 1; }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0, 40, 104, 0.85), rgba(15, 23, 42, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            color: white;
+            z-index: 2;
+        }
+
+        .hero-overlay h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+        .hero-overlay p { font-size: 13px; color: #e0f2fe; max-width: 700px; margin-bottom: 12px; }
+
+        .sound-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* FILTERS ALFABET A-Z */
+        .alphabet-filter {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .alpha-btn {
+            padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-main);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .alpha-btn:hover, .alpha-btn.active {
+            background: var(--poltekbang-blue);
+            color: white;
+            border-color: var(--poltekbang-blue);
+        }
+
+        /* WIDGET SENSOR SIDIK JARI */
+        .sensor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 520px;
+            margin: 0 auto 25px;
+        }
+
+        .fingerprint-scanner {
+            width: 100px;
+            height: 100px;
+            background: #f0f9ff;
+            border: 3px solid var(--poltekbang-blue-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            cursor: pointer;
+            color: var(--poltekbang-blue);
+            font-size: 45px;
+            transition: all 0.3s;
+        }
+
+        .fingerprint-scanner.scanning {
+            animation: pulseScan 1.2s infinite;
+            color: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        @keyframes pulseScan {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { box-shadow: 0 0 0 25px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .nim-input-group { display: flex; gap: 10px; margin-top: 15px; }
+        .nim-input-group input { flex: 1; padding: 10px 15px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 13px; text-align: center; font-weight: 600; }
+        .nim-input-group button { padding: 10px 20px; background: var(--poltekbang-blue); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+
+        .alert-box { display: none; padding: 14px; border-radius: 12px; margin-top: 15px; text-align: center; font-weight: 600; font-size: 13px; }
+        .alert-masuk { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .alert-keluar { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        /* CARDS & TABEL */
+        .card {
+            background: var(--card-bg);
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-title { font-size: 16px; font-weight: 600; color: var(--poltekbang-blue); display: flex; align-items: center; gap: 10px; }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #475569; }
+        input, select { width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; }
+
+        .btn { padding: 9px 16px; font-size: 12px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn-primary { background: var(--poltekbang-blue); color: white; }
+        .btn-success { background: var(--success-color); color: white; }
+        .btn-danger { background: var(--danger-color); color: white; }
+        .btn-excel { background: #16a34a; color: white; }
+
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; white-space: nowrap; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background: #f8fafc; color: #475569; font-weight: 600; }
+
+        .badge { padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; }
+        .badge-masuk { background: #d1fae5; color: #059669; }
+        .badge-keluar { background: #e0f2fe; color: #0284c7; }
+        .badge-pinjam { background: #fef3c7; color: #d97706; }
+        .badge-selesai { background: #f1f5f9; color: #64748b; }
+
+        .filter-box { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+        /* ADMIN SUB-MENU NAV */
+        .admin-subnav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .admin-sub-btn {
+            padding: 10px 18px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-main);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-sub-btn:hover { background: #e2e8f0; }
+        .admin-sub-btn.active {
+            background: var(--poltekbang-blue);
+            color: white;
+            border-color: var(--poltekbang-blue);
+            box-shadow: 0 4px 12px rgba(0, 40, 104, 0.25);
+        }
+
+        .admin-sub-pane { display: none; }
+        .admin-sub-pane.active { display: block; }
+
+        /* SEKSI TATA TERTIB & LARANGAN */
+        .rules-footer-section {
+            background: #ffffff;
+            border-top: 4px solid var(--poltekbang-gold);
+            padding: 25px 20px;
+            margin-top: 30px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        .rules-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--poltekbang-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .rule-card {
+            background: #fff5f5;
+            border: 1px solid #fecaca;
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.15);
+        }
+
+        .rule-icon-box {
+            width: 55px;
+            height: 55px;
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #dc2626;
+            font-size: 24px;
+            position: relative;
+        }
+
+        .rule-icon-box::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #dc2626;
+            transform: rotate(-45deg);
+        }
+
+        .rule-card h4 { font-size: 13px; font-weight: 700; color: #991b1b; margin-bottom: 4px; }
+        .rule-card p { font-size: 11px; color: #7f1d1d; line-height: 1.3; }
+        
+        footer {
+            background: var(--poltekbang-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 18px;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. TICKER PENGUMUMAN RESMI + HARI & ZONA WAKTU (WIT) -->
+    <div class="ticker-bar">
+        <span class="ticker-label">Pengumuman</span>
+        <div class="ticker-content">
+            <marquee behavior="scroll" direction="left" id="tickerText">Selamat Datang di Perpustakaan Digital Politeknik Penerbangan Jayapura — Budayakan Membaca untuk Penerbangan Indonesia yang Selamat, Aman, dan Nyaman.</marquee>
+        </div>
+        <div class="ticker-clock" id="clockWidget">
+            <i class="fa-solid fa-clock"></i> <span id="clockText">Memuat Waktu WIT...</span>
+        </div>
+    </div>
+
+    <!-- 2. HEADER RESMI KAMPUS DENGAN LOGO1.PNG -->
+    <header class="official-header">
+        <div class="brand-logo">
+            <img src="logo1.png" alt="Logo Poltekbang Jayapura">
+            <div class="brand-text">
+                <h2>UNIT PERPUSTAKAAN</h2>
+                <h2>POLITEKNIK PENERBANGAN JAYAPURA</h2>
+                <p>Kementerian Perhubungan Republik Indonesia</p>
+            </div>
+        </div>
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" id="btnTabAbsensi" onclick="switchTab('tab-kiosk')">
+                <i class="fa-solid fa-fingerprint"></i> Absensi Pengunjung
+            </button>
+            <button class="tab-btn" id="btnTabBuku" onclick="switchTab('tab-buku')">
+                <i class="fa-solid fa-book-open"></i> Jenis Buku Tersedia
+            </button>
+            <a href="https://repository.poltekbangjayapura.ac.id/" target="_blank" class="tab-btn" id="btnTabRepo">
+                <i class="fa-solid fa-graduation-cap"></i> Repository PPJ <i class="fa-solid fa-up-right-from-square" style="font-size: 10px;"></i>
+            </a>
+            <button class="tab-btn" id="btnTabAdmin" onclick="switchTab('tab-admin')">
+                <i class="fa-solid fa-user-shield"></i> Panel Administrator
+            </button>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <!-- ==================== TAB 1: ABSENSI PENGUNJUNG ==================== -->
+        <div id="tab-kiosk" class="tab-pane active">
+            <div class="hero-slider-container">
+                <div class="slide-item active" style="background-image: url('1.png');"></div>
+                <div class="slide-item" style="background-image: url('3.png');"></div>
+                <div class="slide-item" style="background-image: url('11.jpg');"></div>
+                
+                <div class="hero-overlay">
+                    <h1>Selamat Datang di Perpustakaan Digital<br>Poltekbang Jayapura</h1>
+                    <p>Silakan tempelkan sidik jari Anda pada sensor di bawah atau masukkan Nomor Induk Mahasiswa (NIM) untuk melakukan absensi kunjungan masuk dan keluar.</p>
+                    <div class="sound-indicator">
+                        <i class="fa-solid fa-volume-high"></i> Panduan Suara Otomatis Aktif
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET SENSOR SIDIK JARI -->
+            <div class="sensor-card">
+                <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <p style="font-weight: 600; color: #475569;">Sentuh / Tempelkan Sidik Jari</p>
+
+                <div class="nim-input-group">
+                    <input type="text" id="kioskNIM" placeholder="Atau ketik NIM / ID Anggota di sini">
+                    <button onclick="prosesAbsensiNIM()"><i class="fa-solid fa-arrow-right"></i> Proses</button>
+                </div>
+
+                <div id="kioskAlert" class="alert-box"></div>
+            </div>
+
+            <!-- LOG REAL-TIME HARIAN -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Log Kunjungan Hari Ini</span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hari & Tanggal</th>
+                                <th>Jam</th>
+                                <th>NIM / ID</th>
+                                <th>Nama Pengunjung</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logKunjunganBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: JENIS BUKU TERSEDIA (A-Z) ==================== -->
+        <div id="tab-buku" class="tab-pane">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fa-solid fa-book-open"></i> Jenis Buku Tersedia (Urut Alfabet A-Z)</span>
+                    <div class="filter-box">
+                        <input type="text" id="cariBukuKatalog" placeholder="Cari judul, kategori, atau penulis..." onkeyup="cariBukuInKatalog()">
+                    </div>
+                </div>
+
+                <div class="alphabet-filter" id="alphabetContainer"></div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Abjad</th>
+                                <th>Kode Buku</th>
+                                <th>Judul Buku (A-Z)</th>
+                                <th>Kategori / Bidang</th>
+                                <th>Penulis / Penerbit</th>
+                                <th>Stok</th>
+                                <th>Status Buku</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelKatalogBukuBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: PANEL ADMINISTRATOR ==================== -->
+        <div id="tab-admin" class="tab-pane">
+            
+            <div class="card" style="background: #e0f2fe; border-left: 5px solid var(--poltekbang-blue); margin-bottom: 20px;">
+                <div class="card-header" style="border: none; margin: 0; padding: 0;">
+                    <span class="card-title" style="color: var(--poltekbang-blue);">
+                        <i class="fa-solid fa-user-gear"></i> Panel Administrator Aktif
+                    </span>
+                    <button class="btn btn-danger" onclick="logoutAdmin()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout Admin
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUB-MENU MODUL ADMINISTRASI -->
+            <div class="admin-subnav">
+                <button class="admin-sub-btn active" id="subBtnBuku" onclick="switchAdminSub('sub-buku')">
+                    <i class="fa-solid fa-book-medical"></i> 1. Kelola Koleksi Buku
+                </button>
+                <button class="admin-sub-btn" id="subBtnPengumuman" onclick="switchAdminSub('sub-pengumuman')">
+                    <i class="fa-solid fa-bullhorn"></i> 2. Papan Pengumuman
+                </button>
+                <button class="admin-sub-btn" id="subBtnAnggota" onclick="switchAdminSub('sub-anggota')">
+                    <i class="fa-solid fa-id-card-clip"></i> 3. Registrasi Anggota
+                </button>
+                <button class="admin-sub-btn" id="subBtnPinjam" onclick="switchAdminSub('sub-pinjam')">
+                    <i class="fa-solid fa-book-bookmark"></i> 4. Catat Peminjaman
+                </button>
+                <button class="admin-sub-btn" id="subBtnLaporan" onclick="switchAdminSub('sub-laporan')">
+                    <i class="fa-solid fa-file-invoice"></i> 5. Laporan & Tarik Data
+                </button>
+            </div>
+
+            <!-- SUB-MODUL 1: TAMBAH BUKU BARU -->
+            <div id="sub-buku" class="admin-sub-pane active">
+                <div class="card" style="border-top: 4px solid var(--poltekbang-gold);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-book-medical"></i> Tambah Koleksi Buku Baru</span>
+                    </div>
+                    <form id="formTambahBuku">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="addKode">Kode Buku:</label>
+                                <input type="text" id="addKode" placeholder="Contoh: BK-PPJ-006" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addJudul">Judul Buku Lengkap:</label>
+                                <input type="text" id="addJudul" placeholder="Contoh: Aviasi Dan Navigasi Udara" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addKategori">Kategori / Bidang ilmu:</label>
+                                <input type="text" id="addKategori" placeholder="Contoh: Penerbangan / Teknik" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addPenulis">Penulis / Penerbit:</label>
+                                <input type="text" id="addPenulis" placeholder="Contoh: Dr. Ir. Susanto, M.T." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="addStok">Jumlah Stok Buku:</label>
+                                <input type="number" id="addStok" value="5" min="1" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" style="margin-top: 8px;">
+                            <i class="fa-solid fa-plus-circle"></i> Simpan Buku Baru Ke Cloud
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SUB-MODUL 2: EDIT PAPAN PENGUMUMAN -->
+            <div id="sub-pengumuman" class="admin-sub-pane">
+                <div class="card" style="border-top: 4px solid var(--poltekbang-blue-light);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-bullhorn"></i> Pengaturan Papan Pengumuman Teks Berjalan</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPengumuman">Teks Pengumuman Baru:</label>
+                        <input type="text" id="inputPengumuman" placeholder="Masukkan teks pengumuman berjalan baru...">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="simpanPengumuman()">
+                        <i class="fa-solid fa-floppy-disk"></i> Simpan & Perbarui Ke Semua Device
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUB-MODUL 3: REGISTRASI ANGGOTA -->
+            <div id="sub-anggota" class="admin-sub-pane">
+                <div class="card" style="border-top: 4px solid var(--success-color);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-id-card-clip"></i> Registrasi Master Data Anggota</span>
+                    </div>
+                    <form id="formRegistrasiAnggota">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="regNIM">NIM / Nomor Induk:</label>
+                                <input type="text" id="regNIM" placeholder="Contoh: 2026001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regNama">Nama Lengkap:</label>
+                                <input type="text" id="regNama" placeholder="Contoh: Taruna Ahmad Fauzi" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="regKategori">Kategori:</label>
+                                <select id="regKategori">
+                                    <option value="Taruna/Mahasiswa">Taruna / Mahasiswa</option>
+                                    <option value="Dosen/Instruktur">Dosen / Instruktur</option>
+                                    <option value="Staf/Umum">Staf / Umum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success" style="margin-top: 8px;">
+                            <i class="fa-solid fa-user-plus"></i> Daftarkan Anggota Baru
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SUB-MODUL 4: PEMINJAMAN BUKU -->
+            <div id="sub-pinjam" class="admin-sub-pane">
+                <div class="card" style="border-top: 4px solid var(--poltekbang-gold);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-book-bookmark"></i> Catat Peminjaman Buku</span>
+                    </div>
+
+                    <form id="formPeminjamanBuku">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="pinjamNIM">NIM Anggota Terdaftar:</label>
+                                <input type="text" id="pinjamNIM" placeholder="Masukkan NIM terdaftar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pinjamJudul">Judul Buku:</label>
+                                <input type="text" id="pinjamJudul" placeholder="Contoh: Kelistrikan Bandara & SCADA" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pinjamLama">Lama Pinjam (Hari):</label>
+                                <input type="number" id="pinjamLama" value="7" min="1" max="14" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
+                            <i class="fa-solid fa-bookmark"></i> Simpan Peminjaman
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SUB-MODUL 5: REKAPITULASI & DUA MENU TARIK DATA -->
+            <div id="sub-laporan" class="admin-sub-pane">
+                <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-file-invoice"></i> Rekapitulasi Laporan & Export Data</span>
+                        
+                        <div class="filter-box">
+                            <input type="date" id="filterTanggalReport">
+                            <button class="btn btn-primary" onclick="filterDanRenderLaporan()"><i class="fa-solid fa-filter"></i> Filter Hari Ini</button>
+                        </div>
+                    </div>
+
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 12px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <h4 style="font-size: 13px; font-weight: 700; color: #166534;"><i class="fa-solid fa-download"></i> Ospi Ekspor & Tarik Data Administrasi:</h4>
+                            <p style="font-size: 11px; color: #15803d;">Pilih kategori data yang ingin ditarik ke format spreadsheet (CSV):</p>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-excel" onclick="exportLaporanPengunjungCSV()">
+                                <i class="fa-solid fa-users"></i> 1. Tarik Data Pengunjung Harian
+                            </button>
+                            <button class="btn btn-excel" style="background: #0284c7;" onclick="exportLaporanPeminjamanCSV()">
+                                <i class="fa-solid fa-book-journal-whills"></i> 2. Tarik Data Peminjaman Buku
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Hari</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Jam Keluar</th>
+                                    <th>Nama Pengunjung</th>
+                                    <th>Buku Dipinjam</th>
+                                    <th>Tgl Peminjaman</th>
+                                    <th>Tgl Pengembalian</th>
+                                    <th>Catatan / Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelLaporanBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SEKSI TATA TERTIB & LARANGAN PERPUSTAKAAN -->
+    <section class="rules-footer-section">
+        <div class="rules-title">
+            <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 20px;"></i>
+            <span>TATA TERTIB & LARANGAN PERPUSTAKAAN POLTEKBANG JAYAPURA</span>
+        </div>
+        
+        <div class="rules-grid">
+            <div class="rule-card">
+                <div class="rule-icon-box"><i class="fa-solid fa-smoking"></i></div>
+                <h4>DILARANG MEROKOK</h4>
+                <p>Area bebas asap rokok di seluruh ruangan perpustakaan.</p>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-icon-box"><i class="fa-solid fa-burger"></i></div>
+                <h4>DILARANG MAKAN & MINUM</h4>
+                <p>Menjaga kebersihan koleksi buku dan fasilitas dari noda.</p>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-icon-box"><i class="fa-solid fa-volume-high"></i></div>
+                <h4>DILARANG GADUH / BISING</h4>
+                <p>Jagalah ketenangan demi kenyamanan membaca bersama.</p>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-icon-box"><i class="fa-solid fa-book-skull"></i></div>
+                <h4>DILARANG MERUSAK BUKU</h4>
+                <p>Tidak mencoret, melipat, atau merobek halaman koleksi buku.</p>
+            </div>
+
+            <div class="rule-card">
+                <div class="rule-icon-box"><i class="fa-solid fa-trash-can"></i></div>
+                <h4>DILARANG BUANG SAMPAH</h4>
+                <p>Buanglah sampah pada tempatnya agar lingkungan tetap asri.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Politeknik Penerbangan Jayapura — Sistem Informasi Perpustakaan Digital Modern.
+    </footer>
+
+    <!-- LOGIKA JAVASCRIPT & FIREBASE REALTIME SYNC -->
+    <script>
+        // =========================================================================
+        // 1. KONFIGURASI FIREBASE REALTIME DATABASE PROYEK ANDA ("perpusppj")
+        // =========================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
+            authDomain: "perpusppj.firebaseapp.com",
+            databaseURL: "https://perpusppj-default-rtdb.firebaseio.com",
+            projectId: "perpusppj",
+            storageBucket: "perpusppj.firebasestorage.app",
+            messagingSenderId: "392001200802",
+            appId: "1:392001200802:web:0287fa62e16c75e1712dfb",
+            measurementId: "G-3P8JGED7CH"
+        };
+
+        // Inisialisasi Firebase & Reference Database
+        let db = null;
+        let isFirebaseConnected = false;
+
+        try {
+            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "") {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.database();
+                isFirebaseConnected = true;
+                console.log("Firebase Realtime Database Terhubung!");
+            }
+        } catch (e) {
+            console.warn("Menggunakan LocalStorage fallback:", e);
+        }
+
+        // =========================================================================
+        // 2. STATE DATA
+        // =========================================================================
+        let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
+            { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa" },
+            { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa" }
+        ];
+
+        let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [
+            { kode: "BK-PPJ-001", judul: "Aerodinamika & Teori Penerbangan", kategori: "Penerbangan", penulis: "Capt. Ir. Supriyadi", stok: 6, status: "Tersedia" },
+            { kode: "BK-PPJ-002", judul: "Dasar Pemrograman C++ & WebAssembly", kategori: "Teknologi Informasi", penulis: "Dr. Eng. Farid M.", stok: 8, status: "Tersedia" },
+            { kode: "BK-PPJ-003", judul: "Kelistrikan Bandara & Sistem SCADA", kategori: "Teknik Listrik Bandara", penulis: "Ir. Bambang S., M.T.", stok: 5, status: "Tersedia" },
+            { kode: "BK-PPJ-004", judul: "Manajemen Pertolongan Kecelakaan Pesawat (PKP-PK)", kategori: "Keselamatan Penerbangan", penulis: "Tim Instruktur PPJ", stok: 4, status: "Tersedia" },
+            { kode: "BK-PPJ-005", judul: "Navigasi Udara & Radar Aviation", kategori: "Navigasi Penerbangan", penulis: "Capt. Hendra Wijaya", stok: 3, status: "Tersedia" },
+            { kode: "BK-PPJ-006", judul: "Tata Cara Pemanduan Lalu Lintas Udara (ATC)", kategori: "Lalu Lintas Udara", penulis: "Dra. Rina Kartika", stok: 2, status: "Dipinjam" }
+        ];
+
+        let logLaporanHarian = JSON.parse(localStorage.getItem('logLaporanHarianPerpus')) || [];
+        let teksPengumuman = localStorage.getItem('pengumumanPerpus') || "Selamat Datang di Perpustakaan Digital Politeknik Penerbangan Jayapura — Budayakan Membaca untuk Penerbangan Indonesia yang Selamat, Aman, dan Nyaman.";
+
+        const DAFTAR_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const NAMA_BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+        let selectedAlphaFilter = "ALL";
+
+        // =========================================================================
+        // 3. LISTEN REAL-TIME SYNC DARI FIREBASE DIBUKA DI DEVICE APAPUN
+        // =========================================================================
+        if (isFirebaseConnected && db) {
+            db.ref('perpus_data').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    if (data.masterAnggota) {
+                        masterAnggota = data.masterAnggota;
+                        localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+                    }
+                    if (data.katalogBuku) {
+                        katalogBuku = data.katalogBuku;
+                        localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+                        renderKatalogBuku();
+                    }
+                    if (data.logLaporanHarian) {
+                        logLaporanHarian = data.logLaporanHarian;
+                        localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+                        renderLogKunjunganRingkas();
+                        filterDanRenderLaporan();
+                    }
+                    if (data.teksPengumuman) {
+                        teksPengumuman = data.teksPengumuman;
+                        localStorage.setItem('pengumumanPerpus', teksPengumuman);
+                        updateTickerTeks();
+                    }
+                }
+            });
+        }
+
+        function simpanSemuaKeCloud() {
+            localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+            localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+            localStorage.setItem('pengumumanPerpus', teksPengumuman);
+
+            if (isFirebaseConnected && db) {
+                db.ref('perpus_data').set({
+                    masterAnggota: masterAnggota,
+                    katalogBuku: katalogBuku,
+                    logLaporanHarian: logLaporanHarian,
+                    teksPengumuman: teksPengumuman
+                });
+            }
+        }
+
+        // =========================================================================
+        // 4. TICKER & CLOCK WIT
+        // =========================================================================
+        function updateTickerTeks() {
+            document.getElementById('tickerText').innerText = teksPengumuman;
+            document.getElementById('inputPengumuman').value = teksPengumuman;
+        }
+
+        function updateLiveClockWIT() {
+            const sekarang = new Date();
+            const namaHari = DAFTAR_HARI[sekarang.getDay()];
+            const tgl = sekarang.getDate();
+            const bulan = NAMA_BULAN[sekarang.getMonth()];
+            const tahun = sekarang.getFullYear();
+            
+            const jam = String(sekarang.getHours()).padStart(2, '0');
+            const menit = String(sekarang.getMinutes()).padStart(2, '0');
+            const detik = String(sekarang.getSeconds()).padStart(2, '0');
+
+            const formatted = `${namaHari}, ${tgl} ${bulan} ${tahun} | ${jam}:${menit}:${detik} WIT`;
+            const clockEl = document.getElementById('clockText');
+            if (clockEl) clockEl.innerText = formatted;
+        }
+
+        setInterval(updateLiveClockWIT, 1000);
+        updateLiveClockWIT();
+
+        function simpanPengumuman() {
+            const teksBaru = document.getElementById('inputPengumuman').value.trim();
+            if (teksBaru !== "") {
+                teksPengumuman = teksBaru;
+                simpanSemuaKeCloud();
+                updateTickerTeks();
+                alert("Papan pengumuman bergerak berhasil diperbarui di semua perangkat!");
+            }
+        }
+
+        // =========================================================================
+        // 5. OTENTIKASI ADMIN & TAB SWITCHING
+        // =========================================================================
+        let isAdminAuthenticated = false;
+
+        function switchTab(tabId) {
+            if (tabId === 'tab-admin' && !isAdminAuthenticated) {
+                const pass = prompt("Masukkan Password Administrator Perpustakaan:");
+                if (pass === "eperpusPPJ") {
+                    isAdminAuthenticated = true;
+                    alert("Akses Administrator Berhasil Diberikan!");
+                } else {
+                    if (pass !== null) alert("Password Admin Salah! Akses Ditolak.");
+                    return;
+                }
+            }
+
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'tab-kiosk') {
+                document.getElementById('btnTabAbsensi').classList.add('active');
+            } else if (tabId === 'tab-buku') {
+                document.getElementById('btnTabBuku').classList.add('active');
+                generateAlphabetButtons();
+                renderKatalogBuku();
+            } else if (tabId === 'tab-admin') {
+                document.getElementById('btnTabAdmin').classList.add('active');
+            }
+        }
+
+        function switchAdminSub(subId) {
+            document.querySelectorAll('.admin-sub-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.admin-sub-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(subId).classList.add('active');
+            
+            if (subId === 'sub-buku') document.getElementById('subBtnBuku').classList.add('active');
+            else if (subId === 'sub-pengumuman') document.getElementById('subBtnPengumuman').classList.add('active');
+            else if (subId === 'sub-anggota') document.getElementById('subBtnAnggota').classList.add('active');
+            else if (subId === 'sub-pinjam') document.getElementById('subBtnPinjam').classList.add('active');
+            else if (subId === 'sub-laporan') {
+                document.getElementById('subBtnLaporan').classList.add('active');
+                filterDanRenderLaporan();
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminAuthenticated = false;
+            alert("Anda telah berhasil logout dari Panel Administrator.");
+            switchTab('tab-kiosk');
+        }
+
+        // SLIDER SLIDE TRANSISI
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide-item');
+
+        function putarSlide() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+        setInterval(putarSlide, 4000);
+
+        // SUARA OTOMATIS
+        function bicaraSuara(teks) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(teks);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // ABSENSI & SIMULASI SENSOR
+        function simulasiScanSidikJari() {
+            const sensor = document.getElementById('sensorWidget');
+            sensor.classList.add('scanning');
+
+            setTimeout(() => {
+                sensor.classList.remove('scanning');
+                if (masterAnggota.length > 0) {
+                    const acakIndex = Math.floor(Math.random() * masterAnggota.length);
+                    prosesAbsensiPengunjung(masterAnggota[acakIndex]);
+                } else {
+                    tampilkanAlertKiosk('error', "Belum ada master data anggota terdaftar!");
+                }
+            }, 1000);
+        }
+
+        function prosesAbsensiNIM() {
+            const nim = document.getElementById('kioskNIM').value.trim();
+            const anggota = masterAnggota.find(a => a.nim === nim);
+
+            if (anggota) {
+                prosesAbsensiPengunjung(anggota);
+                document.getElementById('kioskNIM').value = '';
+            } else {
+                const pesan = `NIM ${nim} tidak terdaftar di sistem administrasi.`;
+                tampilkanAlertKiosk('error', pesan);
+                bicaraSuara(pesan);
+            }
+        }
+
+        function prosesAbsensiPengunjung(anggota) {
+            const sekarang = new Date();
+            const skrgTime = sekarang.getTime();
+            const namaHari = DAFTAR_HARI[sekarang.getDay()];
+            const tglString = sekarang.toISOString().split('T');
+            const jamString = sekarang.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            let recordAktif = logLaporanHarian.find(r => r.nim === anggota.nim && r.tanggal === tglString && r.jamKeluar === '-');
+
+            let tipeAbsen = 'MASUK';
+            let pesanTeks = "";
+            let pesanSuara = "";
+
+            if (!recordAktif) {
+                tipeAbsen = 'MASUK';
+                pesanTeks = `Selamat datang ${anggota.nama} di Perpustakaan Politeknik Penerbangan Jayapura`;
+                pesanSuara = `Selamat datang ${anggota.nama} di perpustakaan politeknik penerbangan jayapura`;
+
+                const recordBaru = {
+                    id: Date.now(),
+                    timestampMasuk: skrgTime,
+                    hari: namaHari,
+                    tanggal: tglString,
+                    jamMasuk: jamString,
+                    jamKeluar: '-',
+                    nim: anggota.nim,
+                    nama: anggota.nama,
+                    bukuDipinjam: '-',
+                    tglPeminjaman: '-',
+                    tglPengembalian: '-',
+                    catatan: 'Kunjungan Biasa'
+                };
+                logLaporanHarian.unshift(recordBaru);
+
+                tampilkanAlertKiosk(tipeAbsen.toLowerCase(), pesanTeks);
+                bicaraSuara(pesanSuara);
+            } else {
+                const waktuMasuk = recordAktif.timestampMasuk || recordAktif.id;
+                const selisihDetik = Math.floor((skrgTime - waktuMasuk) / 1000);
+
+                if (selisihDetik < 60) {
+                    const sisaDetik = 60 - selisihDetik;
+                    pesanTeks = `Anda baru saja absen masuk. Mohon tunggu ${sisaDetik} detik lagi untuk absen keluar.`;
+                    pesanSuara = `Anda baru saja absen masuk. Mohon tunggu beberapa detik lagi untuk absen keluar.`;
+                    
+                    tampilkanAlertKiosk('warning', pesanTeks);
+                    bicaraSuara(pesanSuara);
+                    return;
+                } else {
+                    tipeAbsen = 'KELUAR';
+                    pesanTeks = `Terima kasih telah berkunjung`;
+                    pesanSuara = `Terima kasih telah berkunjung`;
+
+                    recordAktif.jamKeluar = jamString;
+
+                    tampilkanAlertKiosk(tipeAbsen.toLowerCase(), pesanTeks);
+                    bicaraSuara(pesanSuara);
+                }
+            }
+
+            simpanSemuaKeCloud();
+            renderLogKunjunganRingkas();
+            filterDanRenderLaporan();
+        }
+
+        function tampilkanAlertKiosk(tipe, pesan) {
+            const box = document.getElementById('kioskAlert');
+            box.style.display = 'block';
+            box.className = `alert-box alert-${tipe}`;
+            
+            let iconClass = 'fa-circle-check';
+            if (tipe === 'keluar') iconClass = 'fa-right-from-bracket';
+            else if (tipe === 'warning') iconClass = 'fa-triangle-exclamation';
+            else if (tipe === 'error') iconClass = 'fa-circle-xmark';
+
+            box.innerHTML = `<i class="fa-solid ${iconClass}"></i> ${pesan}`;
+        }
+
+        function renderLogKunjunganRingkas() {
+            const body = document.getElementById('logKunjunganBody');
+            body.innerHTML = '';
+
+            logLaporanHarian.slice(0, 5).forEach(log => {
+                const isAktif = log.jamKeluar === '-';
+                body.innerHTML += `
+                    <tr>
+                        <td>${log.hari}, ${log.tanggal}</td>
+                        <td>${isAktif ? log.jamMasuk : log.jamMasuk + ' - ' + log.jamKeluar}</td>
+                        <td>${log.nim}</td>
+                        <td><strong>${log.nama}</strong></td>
+                        <td><span class="badge ${isAktif ? 'badge-masuk' : 'badge-keluar'}">${isAktif ? 'Di Dalam' : 'Sudah Keluar'}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // KATALOG BUKU
+        function generateAlphabetButtons() {
+            const container = document.getElementById('alphabetContainer');
+            container.innerHTML = '<button class="alpha-btn active" onclick="filterByLetter(\'ALL\', this)">Semua (A-Z)</button>';
+            
+            for (let i = 65; i <= 90; i++) {
+                const letter = String.fromCharCode(i);
+                container.innerHTML += `<button class="alpha-btn" onclick="filterByLetter('${letter}', this)">${letter}</button>`;
+            }
+        }
+
+        function filterByLetter(letter, btnEl) {
+            selectedAlphaFilter = letter;
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            if(btnEl) btnEl.classList.add('active');
+            renderKatalogBuku();
+        }
+
+        function renderKatalogBuku() {
+            const body = document.getElementById('tabelKatalogBukuBody');
+            if(!body) return;
+            body.innerHTML = '';
+
+            let sortedData = [...katalogBuku].sort((a, b) => a.judul.localeCompare(b.judul));
+
+            if (selectedAlphaFilter !== 'ALL') {
+                sortedData = sortedData.filter(b => b.judul.toUpperCase().startsWith(selectedAlphaFilter));
+            }
+
+            const query = document.getElementById('cariBukuKatalog')?.value.toLowerCase() || '';
+            if (query !== '') {
+                sortedData = sortedData.filter(b => 
+                    b.judul.toLowerCase().includes(query) ||
+                    b.kategori.toLowerCase().includes(query) ||
+                    b.kode.toLowerCase().includes(query) ||
+                    b.penulis.toLowerCase().includes(query)
+                );
+            }
+
+            if (sortedData.length === 0) {
+                body.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">Tidak ada koleksi buku untuk huruf/kriteria ini.</td></tr>`;
+                return;
+            }
+
+            sortedData.forEach((buku, index) => {
+                const isTersedia = buku.stok > 0;
+                const initialLetter = buku.judul.charAt(0).toUpperCase();
+                body.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
+                        <td><strong>${buku.kode}</strong></td>
+                        <td><strong>${buku.judul}</strong></td>
+                        <td><span class="badge badge-keluar">${buku.kategori}</span></td>
+                        <td>${buku.penulis}</td>
+                        <td>${buku.stok} Eksemplar</td>
+                        <td><span class="badge ${isTersedia ? 'badge-masuk' : 'badge-pinjam'}">${isTersedia ? 'Tersedia' : 'Kosong'}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function cariBukuInKatalog() { renderKatalogBuku(); }
+
+        // FORMS ADMINISTRATOR
+        document.getElementById('formTambahBuku').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const kode = document.getElementById('addKode').value.trim();
+            const judul = document.getElementById('addJudul').value.trim();
+            const kategori = document.getElementById('addKategori').value.trim();
+            const penulis = document.getElementById('addPenulis').value.trim();
+            const stok = parseInt(document.getElementById('addStok').value);
+
+            katalogBuku.push({ kode, judul, kategori, penulis, stok, status: "Tersedia" });
+            simpanSemuaKeCloud();
+
+            alert(`Buku "${judul}" berhasil disimpan!`);
+            this.reset();
+            renderKatalogBuku();
+        });
+
+        document.getElementById('formRegistrasiAnggota').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nim = document.getElementById('regNIM').value.trim();
+            const nama = document.getElementById('regNama').value.trim();
+            const kategori = document.getElementById('regKategori').value;
+
+            masterAnggota.push({ nim, nama, kategori });
+            simpanSemuaKeCloud();
+
+            alert(`Berhasil mendaftarkan ${nama} (${nim})!`);
+            this.reset();
+        });
+
+        document.getElementById('formPeminjamanBuku').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nim = document.getElementById('pinjamNIM').value.trim();
+            const judul = document.getElementById('pinjamJudul').value.trim();
+            const lama = parseInt(document.getElementById('pinjamLama').value);
+
+            const anggota = masterAnggota.find(a => a.nim === nim);
+            if (!anggota) {
+                alert("NIM tidak ditemukan!");
+                return;
+            }
+
+            const sekarang = new Date();
+            const tglPinjamStr = sekarang.toISOString().split('T');
+            
+            const tglKembali = new Date();
+            tglKembali.setDate(sekarang.getDate() + lama);
+            const tglKembaliStr = tglKembali.toISOString().split('T');
+
+            let recordHariIni = logLaporanHarian.find(r => r.nim === nim && r.tanggal === tglPinjamStr);
+
+            if (recordHariIni) {
+                recordHariIni.bukuDipinjam = judul;
+                recordHariIni.tglPeminjaman = tglPinjamStr;
+                recordHariIni.tglPengembalian = tglKembaliStr;
+                recordHariIni.catatan = 'Sedang Meminjam Buku';
+            } else {
+                logLaporanHarian.unshift({
+                    id: Date.now(),
+                    timestampMasuk: sekarang.getTime(),
+                    hari: DAFTAR_HARI[sekarang.getDay()],
+                    tanggal: tglPinjamStr,
+                    jamMasuk: sekarang.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+                    jamKeluar: '-',
+                    nim: anggota.nim,
+                    nama: anggota.nama,
+                    bukuDipinjam: judul,
+                    tglPeminjaman: tglPinjamStr,
+                    tglPengembalian: tglKembaliStr,
+                    catatan: 'Sedang Meminjam Buku'
+                });
+            }
+
+            simpanSemuaKeCloud();
+            filterDanRenderLaporan();
+            alert(`Peminjaman buku "${judul}" berhasil dicatat!`);
+            this.reset();
+        });
+
+        function filterDanRenderLaporan() {
+            const filterTgl = document.getElementById('filterTanggalReport').value;
+            const body = document.getElementById('tabelLaporanBody');
+            if(!body) return;
+            body.innerHTML = '';
+
+            let dataTampil = logLaporanHarian;
+            if (filterTgl) {
+                dataTampil = logLaporanHarian.filter(item => item.tanggal === filterTgl);
+            }
+
+            if (dataTampil.length === 0) {
+                body.innerHTML = `<tr><td colspan="10" style="text-align:center; color:#94a3b8; padding:20px;">Tidak ada data kunjungan pada tanggal ini.</td></tr>`;
+                return;
+            }
+
+            dataTampil.forEach((item, index) => {
+                body.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${item.hari}</strong></td>
+                        <td>${item.tanggal}</td>
+                        <td>${item.jamMasuk}</td>
+                        <td>${item.jamKeluar}</td>
+                        <td><strong>${item.nama}</strong><br><small style="color:#64748b;">${item.nim}</small></td>
+                        <td>${item.bukuDipinjam}</td>
+                        <td>${item.tglPeminjaman}</td>
+                        <td>${item.tglPengembalian}</td>
+                        <td><span class="badge ${item.bukuDipinjam !== '-' ? 'badge-pinjam' : 'badge-selesai'}">${item.catatan}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // EKSPOR CSV
+        function exportLaporanPengunjungCSV() {
+            const filterTgl = document.getElementById('filterTanggalReport').value;
+            let dataExport = logLaporanHarian;
+            if (filterTgl) dataExport = logLaporanHarian.filter(item => item.tanggal === filterTgl);
+
+            if (dataExport.length === 0) {
+                alert("Tidak ada data pengunjung harian untuk ditarik!");
+                return;
+            }
+
+            let csv = "data:text/csv;charset=utf-8,";
+            csv += "No,Hari,Tanggal,Jam Masuk,Jam Keluar,NIM,Nama Pengunjung,Status Kunjungan\n";
+
+            dataExport.forEach((item, i) => {
+                const status = item.jamKeluar === '-' ? 'Masih Di Dalam' : 'Sudah Keluar';
+                csv += `${i + 1},"${item.hari}","${item.tanggal}","${item.jamMasuk}","${item.jamKeluar}","${item.nim}","${item.nama}","${status}"\n`;
+            });
+
+            const link = document.createElement("a");
+            link.href = encodeURI(csv);
+            link.download = `Data_Pengunjung_Harian_PPJ_${filterTgl || 'Lengkap'}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function exportLaporanPeminjamanCSV() {
+            let dataPinjam = logLaporanHarian.filter(item => item.bukuDipinjam && item.bukuDipinjam !== '-');
+
+            if (dataPinjam.length === 0) {
+                alert("Tidak ada record peminjaman buku untuk ditarik!");
+                return;
+            }
+
+            let csv = "data:text/csv;charset=utf-8,";
+            csv += "No,NIM,Nama Peminjam,Buku Dipinjam,Tanggal Peminjaman,Tanggal Pengembalian,Status Peminjaman\n";
+
+            dataPinjam.forEach((item, i) => {
+                csv += `${i + 1},"${item.nim}","${item.nama}","${item.bukuDipinjam}","${item.tglPeminjaman}","${item.tglPengembalian}","${item.catatan}"\n`;
+            });
+
+            const link = document.createElement("a");
+            link.href = encodeURI(csv);
+            link.download = `Data_Peminjaman_Buku_PPJ_${new Date().toISOString().split('T')}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // INITIAL LOAD
+        updateTickerTeks();
+        document.getElementById('filterTanggalReport').value = new Date().toISOString().split('T');
+        renderLogKunjunganRingkas();
+        filterDanRenderLaporan();
+    </script>
+</body>
+</html>
