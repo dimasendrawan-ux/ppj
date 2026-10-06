@@ -265,6 +265,204 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        /* 🌟 LAYOUT KIOSK GRID (SENSORS & STATISTIK SIDE-BY-SIDE) */
+        .kiosk-top-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+            align-items: stretch;
+        }
+
+        /* WIDGET SENSOR SIDIK JARI */
+        .sensor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fingerprint-scanner {
+            width: 90px;
+            height: 90px;
+            background: #f0f9ff;
+            border: 3px solid var(--poltekbang-blue-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            cursor: pointer;
+            color: var(--poltekbang-blue);
+            font-size: 40px;
+            transition: all 0.3s;
+        }
+
+        .fingerprint-scanner.scanning {
+            animation: pulseScan 1.2s infinite;
+            color: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        @keyframes pulseScan {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { box-shadow: 0 0 0 25px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .nim-input-group { display: flex; gap: 10px; margin-top: 12px; }
+        .nim-input-group input { flex: 1; padding: 10px 15px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 13px; text-align: center; font-weight: 600; }
+        .nim-input-group button { padding: 10px 18px; background: var(--poltekbang-blue); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+
+        .alert-box { display: none; padding: 12px; border-radius: 12px; margin-top: 12px; text-align: center; font-weight: 600; font-size: 12px; }
+        .alert-masuk { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .alert-keluar { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+        /* 🌟 WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI) */
+        .today-visit-card {
+            background: linear-gradient(135deg, #001e4e 0%, #003b8e 50%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 40, 104, 0.25);
+            border: 2px solid rgba(251, 191, 36, 0.4);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .today-visit-card::before {
+            content: '\f0c0';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -15px;
+            bottom: -25px;
+            font-size: 150px;
+            color: rgba(255, 255, 255, 0.04);
+            pointer-events: none;
+        }
+
+        .visit-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            z-index: 2;
+        }
+
+        .visit-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--poltekbang-gold);
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .visit-card-title h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 6px;
+        }
+
+        .visit-card-title p {
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-top: 2px;
+        }
+
+        .visit-main-counter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 12px 0;
+            z-index: 2;
+        }
+
+        .counter-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .counter-icon-circle {
+            width: 52px;
+            height: 52px;
+            background: var(--poltekbang-gold);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .counter-num-big {
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1;
+            color: #fbbf24;
+        }
+
+        .counter-lbl-sub {
+            font-size: 11px;
+            color: #e2e8f0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mini-breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .mini-stat-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .mini-stat-item span {
+            display: block;
+            font-size: 10px;
+            color: #93c5fd;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .mini-stat-item strong {
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
         /* FILTERS ALFABET A-Z */
         .alphabet-filter {
             display: flex;
@@ -294,56 +492,6 @@
             color: white;
             border-color: var(--poltekbang-blue);
         }
-
-        /* WIDGET SENSOR SIDIK JARI */
-        .sensor-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            max-width: 520px;
-            margin: 0 auto 25px;
-        }
-
-        .fingerprint-scanner {
-            width: 100px;
-            height: 100px;
-            background: #f0f9ff;
-            border: 3px solid var(--poltekbang-blue-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            cursor: pointer;
-            color: var(--poltekbang-blue);
-            font-size: 45px;
-            transition: all 0.3s;
-        }
-
-        .fingerprint-scanner.scanning {
-            animation: pulseScan 1.2s infinite;
-            color: var(--success-color);
-            border-color: var(--success-color);
-        }
-
-        @keyframes pulseScan {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-            70% { box-shadow: 0 0 0 25px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        .nim-input-group { display: flex; gap: 10px; margin-top: 15px; }
-        .nim-input-group input { flex: 1; padding: 10px 15px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 13px; text-align: center; font-weight: 600; }
-        .nim-input-group button { padding: 10px 20px; background: var(--poltekbang-blue); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
-
-        .alert-box { display: none; padding: 14px; border-radius: 12px; margin-top: 15px; text-align: center; font-weight: 600; font-size: 13px; }
-        .alert-masuk { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-        .alert-keluar { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-        .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
         /* CARDS & TABEL */
         .card {
@@ -439,7 +587,7 @@
         th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
         th { background: #f8fafc; color: #475569; font-weight: 600; }
 
-        /* BADGES STATUS KETERSEDIAAN BUKU: Hijau (Tersedia), Kuning (Dipinjam), Merah (Belum Kembali) */
+        /* BADGES STATUS KETERSEDIAAN BUKU */
         .badge { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
         .badge-masuk { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
         .badge-keluar { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
@@ -571,7 +719,7 @@
             background: #ffffff;
             border-top: 4px solid var(--poltekbang-gold);
             padding: 25px 20px;
-            margin-top: 30px;
+            margin-top: 10px;
             border-radius: 20px 20px 0 0;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
         }
@@ -834,19 +982,67 @@
                 </div>
             </div>
 
-            <!-- WIDGET SENSOR SIDIK JARI -->
-            <div class="sensor-card">
-                <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()">
-                    <i class="fa-solid fa-fingerprint"></i>
-                </div>
-                <p style="font-weight: 600; color: #475569;" id="lblSensorInstruction">Sentuh / Tempelkan Sidik Jari</p>
+            <!-- 🌟 KIOSK GRID TOP: WIDGET SENSOR SIDIK JARI & STATISTIK REAL-TIME KUNJUNGAN SIDE-BY-SIDE -->
+            <div class="kiosk-top-grid">
+                
+                <!-- KARTU 1: WIDGET SENSOR SIDIK JARI -->
+                <div class="sensor-card">
+                    <div>
+                        <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()">
+                            <i class="fa-solid fa-fingerprint"></i>
+                        </div>
+                        <p style="font-weight: 600; color: #475569;" id="lblSensorInstruction">Sentuh / Tempelkan Sidik Jari</p>
+                    </div>
 
-                <div class="nim-input-group">
-                    <input type="text" id="kioskNIM" placeholder="Atau ketik NIM / ID Anggota di sini">
-                    <button onclick="prosesAbsensiNIM()"><i class="fa-solid fa-arrow-right"></i> <span id="lblBtnProsesNIM">Proses</span></button>
+                    <div>
+                        <div class="nim-input-group">
+                            <input type="text" id="kioskNIM" placeholder="Atau ketik NIM / ID Anggota">
+                            <button onclick="prosesAbsensiNIM()"><i class="fa-solid fa-arrow-right"></i> <span id="lblBtnProsesNIM">Proses</span></button>
+                        </div>
+                        <div id="kioskAlert" class="alert-box"></div>
+                    </div>
                 </div>
 
-                <div id="kioskAlert" class="alert-box"></div>
+                <!-- KARTU 2: WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI (UKURAN SAMA & SEBELAHAN) -->
+                <div class="today-visit-card">
+                    <div class="visit-card-header">
+                        <span class="visit-card-badge" id="lblCardBadge"><i class="fa-solid fa-chart-line"></i> Real-Time</span>
+                        <i class="fa-solid fa-calendar-day" style="color: var(--poltekbang-gold); font-size: 20px;"></i>
+                    </div>
+
+                    <div class="visit-card-title">
+                        <h3 id="lblCardTitle">Statistik Kunjungan Hari Ini</h3>
+                        <p id="lblCardSub">Total absensi kedatangan perpustakaan hari ini</p>
+                    </div>
+
+                    <div class="visit-main-counter">
+                        <div class="counter-left">
+                            <div class="counter-icon-circle">
+                                <i class="fa-solid fa-users-rectangle"></i>
+                            </div>
+                            <div>
+                                <div class="counter-num-big" id="widgetTodayCount">0</div>
+                                <div class="counter-lbl-sub" id="lblCounterSubText">Pengunjung Hari Ini</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mini-breakdown-grid">
+                        <div class="mini-stat-item">
+                            <span id="lblMiniTaruna">Taruna</span>
+                            <strong id="cntMiniTaruna">0</strong>
+                        </div>
+                        <div class="mini-stat-item">
+                            <span id="lblMiniDosen">Dosen</span>
+                            <strong id="cntMiniDosen">0</strong>
+                        </div>
+                        <div class="mini-stat-item">
+                            <span id="lblMiniStaf">Staf/Umum</span>
+                            <strong id="cntMiniStaf">0</strong>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- LOG REAL-TIME HARIAN -->
@@ -928,7 +1124,7 @@
                     <i class="fa-solid fa-bullhorn"></i> <span id="lblSub2">2. Papan Pengumuman</span>
                 </button>
                 <button class="admin-sub-btn" id="subBtnAnggota" onclick="switchAdminSub('sub-anggota')">
-                    <i class="fa-solid fa-id-card-clip"></i> <span id="lblSub3">3. Registrasi Anggota</span>
+                    <i class="fa-solid fa-id-card-clip"></i> <span id="lblSub3">3. Registrasi & List Anggota (A-Z)</span>
                 </button>
                 <button class="admin-sub-btn" id="subBtnPinjam" onclick="switchAdminSub('sub-pinjam')">
                     <i class="fa-solid fa-book-bookmark"></i> <span id="lblSub4">4. Catat Peminjaman</span>
@@ -990,9 +1186,9 @@
                 </div>
             </div>
 
-            <!-- SUB-MODUL 3: REGISTRASI ANGGOTA -->
+            <!-- SUB-MODUL 3: REGISTRASI & TABEL NAMA KEANGGOTAAN TERURUT ALFABET (A-Z) -->
             <div id="sub-anggota" class="admin-sub-pane">
-                <div class="card" style="border-top: 4px solid var(--success-color);">
+                <div class="card" style="border-top: 4px solid var(--success-color); margin-bottom: 20px;">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-id-card-clip"></i> <span id="lblRegTitle">Registrasi Master Data Anggota</span></span>
                     </div>
@@ -1019,6 +1215,36 @@
                             <i class="fa-solid fa-user-plus"></i> <span id="lblBtnReg">Daftarkan Anggota Baru</span>
                         </button>
                     </form>
+                </div>
+
+                <!-- TABEL ALFABET NAMA KEANGGOTAAN TERDAFTAR -->
+                <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-users-rectangle"></i> <span id="lblMemberListTitle">Daftar Keanggotaan Terdaftar (Urut Alfabet A-Z)</span></span>
+                        <div class="filter-box">
+                            <input type="text" id="cariNamaAnggota" placeholder="Cari nama atau NIM anggota..." onkeyup="cariAnggotaInTable()">
+                        </div>
+                    </div>
+
+                    <!-- ALPHABET FILTER BUTTONS FOR MEMBERS -->
+                    <div class="alphabet-filter" id="memberAlphabetContainer"></div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th id="thMemAlpha">Abjad</th>
+                                    <th id="thMemNIM">NIM / ID Anggota</th>
+                                    <th id="thMemName">Nama Lengkap Anggota (A-Z)</th>
+                                    <th id="thMemCat">Kategori Anggota</th>
+                                    <th id="thMemVisits">Total Riwayat Kunjungan</th>
+                                    <th id="thMemStatus">Status Akun</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelMasterAnggotaBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -1274,6 +1500,7 @@
         // =========================================================================
         let currentLang = 'id';
         let currentPeriodMode = 'harian'; // 'harian', 'mingguan', 'bulanan'
+        let selectedMemberAlphaFilter = 'ALL';
 
         const i18n = {
             id: {
@@ -1309,7 +1536,7 @@
                 adminLogout: "Logout Admin",
                 sub1: "1. Kelola Koleksi Buku",
                 sub2: "2. Papan Pengumuman",
-                sub3: "3. Registrasi Anggota",
+                sub3: "3. Registrasi & List Anggota (A-Z)",
                 sub4: "4. Catat Peminjaman",
                 sub5: "5. Laporan & Tarik Data",
                 addBookTitle: "Tambah Koleksi Buku Baru",
@@ -1327,6 +1554,13 @@
                 regName: "Nama Lengkap:",
                 regCat: "Kategori:",
                 btnReg: "Daftarkan Anggota Baru",
+                memberListTitle: "Daftar Keanggotaan Terdaftar (Urut Alfabet A-Z)",
+                thMemAlpha: "Abjad",
+                thMemNIM: "NIM / ID Anggota",
+                thMemName: "Nama Lengkap Anggota (A-Z)",
+                thMemCat: "Kategori Anggota",
+                thMemVisits: "Total Riwayat Kunjungan",
+                thMemStatus: "Status Akun",
                 borrowTitle: "Catat Peminjaman Buku",
                 borrowNIM: "NIM Anggota Terdaftar:",
                 borrowBook: "Judul Buku:",
@@ -1352,6 +1586,13 @@
                 thRepBorrowDate: "Tgl Peminjaman",
                 thRepReturnDate: "Tgl Pengembalian",
                 thRepStatus: "Catatan / Status",
+                cardBadge: "<i class=\"fa-solid fa-chart-line\"></i> Real-Time",
+                cardTitle: "Statistik Kunjungan Hari Ini",
+                cardSub: "Total absensi kedatangan perpustakaan hari ini",
+                counterSubText: "Pengunjung Hari Ini",
+                miniTaruna: "Taruna",
+                miniDosen: "Dosen",
+                miniStaf: "Staf/Umum",
                 rulesHeader: "TATA TERTIB & LARANGAN PERPUSTAKAAN POLTEKBANG JAYAPURA",
                 rule1Title: "DILARANG MEROKOK",
                 rule1Desc: "Area bebas asap rokok di seluruh ruangan perpustakaan.",
@@ -1409,7 +1650,7 @@
                 adminLogout: "Admin Logout",
                 sub1: "1. Manage Book Collection",
                 sub2: "2. Announcement Board",
-                sub3: "3. Member Registration",
+                sub3: "3. Registration & Member List (A-Z)",
                 sub4: "4. Book Loan Entry",
                 sub5: "5. Reports & Data Export",
                 addBookTitle: "Add New Book Collection",
@@ -1427,6 +1668,13 @@
                 regName: "Full Name:",
                 regCat: "Category:",
                 btnReg: "Register New Member",
+                memberListTitle: "Registered Member Directory (A-Z Alphabetical Order)",
+                thMemAlpha: "Alphabet",
+                thMemNIM: "Member ID / NIM",
+                thMemName: "Full Member Name (A-Z)",
+                thMemCat: "Member Category",
+                thMemVisits: "Total Visit History",
+                thMemStatus: "Account Status",
                 borrowTitle: "Record Book Loan",
                 borrowNIM: "Registered Member ID:",
                 borrowBook: "Book Title:",
@@ -1452,6 +1700,13 @@
                 thRepBorrowDate: "Loan Date",
                 thRepReturnDate: "Return Date",
                 thRepStatus: "Notes / Status",
+                cardBadge: "<i class=\"fa-solid fa-chart-line\"></i> Real-Time",
+                cardTitle: "Today's Visit Statistics",
+                cardSub: "Total library attendance recorded today",
+                counterSubText: "Visitors Today",
+                miniTaruna: "Cadets",
+                miniDosen: "Lecturers",
+                miniStaf: "Staff/Public",
                 rulesHeader: "LIBRARY CODE OF CONDUCT & RULES — JAYAPURA AVIATION POLYTECHNIC",
                 rule1Title: "NO SMOKING",
                 rule1Desc: "Smoke-free environment across all library areas.",
@@ -1495,6 +1750,8 @@
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
             renderKatalogBuku();
+            renderTabelMasterAnggota();
+            updateTodayCounterWidget();
         }
 
         // =========================================================================
@@ -1512,7 +1769,9 @@
             { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa" },
             { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa" },
             { nim: "1988001", nama: "Dosen Budi Santoso", kategori: "Dosen/Instruktur" },
-            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum" }
+            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum" },
+            { nim: "2026003", nama: "Taruna Rizky Pratama", kategori: "Taruna/Mahasiswa" },
+            { nim: "2026004", nama: "Taruni Annisa Putri", kategori: "Taruna/Mahasiswa" }
         ];
 
         let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [
@@ -1588,6 +1847,7 @@
                     if (data.masterAnggota) {
                         masterAnggota = data.masterAnggota;
                         localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+                        renderTabelMasterAnggota();
                     }
                     if (data.katalogBuku) {
                         katalogBuku = data.katalogBuku;
@@ -1600,6 +1860,7 @@
                         renderLogKunjunganRingkas();
                         filterDanRenderLaporan();
                         renderKatalogBuku();
+                        updateTodayCounterWidget();
                     }
                     if (data.teksPengumuman) {
                         teksPengumuman = data.teksPengumuman;
@@ -1692,7 +1953,10 @@
                 renderKatalogBuku();
             } else if (tabId === 'tab-admin') {
                 document.getElementById('btnTabAdmin').classList.add('active');
+                generateMemberAlphabetButtons();
+                renderTabelMasterAnggota();
             }
+            updateTodayCounterWidget();
         }
 
         function switchAdminSub(subId) {
@@ -1703,7 +1967,11 @@
             
             if (subId === 'sub-buku') document.getElementById('subBtnBuku').classList.add('active');
             else if (subId === 'sub-pengumuman') document.getElementById('subBtnPengumuman').classList.add('active');
-            else if (subId === 'sub-anggota') document.getElementById('subBtnAnggota').classList.add('active');
+            else if (subId === 'sub-anggota') {
+                document.getElementById('subBtnAnggota').classList.add('active');
+                generateMemberAlphabetButtons();
+                renderTabelMasterAnggota();
+            }
             else if (subId === 'sub-pinjam') document.getElementById('subBtnPinjam').classList.add('active');
             else if (subId === 'sub-laporan') {
                 document.getElementById('subBtnLaporan').classList.add('active');
@@ -1851,6 +2119,7 @@
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
             renderKatalogBuku();
+            updateTodayCounterWidget();
         }
 
         function tampilkanAlertKiosk(tipe, pesan) {
@@ -1912,7 +2181,6 @@
             renderKatalogBuku();
         }
 
-        // FUNGSI UNTUK MENDAPATKAN DAFTAR PEMINJAM AKTIF UNTUK SEBUAH BUKU
         function getPeminjamAktifBuku(judulBuku) {
             return logLaporanHarian.filter(log => 
                 log.bukuDipinjam && 
@@ -1954,7 +2222,6 @@
                 const peminjamList = getPeminjamAktifBuku(buku.judul);
                 const jumlahDipinjam = peminjamList.length;
 
-                // Cek apakah ada peminjam yang TERLAMBAT (Overdue)
                 let adaOverdue = false;
                 peminjamList.forEach(p => {
                     if (p.tglPengembalian && p.tglPengembalian !== '-' && p.tglPengembalian < tglHariIniStr) {
@@ -1962,10 +2229,6 @@
                     }
                 });
 
-                // PENENTUAN BADGE STATUS KETERSEDIAAN:
-                // 1. Jika ada peminjaman overdue -> Warna MERAH "Belum Kembali"
-                // 2. Jika sedang dipinjam (tanpa overdue) -> Warna KUNING "Dipinjam"
-                // 3. Jika tidak ada yang meminjam -> Warna HIJAU "Tersedia"
                 let statusBadgeHTML = '';
                 if (adaOverdue) {
                     const txt = currentLang === 'id' ? 'Belum Kembali' : 'Overdue / Not Returned';
@@ -1978,7 +2241,6 @@
                     statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> ${txt}</span>`;
                 }
 
-                // LINK PEMINJAM TERDAFTAR
                 let borrowerCellHTML = '';
                 if (jumlahDipinjam > 0) {
                     const namaPeminjamPertama = peminjamList[0].nama;
@@ -2015,8 +2277,106 @@
         function cariBukuInKatalog() { renderKatalogBuku(); }
 
         // =========================================================================
-        // 9. MODAL POPUP DETAIL PEMINJAM TERDAFTAR
+        // 9. LOGIKA TABEL MASTER ANGGOTA ALFABET (A-Z) DI PANEL ADMIN
         // =========================================================================
+        function generateMemberAlphabetButtons() {
+            const container = document.getElementById('memberAlphabetContainer');
+            if(!container) return;
+            const allText = currentLang === 'id' ? 'Semua Nama (A-Z)' : 'All Names (A-Z)';
+            container.innerHTML = `<button class="alpha-btn active" onclick="filterMemberByLetter('ALL', this)">${allText}</button>`;
+            
+            for (let i = 65; i <= 90; i++) {
+                const letter = String.fromCharCode(i);
+                container.innerHTML += `<button class="alpha-btn" onclick="filterMemberByLetter('${letter}', this)">${letter}</button>`;
+            }
+        }
+
+        function filterMemberByLetter(letter, btnEl) {
+            selectedMemberAlphaFilter = letter;
+            document.querySelectorAll('#memberAlphabetContainer .alpha-btn').forEach(b => b.classList.remove('active'));
+            if(btnEl) btnEl.classList.add('active');
+            renderTabelMasterAnggota();
+        }
+
+        function renderTabelMasterAnggota() {
+            const body = document.getElementById('tabelMasterAnggotaBody');
+            if(!body) return;
+            body.innerHTML = '';
+
+            let sortedMembers = [...masterAnggota].sort((a, b) => a.nama.localeCompare(b.nama));
+
+            if (selectedMemberAlphaFilter !== 'ALL') {
+                sortedMembers = sortedMembers.filter(m => m.nama.toUpperCase().startsWith(selectedMemberAlphaFilter));
+            }
+
+            const query = document.getElementById('cariNamaAnggota')?.value.toLowerCase() || '';
+            if (query !== '') {
+                sortedMembers = sortedMembers.filter(m => 
+                    m.nama.toLowerCase().includes(query) ||
+                    m.nim.toLowerCase().includes(query) ||
+                    m.kategori.toLowerCase().includes(query)
+                );
+            }
+
+            if (sortedMembers.length === 0) {
+                const noMemberText = currentLang === 'id' ? 'Tidak ada data anggota terdaftar untuk kriteria ini.' : 'No registered member found for this criteria.';
+                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
+                return;
+            }
+
+            sortedMembers.forEach((m, idx) => {
+                const initialLetter = m.nama.charAt(0).toUpperCase();
+                const totalVisits = logLaporanHarian.filter(l => l.nim === m.nim).length;
+
+                body.innerHTML += `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
+                        <td><strong>${m.nim}</strong></td>
+                        <td><strong>${m.nama}</strong></td>
+                        <td><span class="badge badge-kat">${m.kategori || 'Taruna/Mahasiswa'}</span></td>
+                        <td><span class="badge badge-keluar">${totalVisits} ${currentLang === 'id' ? 'Kali Kunjungan' : 'Visits'}</span></td>
+                        <td><span class="badge badge-masuk"><i class="fa-solid fa-user-check"></i> ${currentLang === 'id' ? 'Aktif' : 'Active'}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function cariAnggotaInTable() {
+            renderTabelMasterAnggota();
+        }
+
+        // =========================================================================
+        // 🌟 LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI)
+        // =========================================================================
+        function updateTodayCounterWidget() {
+            const todayStr = getFormattedDate();
+            const todayLogs = logLaporanHarian.filter(item => item.tanggal === todayStr);
+            
+            const counterEl = document.getElementById('widgetTodayCount');
+            if (counterEl) {
+                counterEl.innerText = todayLogs.length;
+            }
+
+            // Hitung Breakdown Per Kategori
+            let cntTaruna = 0, cntDosen = 0, cntStaf = 0;
+            todayLogs.forEach(l => {
+                const kat = l.kategoriAnggota || 'Taruna/Mahasiswa';
+                if (kat.includes('Taruna') || kat.includes('Mahasiswa')) cntTaruna++;
+                else if (kat.includes('Dosen') || kat.includes('Instruktur')) cntDosen++;
+                else cntStaf++;
+            });
+
+            const elTaruna = document.getElementById('cntMiniTaruna');
+            const elDosen = document.getElementById('cntMiniDosen');
+            const elStaf = document.getElementById('cntMiniStaf');
+
+            if (elTaruna) elTaruna.innerText = cntTaruna;
+            if (elDosen) elDosen.innerText = cntDosen;
+            if (elStaf) elStaf.innerText = cntStaf;
+        }
+
+        // MODAL POPUP DETAIL PEMINJAM TERDAFTAR
         function bukaModalPeminjam(kodeBuku, judulBuku) {
             document.getElementById('modalBookTitleDisplay').innerText = `${judulBuku} (${kodeBuku})`;
             const listPeminjam = getPeminjamAktifBuku(judulBuku);
@@ -2087,6 +2447,7 @@
 
             alert(currentLang === 'id' ? `Berhasil mendaftarkan ${nama} (${nim})!` : `Successfully registered ${nama} (${nim})!`);
             this.reset();
+            renderTabelMasterAnggota();
         });
 
         document.getElementById('formPeminjamanBuku').addEventListener('submit', function(e) {
@@ -2131,13 +2492,12 @@
             simpanSemuaKeCloud();
             filterDanRenderLaporan();
             renderKatalogBuku();
+            updateTodayCounterWidget();
             alert(currentLang === 'id' ? `Peminjaman buku "${judul}" berhasil dicatat!` : `Loan for book "${judul}" successfully recorded!`);
             this.reset();
         });
 
-        // =========================================================================
-        // 10. OPSI PENARIKAN DATA HARIAN, MINGGUAN, BULANAN & KOLOM PER KATEGORI
-        // =========================================================================
+        // OPSI PENARIKAN DATA HARIAN, MINGGUAN, BULANAN & KOLOM PER KATEGORI
         function setPeriodMode(mode) {
             currentPeriodMode = mode;
             document.getElementById('btnPeriodHarian').classList.toggle('active', mode === 'harian');
@@ -2169,7 +2529,7 @@
             } else if (currentPeriodMode === 'mingguan') {
                 const targetDate = new Date(dateVal);
                 const startDate = new Date(targetDate);
-                startDate.setDate(targetDate.getDate() - 6); // 7 Hari Terakhir
+                startDate.setDate(targetDate.getDate() - 6);
                 
                 const startStr = getFormattedDate(startDate);
                 const endStr = dateVal;
@@ -2187,7 +2547,6 @@
             if (!body) return;
             body.innerHTML = '';
 
-            // 1. KANVAS RINGKASAN REKAP PER KATEGORI ANGGOTA
             const countsKategori = {
                 "Taruna/Mahasiswa": 0,
                 "Dosen/Instruktur": 0,
@@ -2258,7 +2617,6 @@
                 return;
             }
 
-            // Dikelompokkan/diurutkan per Kategori Anggota
             dataExport.sort((a, b) => (a.kategoriAnggota || '').localeCompare(b.kategoriAnggota || ''));
 
             let csv = "data:text/csv;charset=utf-8,";
@@ -2286,7 +2644,6 @@
                 return;
             }
 
-            // Dikelompokkan/diurutkan per Kategori Buku
             dataPinjam.sort((a, b) => (a.kategoriBuku || '').localeCompare(b.kategoriBuku || ''));
 
             let csv = "data:text/csv;charset=utf-8,";
@@ -2312,6 +2669,8 @@
         renderLogKunjunganRingkas();
         filterDanRenderLaporan();
         renderKatalogBuku();
+        renderTabelMasterAnggota();
+        updateTodayCounterWidget();
     </script>
 </body>
 </html>
