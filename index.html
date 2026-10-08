@@ -166,7 +166,7 @@
             margin-top: 2px;
         }
 
-        /* 🟡 STYLING KOTAK KUNING NPP (HIGHLIGHT PEMBEDA) */
+        /* KOTAK KUNING BACKGROUND NPP */
         .npp-tag {
             display: inline-block;
             background-color: var(--poltekbang-gold);
@@ -539,6 +539,7 @@
         .btn-primary { background: var(--poltekbang-blue); color: white; }
         .btn-success { background: var(--success-color); color: white; }
         .btn-danger { background: var(--danger-color); color: white; }
+        .btn-warning { background: var(--poltekbang-gold); color: #000; }
         .btn-excel { background: #16a34a; color: white; }
 
         .btn-group-period {
@@ -601,12 +602,12 @@
         th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
         th { background: #f8fafc; color: #475569; font-weight: 600; }
 
-        /* BADGES STATUS KETERSEDIAAN BUKU */
+        /* BADGES STATUS KETERSEDIAAN BUKU & AKUN ANGGOTA */
         .badge { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
         .badge-masuk { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
         .badge-keluar { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
         .badge-dipinjam { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; } /* KUNING DIPINJAM */
-        .badge-overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }  /* MERAH BELUM KEMBALI */
+        .badge-overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }  /* MERAH NON-AKTIF / BELUM KEMBALI */
         .badge-selesai { background: #f1f5f9; color: #64748b; }
         .badge-kat { background: #e0e7ff; color: #3730a3; }
 
@@ -959,7 +960,7 @@
             <div class="brand-text">
                 <h2 id="lblHeaderTitle">UNIT PERPUSTAKAAN<br>POLITEKNIK PENERBANGAN JAYAPURA</h2>
                 <p id="lblHeaderSub">Kementerian Perhubungan Republik Indonesia</p>
-                <!-- 🟡 KOTAK KUNING BACKGROUND NPP PEMBEDA -->
+                <!-- KOTAK KUNING BACKGROUND NPP PEMBEDA -->
                 <span class="npp-tag" id="lblNppBadge"><i class="fa-solid fa-id-badge"></i> NPP: 9171012C0000001</span>
             </div>
         </div>
@@ -1019,7 +1020,7 @@
                     </div>
                 </div>
 
-                <!-- KARTU 2: WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI (UKURAN SAMA & SEBELAHAN) -->
+                <!-- KARTU 2: WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI -->
                 <div class="today-visit-card">
                     <div class="visit-card-header">
                         <span class="visit-card-badge" id="lblCardBadge"><i class="fa-solid fa-chart-line"></i> Real-Time</span>
@@ -1233,7 +1234,7 @@
                     </form>
                 </div>
 
-                <!-- TABEL ALFABET NAMA KEANGGOTAAN TERDAFTAR -->
+                <!-- TABEL ALFABET NAMA KEANGGOTAAN TERDAFTAR DENGAN STATUS & OPSI HAPUS -->
                 <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-users-rectangle"></i> <span id="lblMemberListTitle">Daftar Keanggotaan Terdaftar (Urut Alfabet A-Z)</span></span>
@@ -1256,6 +1257,7 @@
                                     <th id="thMemCat">Kategori Anggota</th>
                                     <th id="thMemVisits">Total Riwayat Kunjungan</th>
                                     <th id="thMemStatus">Status Akun</th>
+                                    <th id="thMemAction">Aksi & Pengaturan</th>
                                 </tr>
                             </thead>
                             <tbody id="tabelMasterAnggotaBody"></tbody>
@@ -1483,7 +1485,7 @@
     <!-- LOGIKA JAVASCRIPT & FIREBASE REALTIME SYNC -->
     <script>
         // =========================================================================
-        // 1. KONFIGURASI FIREBASE REALTIME DATABASE PROYEK ANDA ("perpusppj")
+        // 1. KONFIGURASI FIREBASE REALTIME DATABASE PROYEK ("perpusppj")
         // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
@@ -1496,7 +1498,6 @@
             measurementId: "G-3P8JGED7CH"
         };
 
-        // Inisialisasi Firebase & Reference Database
         let db = null;
         let isFirebaseConnected = false;
 
@@ -1515,7 +1516,7 @@
         // 2. DICTIONARY TRANSLATION (DUAL LANGUAGE ID & ENG)
         // =========================================================================
         let currentLang = 'id';
-        let currentPeriodMode = 'harian'; // 'harian', 'mingguan', 'bulanan'
+        let currentPeriodMode = 'harian';
         let selectedMemberAlphaFilter = 'ALL';
 
         const i18n = {
@@ -1577,6 +1578,7 @@
                 thMemCat: "Kategori Anggota",
                 thMemVisits: "Total Riwayat Kunjungan",
                 thMemStatus: "Status Akun",
+                thMemAction: "Aksi & Pengaturan",
                 borrowTitle: "Catat Peminjaman Buku",
                 borrowNIM: "NIM Anggota Terdaftar:",
                 borrowBook: "Judul Buku:",
@@ -1691,6 +1693,7 @@
                 thMemCat: "Member Category",
                 thMemVisits: "Total Visit History",
                 thMemStatus: "Account Status",
+                thMemAction: "Action & Settings",
                 borrowTitle: "Record Book Loan",
                 borrowNIM: "Registered Member ID:",
                 borrowBook: "Book Title:",
@@ -1782,12 +1785,12 @@
         // 4. STATE DATA & REALTIME FIREBASE LISTENERS
         // =========================================================================
         let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
-            { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa" },
-            { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa" },
-            { nim: "1988001", nama: "Dosen Budi Santoso", kategori: "Dosen/Instruktur" },
-            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum" },
-            { nim: "2026003", nama: "Taruna Rizky Pratama", kategori: "Taruna/Mahasiswa" },
-            { nim: "2026004", nama: "Taruni Annisa Putri", kategori: "Taruna/Mahasiswa" }
+            { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
+            { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa", status: "Aktif" },
+            { nim: "1988001", nama: "Dosen Budi Santoso", kategori: "Dosen/Instruktur", status: "Aktif" },
+            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum", status: "Aktif" },
+            { nim: "2026003", nama: "Taruna Rizky Pratama", kategori: "Taruna/Mahasiswa", status: "Aktif" },
+            { nim: "2026004", nama: "Taruni Annisa Putri", kategori: "Taruna/Mahasiswa", status: "Aktif" }
         ];
 
         let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [
@@ -2079,6 +2082,20 @@
         }
 
         function prosesAbsensiPengunjung(anggota) {
+            // CEK STATUS AKUN (AKUN NON-AKTIF TIDAK BISA MELAKUKAN PENDATAAN)
+            if (anggota.status === 'Non-Aktif') {
+                const pesanTeks = currentLang === 'id' ? 
+                    `Gagal! Akun ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif. Hubungi Admin.` : 
+                    `Failed! Account ${anggota.nama} (${anggota.nim}) is Non-Active. Contact Admin.`;
+                const pesanSuara = currentLang === 'id' ? 
+                    `Mohon maaf, akun ${anggota.nama} sedang non aktif. Silakan hubungi administrator.` : 
+                    `Sorry, account ${anggota.nama} is non active. Please contact administrator.`;
+
+                tampilkanAlertKiosk('error', pesanTeks);
+                bicaraSuara(pesanSuara);
+                return;
+            }
+
             const sekarang = new Date();
             const skrgTime = sekarang.getTime();
             const namaHari = DAFTAR_HARI[sekarang.getDay()];
@@ -2293,7 +2310,7 @@
         function cariBukuInKatalog() { renderKatalogBuku(); }
 
         // =========================================================================
-        // 9. LOGIKA TABEL MASTER ANGGOTA ALFABET (A-Z) DI PANEL ADMIN
+        // 9. LOGIKA TABEL MASTER ANGGOTA ALFABET (A-Z) + HAPUS & TOGGLE STATUS
         // =========================================================================
         function generateMemberAlphabetButtons() {
             const container = document.getElementById('memberAlphabetContainer');
@@ -2330,19 +2347,34 @@
                 sortedMembers = sortedMembers.filter(m => 
                     m.nama.toLowerCase().includes(query) ||
                     m.nim.toLowerCase().includes(query) ||
-                    m.kategori.toLowerCase().includes(query)
+                    (m.kategori && m.kategori.toLowerCase().includes(query))
                 );
             }
 
             if (sortedMembers.length === 0) {
                 const noMemberText = currentLang === 'id' ? 'Tidak ada data anggota terdaftar untuk kriteria ini.' : 'No registered member found for this criteria.';
-                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
+                body.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
                 return;
             }
 
             sortedMembers.forEach((m, idx) => {
                 const initialLetter = m.nama.charAt(0).toUpperCase();
                 const totalVisits = logLaporanHarian.filter(l => l.nim === m.nim).length;
+                const statusAkun = m.status || 'Aktif';
+
+                // STATUS BADGE: AKTIF (HIJAU) / NON-AKTIF (MERAH)
+                let statusBadgeHTML = '';
+                if (statusAkun === 'Aktif') {
+                    statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-user-check"></i> ${currentLang === 'id' ? 'Aktif' : 'Active'}</span>`;
+                } else {
+                    statusBadgeHTML = `<span class="badge badge-overdue"><i class="fa-solid fa-user-xmark"></i> ${currentLang === 'id' ? 'Non-Aktif' : 'Inactive'}</span>`;
+                }
+
+                // TOMBOL UBAH STATUS & TOMBOL HAPUS DUA NAMA SAMAA/DUPLIKAT
+                const btnToggleTxt = statusAkun === 'Aktif' ? 
+                    (currentLang === 'id' ? 'Non-Aktifkan' : 'Deactivate') : 
+                    (currentLang === 'id' ? 'Aktifkan' : 'Activate');
+                const btnToggleClass = statusAkun === 'Aktif' ? 'btn-warning' : 'btn-success';
 
                 body.innerHTML += `
                     <tr>
@@ -2352,7 +2384,17 @@
                         <td><strong>${m.nama}</strong></td>
                         <td><span class="badge badge-kat">${m.kategori || 'Taruna/Mahasiswa'}</span></td>
                         <td><span class="badge badge-keluar">${totalVisits} ${currentLang === 'id' ? 'Kali Kunjungan' : 'Visits'}</span></td>
-                        <td><span class="badge badge-masuk"><i class="fa-solid fa-user-check"></i> ${currentLang === 'id' ? 'Aktif' : 'Active'}</span></td>
+                        <td>${statusBadgeHTML}</td>
+                        <td>
+                            <div style="display:flex; gap:6px;">
+                                <button class="btn ${btnToggleClass}" style="padding:4px 8px; font-size:11px;" onclick="toggleStatusAnggota('${m.nim}')" title="Ubah Status Akun">
+                                    <i class="fa-solid fa-user-gear"></i> ${btnToggleTxt}
+                                </button>
+                                <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusAnggota('${m.nim}')" title="Hapus Anggota">
+                                    <i class="fa-solid fa-trash"></i> ${currentLang === 'id' ? 'Hapus' : 'Delete'}
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 `;
             });
@@ -2362,8 +2404,44 @@
             renderTabelMasterAnggota();
         }
 
+        // FUNGSI TOGGLE STATUS AKUN (AKTIF <-> NON-AKTIF)
+        function toggleStatusAnggota(nim) {
+            const anggota = masterAnggota.find(a => a.nim === nim);
+            if (!anggota) return;
+
+            const statusBaru = (anggota.status === 'Non-Aktif') ? 'Aktif' : 'Non-Aktif';
+            anggota.status = statusBaru;
+
+            simpanSemuaKeCloud();
+            renderTabelMasterAnggota();
+
+            const pesan = currentLang === 'id' ? 
+                `Status akun "${anggota.nama}" (${anggota.nim}) berhasil diubah menjadi: ${statusBaru}` : 
+                `Account status for "${anggota.nama}" (${anggota.nim}) successfully set to: ${statusBaru}`;
+            alert(pesan);
+        }
+
+        // FUNGSI HAPUS ANGGOTA (CEGAH BEBAN PENYIMPANAN / OPSI DUA NAMA SAMA)
+        function hapusAnggota(nim) {
+            const anggota = masterAnggota.find(a => a.nim === nim);
+            if (!anggota) return;
+
+            const konfirmasi = confirm(currentLang === 'id' ? 
+                `Apakah Anda yakin ingin menghapus data anggota "${anggota.nama}" (${anggota.nim})?` : 
+                `Are you sure you want to delete member data "${anggota.nama}" (${anggota.nim})?`);
+
+            if (konfirmasi) {
+                masterAnggota = masterAnggota.filter(a => a.nim !== nim);
+                simpanSemuaKeCloud();
+                renderTabelMasterAnggota();
+                alert(currentLang === 'id' ? 
+                    `Data anggota "${anggota.nama}" (${anggota.nim}) telah berhasil dihapus!` : 
+                    `Member data "${anggota.nama}" (${anggota.nim}) deleted successfully!`);
+            }
+        }
+
         // =========================================================================
-        // LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI)
+        // LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI
         // =========================================================================
         function updateTodayCounterWidget() {
             const todayStr = getFormattedDate();
@@ -2374,7 +2452,6 @@
                 counterEl.innerText = todayLogs.length;
             }
 
-            // Hitung Breakdown Per Kategori
             let cntTaruna = 0, cntDosen = 0, cntStaf = 0;
             todayLogs.forEach(l => {
                 const kat = l.kategoriAnggota || 'Taruna/Mahasiswa';
@@ -2452,13 +2529,32 @@
             renderKatalogBuku();
         });
 
+        // REGISTRASI ANGGOTA BARU + VALIDASI NIM & NAMA DUPLIKAT
         document.getElementById('formRegistrasiAnggota').addEventListener('submit', function(e) {
             e.preventDefault();
             const nim = document.getElementById('regNIM').value.trim();
             const nama = document.getElementById('regNama').value.trim();
             const kategori = document.getElementById('regKategori').value;
 
-            masterAnggota.push({ nim, nama, kategori });
+            // VALIDASI CEK DUPLIKASI NIM
+            const isNimExists = masterAnggota.some(a => a.nim.toLowerCase() === nim.toLowerCase());
+            if (isNimExists) {
+                alert(currentLang === 'id' ? 
+                    `Gagal Mendaftar! NIM/ID "${nim}" sudah terdaftar di sistem. Gunakan NIM lain atau hapus data lama.` : 
+                    `Registration Failed! ID "${nim}" is already registered. Use another ID or delete existing record.`);
+                return;
+            }
+
+            // VALIDASI CEK DUPLIKASI NAMA
+            const isNamaExists = masterAnggota.some(a => a.nama.toLowerCase() === nama.toLowerCase());
+            if (isNamaExists) {
+                alert(currentLang === 'id' ? 
+                    `Gagal Mendaftar! Nama "${nama}" sudah terdaftar di sistem. Harap periksa opsi penghapusan jika ada nama yang ganda.` : 
+                    `Registration Failed! Name "${nama}" is already registered. Please check delete option for duplicate names.`);
+                return;
+            }
+
+            masterAnggota.push({ nim, nama, kategori, status: "Aktif" });
             simpanSemuaKeCloud();
 
             alert(currentLang === 'id' ? `Berhasil mendaftarkan ${nama} (${nim})!` : `Successfully registered ${nama} (${nim})!`);
@@ -2466,6 +2562,7 @@
             renderTabelMasterAnggota();
         });
 
+        // PENAMBATAN STATUS NON-AKTIF PADA FORM PEMINJAMAN BUKU
         document.getElementById('formPeminjamanBuku').addEventListener('submit', function(e) {
             e.preventDefault();
             const nim = document.getElementById('pinjamNIM').value.trim();
@@ -2474,7 +2571,15 @@
 
             const anggota = masterAnggota.find(a => a.nim === nim);
             if (!anggota) {
-                alert(currentLang === 'id' ? "NIM tidak ditemukan!" : "Student ID not found!");
+                alert(currentLang === 'id' ? "NIM / ID Anggota tidak ditemukan di sistem!" : "Student / Member ID not found!");
+                return;
+            }
+
+            // CEK AKUN NON-AKTIF
+            if (anggota.status === 'Non-Aktif') {
+                alert(currentLang === 'id' ? 
+                    `Gagal! Anggota ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif dan tidak dapat melakukan pendataan peminjaman buku.` : 
+                    `Failed! Member ${anggota.nama} (${anggota.nim}) is Non-Active and cannot record book loans.`);
                 return;
             }
 
