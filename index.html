@@ -166,6 +166,20 @@
             margin-top: 2px;
         }
 
+        /* 🟡 STYLING KOTAK KUNING NPP (HIGHLIGHT PEMBEDA) */
+        .npp-tag {
+            display: inline-block;
+            background-color: var(--poltekbang-gold);
+            color: #000000;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 5px;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         /* TAB NAVIGATION HEADER */
         .tab-buttons {
             display: flex;
@@ -265,7 +279,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* 🌟 LAYOUT KIOSK GRID (SENSORS & STATISTIK SIDE-BY-SIDE) */
+        /* LAYOUT KIOSK GRID (SENSORS & STATISTIK SIDE-BY-SIDE) */
         .kiosk-top-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -325,7 +339,7 @@
         .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        /* 🌟 WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI) */
+        /* WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI */
         .today-visit-card {
             background: linear-gradient(135deg, #001e4e 0%, #003b8e 50%, #0f172a 100%);
             border-radius: 20px;
@@ -938,13 +952,15 @@
         </div>
     </div>
 
-    <!-- 2. HEADER RESMI KAMPUS DENGAN JUDUL REVISI -->
+    <!-- 2. HEADER RESMI KAMPUS DENGAN JUDUL & KOTAK KUNING NPP -->
     <header class="official-header">
         <div class="brand-logo">
             <img src="logo1.png" alt="Logo Poltekbang Jayapura">
             <div class="brand-text">
-                <h2 id="lblHeaderTitle">UNIT PERPUSTAKAAN<br>POLITEKNIK PENERBANGAN JAYAPURA<br>NPP:9171012C0000001</h2>
+                <h2 id="lblHeaderTitle">UNIT PERPUSTAKAAN<br>POLITEKNIK PENERBANGAN JAYAPURA</h2>
                 <p id="lblHeaderSub">Kementerian Perhubungan Republik Indonesia</p>
+                <!-- 🟡 KOTAK KUNING BACKGROUND NPP PEMBEDA -->
+                <span class="npp-tag" id="lblNppBadge"><i class="fa-solid fa-id-badge"></i> NPP: 9171012C0000001</span>
             </div>
         </div>
 
@@ -982,7 +998,7 @@
                 </div>
             </div>
 
-            <!-- 🌟 KIOSK GRID TOP: WIDGET SENSOR SIDIK JARI & STATISTIK REAL-TIME KUNJUNGAN SIDE-BY-SIDE -->
+            <!-- KIOSK GRID TOP: WIDGET SENSOR SIDIK JARI & STATISTIK REAL-TIME KUNJUNGAN SIDE-BY-SIDE -->
             <div class="kiosk-top-grid">
                 
                 <!-- KARTU 1: WIDGET SENSOR SIDIK JARI -->
@@ -1811,7 +1827,7 @@
                 bukuDipinjam: "Tata Cara Pemanduan Lalu Lintas Udara (ATC)",
                 kategoriBuku: "Lalu Lintas Udara",
                 tglPeminjaman: tglKemarinStr,
-                tglPengembalian: tglKemarinStr, // Overdue -> Belum Kembali (MERAH)
+                tglPengembalian: tglKemarinStr,
                 catatan: "Sedang Meminjam Buku"
             },
             {
@@ -1827,7 +1843,7 @@
                 bukuDipinjam: "Aerodinamika & Teori Penerbangan",
                 kategoriBuku: "Penerbangan",
                 tglPeminjaman: tglSekarangStr,
-                tglPengembalian: getFormattedDate(new Date(Date.now() + 7 * 86400000)), // Normal -> Dipinjam (KUNING)
+                tglPengembalian: getFormattedDate(new Date(Date.now() + 7 * 86400000)),
                 catatan: "Sedang Meminjam Buku"
             }
         ];
@@ -2347,7 +2363,7 @@
         }
 
         // =========================================================================
-        // 🌟 LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI)
+        // LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI (DI SEBELAH MENU SIDIK JARI)
         // =========================================================================
         function updateTodayCounterWidget() {
             const todayStr = getFormattedDate();
