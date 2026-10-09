@@ -166,7 +166,6 @@
             margin-top: 2px;
         }
 
-        /* KOTAK KUNING BACKGROUND NPP */
         .npp-tag {
             display: inline-block;
             background-color: var(--poltekbang-gold);
@@ -279,7 +278,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* LAYOUT KIOSK GRID (SENSORS & STATISTIK SIDE-BY-SIDE) */
+        /* LAYOUT KIOSK GRID */
         .kiosk-top-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -339,14 +338,17 @@
         .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        /* WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI */
+        /* WIDGET STATISTIK KUNJUNGAN HARI INI: GRADASI BATIK PAPUA + MASCOT BACKGROUND TANPA BINGKAI */
         .today-visit-card {
-            background: linear-gradient(135deg, #001e4e 0%, #003b8e 50%, #0f172a 100%);
+            background-color: #001a40;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(135deg, #00183c 0%, #003278 50%, #09132c 100%);
             border-radius: 20px;
-            padding: 25px;
+            padding: 22px 25px;
             color: white;
-            box-shadow: 0 10px 30px rgba(0, 40, 104, 0.25);
-            border: 2px solid rgba(251, 191, 36, 0.4);
+            box-shadow: 0 12px 32px rgba(0, 30, 80, 0.3);
+            border: 2px solid rgba(251, 191, 36, 0.45);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -354,94 +356,93 @@
             justify-content: space-between;
         }
 
-        .today-visit-card::before {
-            content: '\f0c0';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
+        /* GAMBAR SILAHKAN.JPEG SEBAGAI BACKGROUND ELEMENT (DI BELAKANG TEKS, TANPA BINGKAI) */
+        .today-visit-mascot-bg {
             position: absolute;
-            right: -15px;
-            bottom: -25px;
-            font-size: 150px;
-            color: rgba(255, 255, 255, 0.04);
+            right: 0;
+            bottom: 0;
+            top: 0;
+            height: 100%;
+            z-index: 1;
             pointer-events: none;
-        }
-
-        .visit-card-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            z-index: 2;
+            align-items: flex-end;
+            justify-content: flex-end;
+            opacity: 0.85;
         }
 
-        .visit-card-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--poltekbang-gold);
-            color: #000;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .today-visit-mascot-bg img {
+            height: 100%;
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            filter: drop-shadow(-4px 2px 10px rgba(0, 0, 0, 0.4));
+        }
+
+        .today-visit-body {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
         }
 
         .visit-card-title h3 {
             font-size: 16px;
             font-weight: 800;
             color: #ffffff;
-            margin-top: 6px;
+            margin-bottom: 2px;
         }
 
         .visit-card-title p {
             font-size: 11px;
             color: #cbd5e1;
-            margin-top: 2px;
         }
 
         .visit-main-counter {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 16px 20px;
-            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 10px 16px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 12px 0;
-            z-index: 2;
+            max-width: 75%;
         }
 
         .counter-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .counter-icon-circle {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             background: var(--poltekbang-gold);
             color: #000;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 18px;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+            flex-shrink: 0;
         }
 
         .counter-num-big {
-            font-size: 34px;
+            font-size: 30px;
             font-weight: 800;
             line-height: 1;
             color: #fbbf24;
         }
 
         .counter-lbl-sub {
-            font-size: 11px;
+            font-size: 10px;
             color: #e2e8f0;
             font-weight: 600;
             text-transform: uppercase;
@@ -452,27 +453,27 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            z-index: 2;
+            max-width: 80%;
         }
 
         .mini-stat-item {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 6px 8px;
             border-radius: 10px;
             text-align: center;
         }
 
         .mini-stat-item span {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             color: #93c5fd;
             font-weight: 600;
             text-transform: uppercase;
         }
 
         .mini-stat-item strong {
-            font-size: 14px;
+            font-size: 13px;
             color: #ffffff;
             font-weight: 700;
         }
@@ -602,12 +603,12 @@
         th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
         th { background: #f8fafc; color: #475569; font-weight: 600; }
 
-        /* BADGES STATUS KETERSEDIAAN BUKU & AKUN ANGGOTA */
+        /* BADGES STATUS */
         .badge { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
         .badge-masuk { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
         .badge-keluar { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
-        .badge-dipinjam { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; } /* KUNING DIPINJAM */
-        .badge-overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }  /* MERAH NON-AKTIF / BELUM KEMBALI */
+        .badge-dipinjam { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+        .badge-overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
         .badge-selesai { background: #f1f5f9; color: #64748b; }
         .badge-kat { background: #e0e7ff; color: #3730a3; }
 
@@ -809,30 +810,58 @@
         }
 
         .helpdesk-main-btn {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--poltekbang-gold), #d97706);
             color: #000;
-            border: none;
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
-            font-size: 26px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 10px 28px rgba(245, 158, 11, 0.6);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 0;
         }
 
         .helpdesk-main-btn:hover {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1) rotate(4deg);
+            box-shadow: 0 12px 32px rgba(245, 158, 11, 0.8);
+        }
+
+        .helpdesk-main-btn img.avatar-btn-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 50%;
+        }
+
+        .helpdesk-badge-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: #10b981;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .helpdesk-menu-popover {
             position: absolute;
-            bottom: 75px;
+            bottom: 80px;
             right: 0;
-            width: 310px;
+            width: 320px;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
@@ -861,21 +890,49 @@
             padding-bottom: 10px;
         }
 
-        .helpdesk-header h4 {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--poltekbang-blue);
+        .helpdesk-header-title-box {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .helpdesk-header p {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
         }
 
         .helpdesk-close-btn {
             background: transparent;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             color: #94a3b8;
             cursor: pointer;
+        }
+
+        .helpdesk-mascot-card {
+            background: linear-gradient(135deg, #001e4e, #0044a8);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: white;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 30, 80, 0.15);
+        }
+
+        .helpdesk-mascot-text h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .helpdesk-mascot-text p {
+            font-size: 11px;
+            color: #e0f2fe;
+            line-height: 1.4;
         }
 
         .helpdesk-option-card {
@@ -936,7 +993,7 @@
 </head>
 <body>
 
-    <!-- 1. TICKER PENGUMUMAN RESMI + HARI & ZONA WAKTU (WIT) + DUAL LANGUAGE SWITCHER -->
+    <!-- TICKER PENGUMUMAN RESMI -->
     <div class="ticker-bar">
         <span class="ticker-label" id="lblTickerLabel">Pengumuman</span>
         <div class="ticker-content">
@@ -953,14 +1010,13 @@
         </div>
     </div>
 
-    <!-- 2. HEADER RESMI KAMPUS DENGAN JUDUL & KOTAK KUNING NPP -->
+    <!-- HEADER RESMI KAMPUS -->
     <header class="official-header">
         <div class="brand-logo">
             <img src="logo1.png" alt="Logo Poltekbang Jayapura">
             <div class="brand-text">
                 <h2 id="lblHeaderTitle">UNIT PERPUSTAKAAN<br>POLITEKNIK PENERBANGAN JAYAPURA</h2>
                 <p id="lblHeaderSub">Kementerian Perhubungan Republik Indonesia</p>
-                <!-- KOTAK KUNING BACKGROUND NPP PEMBEDA -->
                 <span class="npp-tag" id="lblNppBadge"><i class="fa-solid fa-id-badge"></i> NPP: 9171012C0000001</span>
             </div>
         </div>
@@ -991,15 +1047,15 @@
                 <div class="slide-item" style="background-image: url('11.jpg');"></div>
                 
                 <div class="hero-overlay">
-                    <h1 id="lblHeroTitle">Selamat Datang di Unit Perpustakaan Digital<br>Poltekbang Jayapura</h1>
-                    <p id="lblHeroSub">Silakan tempelkan sidik jari Anda pada sensor di bawah atau masukkan Nomor Induk Mahasiswa (NIM) untuk melakukan absensi kunjungan masuk dan keluar.</p>
+                    <h1 id="lblHeroTitle">Selamat Datang di Unit Perpustakaan Digital<br>Politeknik Penerbangan Jayapura</h1>
+                    <p id="lblHeroSub">Silakan tempelkan sidik jari Anda pada sensor di bawah atau masukkan Nomor Induk Mahasiswa (NIM) <br> untuk melakukan absensi kunjungan masuk dan keluar.</p>
                     <div class="sound-indicator">
                         <i class="fa-solid fa-volume-high"></i> <span id="lblSoundIndicator">Panduan Suara Otomatis Aktif</span>
                     </div>
                 </div>
             </div>
 
-            <!-- KIOSK GRID TOP: WIDGET SENSOR SIDIK JARI & STATISTIK REAL-TIME KUNJUNGAN SIDE-BY-SIDE -->
+            <!-- KIOSK GRID TOP -->
             <div class="kiosk-top-grid">
                 
                 <!-- KARTU 1: WIDGET SENSOR SIDIK JARI -->
@@ -1020,42 +1076,44 @@
                     </div>
                 </div>
 
-                <!-- KARTU 2: WIDGET STATISTIK REAL-TIME KUNJUNGAN HARI INI -->
+                <!-- KARTU 2: WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT BAGIAN BELAKANG TANPA BINGKAI) -->
                 <div class="today-visit-card">
-                    <div class="visit-card-header">
-                        <span class="visit-card-badge" id="lblCardBadge"><i class="fa-solid fa-chart-line"></i> Real-Time</span>
-                        <i class="fa-solid fa-calendar-day" style="color: var(--poltekbang-gold); font-size: 20px;"></i>
+                    <!-- GAMBAR SILAHKAN.JPEG MASCOT SEBAGAI BACKGROUND ELEMENT (DI BELAKANG TEKS, TANPA BINGKAI) -->
+                    <div class="today-visit-mascot-bg">
+                        <img src="silahkan.jpeg" alt="Mascot Petugas Perpustakaan Poltekbang Jayapura">
                     </div>
 
-                    <div class="visit-card-title">
-                        <h3 id="lblCardTitle">Statistik Kunjungan Hari Ini</h3>
-                        <p id="lblCardSub">Total absensi kedatangan perpustakaan hari ini</p>
-                    </div>
+                    <div class="today-visit-body">
+                        <div class="visit-card-title">
+                            <h3 id="lblCardTitle">Statistik Kunjungan Hari Ini</h3>
+                            <p id="lblCardSub">Total absensi kedatangan perpustakaan hari ini</p>
+                        </div>
 
-                    <div class="visit-main-counter">
-                        <div class="counter-left">
-                            <div class="counter-icon-circle">
-                                <i class="fa-solid fa-users-rectangle"></i>
+                        <div class="visit-main-counter">
+                            <div class="counter-left">
+                                <div class="counter-icon-circle">
+                                    <i class="fa-solid fa-users-rectangle"></i>
+                                </div>
+                                <div>
+                                    <div class="counter-num-big" id="widgetTodayCount">0</div>
+                                    <div class="counter-lbl-sub" id="lblCounterSubText">Pengunjung Hari Ini</div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="counter-num-big" id="widgetTodayCount">0</div>
-                                <div class="counter-lbl-sub" id="lblCounterSubText">Pengunjung Hari Ini</div>
-                            </div>
                         </div>
-                    </div>
 
-                    <div class="mini-breakdown-grid">
-                        <div class="mini-stat-item">
-                            <span id="lblMiniTaruna">Taruna</span>
-                            <strong id="cntMiniTaruna">0</strong>
-                        </div>
-                        <div class="mini-stat-item">
-                            <span id="lblMiniDosen">Dosen</span>
-                            <strong id="cntMiniDosen">0</strong>
-                        </div>
-                        <div class="mini-stat-item">
-                            <span id="lblMiniStaf">Staf/Umum</span>
-                            <strong id="cntMiniStaf">0</strong>
+                        <div class="mini-breakdown-grid">
+                            <div class="mini-stat-item">
+                                <span id="lblMiniTaruna">Taruna</span>
+                                <strong id="cntMiniTaruna">0</strong>
+                            </div>
+                            <div class="mini-stat-item">
+                                <span id="lblMiniDosen">Dosen</span>
+                                <strong id="cntMiniDosen">0</strong>
+                            </div>
+                            <div class="mini-stat-item">
+                                <span id="lblMiniStaf">Staf/Umum</span>
+                                <strong id="cntMiniStaf">0</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1132,7 +1190,7 @@
                 </div>
             </div>
 
-            <!-- SUB-MENU MODUL ADMINISTRASI -->
+            <!-- SUB-MENU NAV -->
             <div class="admin-subnav">
                 <button class="admin-sub-btn active" id="subBtnBuku" onclick="switchAdminSub('sub-buku')">
                     <i class="fa-solid fa-book-medical"></i> <span id="lblSub1">1. Kelola Koleksi Buku</span>
@@ -1203,7 +1261,7 @@
                 </div>
             </div>
 
-            <!-- SUB-MODUL 3: REGISTRASI & TABEL NAMA KEANGGOTAAN TERURUT ALFABET (A-Z) -->
+            <!-- SUB-MODUL 3: REGISTRASI & LIST ANGGOTA -->
             <div id="sub-anggota" class="admin-sub-pane">
                 <div class="card" style="border-top: 4px solid var(--success-color); margin-bottom: 20px;">
                     <div class="card-header">
@@ -1234,7 +1292,6 @@
                     </form>
                 </div>
 
-                <!-- TABEL ALFABET NAMA KEANGGOTAAN TERDAFTAR DENGAN STATUS & OPSI HAPUS -->
                 <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-users-rectangle"></i> <span id="lblMemberListTitle">Daftar Keanggotaan Terdaftar (Urut Alfabet A-Z)</span></span>
@@ -1243,7 +1300,6 @@
                         </div>
                     </div>
 
-                    <!-- ALPHABET FILTER BUTTONS FOR MEMBERS -->
                     <div class="alphabet-filter" id="memberAlphabetContainer"></div>
 
                     <div class="table-responsive">
@@ -1295,13 +1351,12 @@
                 </div>
             </div>
 
-            <!-- SUB-MODUL 5: REKAPITULASI & PENARIKAN DATA HARIAN, MINGGUAN, BULANAN DENGAN KOLOM PER KATEGORI -->
+            <!-- SUB-MODUL 5: REKAPITULASI LAPORAN -->
             <div id="sub-laporan" class="admin-sub-pane">
                 <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-file-invoice"></i> <span id="lblReportTitle">Rekapitulasi Laporan & Export Data</span></span>
                         
-                        <!-- FILTER RENTANG WAKTU: HARIAN, MINGGUAN, BULANAN -->
                         <div class="filter-box">
                             <div class="btn-group-period">
                                 <button class="btn-period active" id="btnPeriodHarian" onclick="setPeriodMode('harian')">
@@ -1320,7 +1375,6 @@
                         </div>
                     </div>
 
-                    <!-- RINGKASAN REKAP PER KATEGORI -->
                     <div style="margin-bottom: 15px;">
                         <h4 style="font-size: 13px; font-weight: 700; color: var(--poltekbang-blue); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-chart-pie"></i> <span id="lblCatSummary">Ringkasan Total Kunjungan Per Kategori Anggota:</span>
@@ -1400,7 +1454,7 @@
         </div>
     </div>
 
-    <!-- SEKSI TATA TERTIB & LARANGAN PERPUSTAKAAN -->
+    <!-- SEKSI TATA TERTIB & LARANGAN -->
     <section class="rules-footer-section">
         <div class="rules-title">
             <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 20px;"></i>
@@ -1442,14 +1496,23 @@
 
     <!-- HELPDESK FLOATING BUBBLE MENU -->
     <div class="helpdesk-floating-container">
-        <!-- POPOVER MENU GELEMBUNG -->
         <div class="helpdesk-menu-popover" id="helpdeskPopover">
             <div class="helpdesk-header">
-                <h4><i class="fa-solid fa-headset" style="color: var(--poltekbang-gold);"></i> <span id="lblHelpdeskPopoverTitle">Pusat Bantuan & Layanan</span></h4>
+                <div class="helpdesk-header-title-box">
+                    <p id="lblHelpdeskSubtitle"><i class="fa-solid fa-headset" style="color: var(--poltekbang-gold); margin-right: 4px;"></i> Customer Service Poltekbang Jayapura</p>
+                </div>
                 <button class="helpdesk-close-btn" onclick="toggleHelpdeskMenu()"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- OPTION 1: CONTACT ME (WHATSAPP + TELEPON) -->
+            <!-- BANNER BIRU TANPA GAMBAR DI DALAMNYA -->
+            <div class="helpdesk-mascot-card">
+                <div class="helpdesk-mascot-text">
+                    <h5 id="lblMascotWelcomeTitle"><i class="fa-solid fa-comments"></i> Halo! Ada yang bisa kami bantu?</h5>
+                    <p id="lblMascotWelcomeSub">Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.</p>
+                </div>
+            </div>
+
+            <!-- OPTION 1: CONTACT ME -->
             <a href="https://wa.me/6282393715964" target="_blank" class="helpdesk-option-card">
                 <div class="helpdesk-icon-box icon-whatsapp">
                     <i class="fa-brands fa-whatsapp"></i>
@@ -1460,7 +1523,7 @@
                 </div>
             </a>
 
-            <!-- OPTION 2: LAYANAN PENGADUAN (GOOGLE FORM) -->
+            <!-- OPTION 2: LAYANAN PENGADUAN -->
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7TOAMAl_WpoYove7jyCLABifvwdDnu38fcHP1txJdhl6l2g/viewform" target="_blank" class="helpdesk-option-card">
                 <div class="helpdesk-icon-box icon-form">
                     <i class="fa-solid fa-clipboard-list"></i>
@@ -1472,9 +1535,10 @@
             </a>
         </div>
 
-        <!-- TOMBOL UTAMA GELEMBUNG MELAYANG -->
-        <button class="helpdesk-main-btn" onclick="toggleHelpdeskMenu()" title="Pusat Bantuan & Layanan">
-            <i class="fa-solid fa-headset"></i>
+        <!-- TOMBOL GELEMBUNG UTAMA -->
+        <button class="helpdesk-main-btn" onclick="toggleHelpdeskMenu()" title="Layanan Customer Service">
+            <img src="masukan.jpeg" alt="Logo Customer Service" class="avatar-btn-img">
+            <span class="helpdesk-badge-status"><i class="fa-solid fa-headset"></i></span>
         </button>
     </div>
 
@@ -1484,9 +1548,6 @@
 
     <!-- LOGIKA JAVASCRIPT & FIREBASE REALTIME SYNC -->
     <script>
-        // =========================================================================
-        // 1. KONFIGURASI FIREBASE REALTIME DATABASE PROYEK ("perpusppj")
-        // =========================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
             authDomain: "perpusppj.firebaseapp.com",
@@ -1506,15 +1567,11 @@
                 firebase.initializeApp(firebaseConfig);
                 db = firebase.database();
                 isFirebaseConnected = true;
-                console.log("Firebase Realtime Database Terhubung!");
             }
         } catch (e) {
             console.warn("Menggunakan LocalStorage fallback:", e);
         }
 
-        // =========================================================================
-        // 2. DICTIONARY TRANSLATION (DUAL LANGUAGE ID & ENG)
-        // =========================================================================
         let currentLang = 'id';
         let currentPeriodMode = 'harian';
         let selectedMemberAlphaFilter = 'ALL';
@@ -1604,7 +1661,6 @@
                 thRepBorrowDate: "Tgl Peminjaman",
                 thRepReturnDate: "Tgl Pengembalian",
                 thRepStatus: "Catatan / Status",
-                cardBadge: "<i class=\"fa-solid fa-chart-line\"></i> Real-Time",
                 cardTitle: "Statistik Kunjungan Hari Ini",
                 cardSub: "Total absensi kedatangan perpustakaan hari ini",
                 counterSubText: "Pengunjung Hari Ini",
@@ -1622,7 +1678,9 @@
                 rule4Desc: "Tidak mencoret, melipat, atau merobek halaman koleksi buku.",
                 rule5Title: "DILARANG BUANG SAMPAH",
                 rule5Desc: "Buanglah sampah pada tempatnya agar lingkungan tetap asri.",
-                helpdeskPopoverTitle: "Pusat Bantuan & Layanan",
+                helpdeskSubtitle: "<i class=\"fa-solid fa-headset\" style=\"color: var(--poltekbang-gold); margin-right: 4px;\"></i> Customer Service Poltekbang Jayapura",
+                mascotWelcomeTitle: "<i class=\"fa-solid fa-comments\"></i> Halo! Ada yang bisa kami bantu?",
+                mascotWelcomeSub: "Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.",
                 contactMeTitle: "Contact Me (Hubungi Kami)",
                 contactMeSub: "WhatsApp / Telp: +62 823 9371 5964",
                 complaintTitle: "Layanan Pengaduan",
@@ -1719,7 +1777,6 @@
                 thRepBorrowDate: "Loan Date",
                 thRepReturnDate: "Return Date",
                 thRepStatus: "Notes / Status",
-                cardBadge: "<i class=\"fa-solid fa-chart-line\"></i> Real-Time",
                 cardTitle: "Today's Visit Statistics",
                 cardSub: "Total library attendance recorded today",
                 counterSubText: "Visitors Today",
@@ -1737,7 +1794,9 @@
                 rule4Desc: "Do not mark, fold, or tear pages of library books.",
                 rule5Title: "NO LITTERING",
                 rule5Desc: "Dispose of trash properly to keep the environment clean.",
-                helpdeskPopoverTitle: "Helpdesk & Support Center",
+                helpdeskSubtitle: "<i class=\"fa-solid fa-headset\" style=\"color: var(--poltekbang-gold); margin-right: 4px;\"></i> Customer Service Jayapura Aviation Polytechnic",
+                mascotWelcomeTitle: "<i class=\"fa-solid fa-comments\"></i> Hello! How can we help you?",
+                mascotWelcomeSub: "Official information & complaint center of Jayapura Aviation Polytechnic Library.",
                 contactMeTitle: "Contact Me",
                 contactMeSub: "WhatsApp / Call: +62 823 9371 5964",
                 complaintTitle: "Complaint & Feedback Service",
@@ -1773,17 +1832,11 @@
             updateTodayCounterWidget();
         }
 
-        // =========================================================================
-        // 3. HELPDESK FLOATING MENU TOGGLE
-        // =========================================================================
         function toggleHelpdeskMenu() {
             const popover = document.getElementById('helpdeskPopover');
             popover.classList.toggle('active');
         }
 
-        // =========================================================================
-        // 4. STATE DATA & REALTIME FIREBASE LISTENERS
-        // =========================================================================
         let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
             { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
             { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa", status: "Aktif" },
@@ -1906,9 +1959,6 @@
             }
         }
 
-        // =========================================================================
-        // 5. TICKER & CLOCK WIT
-        // =========================================================================
         function updateTickerTeks() {
             document.getElementById('tickerText').innerText = teksPengumuman;
             document.getElementById('inputPengumuman').value = teksPengumuman;
@@ -1943,9 +1993,6 @@
             }
         }
 
-        // =========================================================================
-        // 6. OTENTIKASI ADMIN & TAB SWITCHING
-        // =========================================================================
         let isAdminAuthenticated = false;
 
         function switchTab(tabId) {
@@ -2004,7 +2051,6 @@
             switchTab('tab-kiosk');
         }
 
-        // SLIDER TRANSISI
         let slideIndex = 0;
         const slides = document.querySelectorAll('.slide-item');
 
@@ -2015,7 +2061,6 @@
         }
         setInterval(putarSlide, 4000);
 
-        // SUARA OTOMATIS
         function bicaraSuara(teks) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -2026,9 +2071,6 @@
             }
         }
 
-        // =========================================================================
-        // 7. ABSENSI SENSOR & PROSES MASUK / KELUAR
-        // =========================================================================
         function simulasiScanSidikJari() {
             const sensor = document.getElementById('sensorWidget');
             sensor.classList.add('scanning');
@@ -2082,7 +2124,6 @@
         }
 
         function prosesAbsensiPengunjung(anggota) {
-            // CEK STATUS AKUN (AKUN NON-AKTIF TIDAK BISA MELAKUKAN PENDATAAN)
             if (anggota.status === 'Non-Aktif') {
                 const pesanTeks = currentLang === 'id' ? 
                     `Gagal! Akun ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif. Hubungi Admin.` : 
@@ -2192,9 +2233,6 @@
             });
         }
 
-        // =========================================================================
-        // 8. KATALOG BUKU DENGAN STATUS "DIPINJAM" (KUNING) & "BELUM KEMBALI" (MERAH) + LINK PEMINJAM
-        // =========================================================================
         function generateAlphabetButtons() {
             const container = document.getElementById('alphabetContainer');
             if(!container) return;
@@ -2276,7 +2314,7 @@
 
                 let borrowerCellHTML = '';
                 if (jumlahDipinjam > 0) {
-                    const namaPeminjamPertama = peminjamList[0].nama;
+                    const namaPeminjamPertama = peminjamList.nama;
                     const suffix = jumlahDipinjam > 1 ? ` (+${jumlahDipinjam - 1})` : '';
                     const btnTxt = `${namaPeminjamPertama}${suffix}`;
 
@@ -2309,9 +2347,6 @@
 
         function cariBukuInKatalog() { renderKatalogBuku(); }
 
-        // =========================================================================
-        // 9. LOGIKA TABEL MASTER ANGGOTA ALFABET (A-Z) + HAPUS & TOGGLE STATUS
-        // =========================================================================
         function generateMemberAlphabetButtons() {
             const container = document.getElementById('memberAlphabetContainer');
             if(!container) return;
@@ -2362,7 +2397,6 @@
                 const totalVisits = logLaporanHarian.filter(l => l.nim === m.nim).length;
                 const statusAkun = m.status || 'Aktif';
 
-                // STATUS BADGE: AKTIF (HIJAU) / NON-AKTIF (MERAH)
                 let statusBadgeHTML = '';
                 if (statusAkun === 'Aktif') {
                     statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-user-check"></i> ${currentLang === 'id' ? 'Aktif' : 'Active'}</span>`;
@@ -2370,7 +2404,6 @@
                     statusBadgeHTML = `<span class="badge badge-overdue"><i class="fa-solid fa-user-xmark"></i> ${currentLang === 'id' ? 'Non-Aktif' : 'Inactive'}</span>`;
                 }
 
-                // TOMBOL UBAH STATUS & TOMBOL HAPUS DUA NAMA SAMAA/DUPLIKAT
                 const btnToggleTxt = statusAkun === 'Aktif' ? 
                     (currentLang === 'id' ? 'Non-Aktifkan' : 'Deactivate') : 
                     (currentLang === 'id' ? 'Aktifkan' : 'Activate');
@@ -2400,11 +2433,8 @@
             });
         }
 
-        function cariAnggotaInTable() {
-            renderTabelMasterAnggota();
-        }
+        function cariAnggotaInTable() { renderTabelMasterAnggota(); }
 
-        // FUNGSI TOGGLE STATUS AKUN (AKTIF <-> NON-AKTIF)
         function toggleStatusAnggota(nim) {
             const anggota = masterAnggota.find(a => a.nim === nim);
             if (!anggota) return;
@@ -2421,7 +2451,6 @@
             alert(pesan);
         }
 
-        // FUNGSI HAPUS ANGGOTA (CEGAH BEBAN PENYIMPANAN / OPSI DUA NAMA SAMA)
         function hapusAnggota(nim) {
             const anggota = masterAnggota.find(a => a.nim === nim);
             if (!anggota) return;
@@ -2440,9 +2469,6 @@
             }
         }
 
-        // =========================================================================
-        // LOGIKA UPDATE WIDGET REKAP KUNJUNGAN HARI INI
-        // =========================================================================
         function updateTodayCounterWidget() {
             const todayStr = getFormattedDate();
             const todayLogs = logLaporanHarian.filter(item => item.tanggal === todayStr);
@@ -2469,7 +2495,6 @@
             if (elStaf) elStaf.innerText = cntStaf;
         }
 
-        // MODAL POPUP DETAIL PEMINJAM TERDAFTAR
         function bukaModalPeminjam(kodeBuku, judulBuku) {
             document.getElementById('modalBookTitleDisplay').innerText = `${judulBuku} (${kodeBuku})`;
             const listPeminjam = getPeminjamAktifBuku(judulBuku);
@@ -2512,7 +2537,6 @@
             document.getElementById('modalPeminjam').classList.remove('active');
         }
 
-        // FORMS ADMINISTRATOR
         document.getElementById('formTambahBuku').addEventListener('submit', function(e) {
             e.preventDefault();
             const kode = document.getElementById('addKode').value.trim();
@@ -2529,28 +2553,25 @@
             renderKatalogBuku();
         });
 
-        // REGISTRASI ANGGOTA BARU + VALIDASI NIM & NAMA DUPLIKAT
         document.getElementById('formRegistrasiAnggota').addEventListener('submit', function(e) {
             e.preventDefault();
             const nim = document.getElementById('regNIM').value.trim();
             const nama = document.getElementById('regNama').value.trim();
             const kategori = document.getElementById('regKategori').value;
 
-            // VALIDASI CEK DUPLIKASI NIM
             const isNimExists = masterAnggota.some(a => a.nim.toLowerCase() === nim.toLowerCase());
             if (isNimExists) {
                 alert(currentLang === 'id' ? 
-                    `Gagal Mendaftar! NIM/ID "${nim}" sudah terdaftar di sistem. Gunakan NIM lain atau hapus data lama.` : 
-                    `Registration Failed! ID "${nim}" is already registered. Use another ID or delete existing record.`);
+                    `Gagal Mendaftar! NIM/ID "${nim}" sudah terdaftar di sistem.` : 
+                    `Registration Failed! ID "${nim}" is already registered.`);
                 return;
             }
 
-            // VALIDASI CEK DUPLIKASI NAMA
             const isNamaExists = masterAnggota.some(a => a.nama.toLowerCase() === nama.toLowerCase());
             if (isNamaExists) {
                 alert(currentLang === 'id' ? 
-                    `Gagal Mendaftar! Nama "${nama}" sudah terdaftar di sistem. Harap periksa opsi penghapusan jika ada nama yang ganda.` : 
-                    `Registration Failed! Name "${nama}" is already registered. Please check delete option for duplicate names.`);
+                    `Gagal Mendaftar! Nama "${nama}" sudah terdaftar di sistem.` : 
+                    `Registration Failed! Name "${nama}" is already registered.`);
                 return;
             }
 
@@ -2562,7 +2583,6 @@
             renderTabelMasterAnggota();
         });
 
-        // PENAMBATAN STATUS NON-AKTIF PADA FORM PEMINJAMAN BUKU
         document.getElementById('formPeminjamanBuku').addEventListener('submit', function(e) {
             e.preventDefault();
             const nim = document.getElementById('pinjamNIM').value.trim();
@@ -2575,11 +2595,10 @@
                 return;
             }
 
-            // CEK AKUN NON-AKTIF
             if (anggota.status === 'Non-Aktif') {
                 alert(currentLang === 'id' ? 
-                    `Gagal! Anggota ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif dan tidak dapat melakukan pendataan peminjaman buku.` : 
-                    `Failed! Member ${anggota.nama} (${anggota.nim}) is Non-Active and cannot record book loans.`);
+                    `Gagal! Anggota ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif.` : 
+                    `Failed! Member ${anggota.nama} (${anggota.nim}) is Non-Active.`);
                 return;
             }
 
@@ -2618,7 +2637,6 @@
             this.reset();
         });
 
-        // OPSI PENARIKAN DATA HARIAN, MINGGUAN, BULANAN & KOLOM PER KATEGORI
         function setPeriodMode(mode) {
             currentPeriodMode = mode;
             document.getElementById('btnPeriodHarian').classList.toggle('active', mode === 'harian');
@@ -2729,12 +2747,11 @@
             });
         }
 
-        // EKSPOR CSV DENGAN KOLOM PER KATEGORI
         function exportLaporanPengunjungCSV() {
             const dataExport = getFilteredData();
 
             if (dataExport.length === 0) {
-                alert(currentLang === 'id' ? "Tidak ada data pengunjung untuk ditarik pada periode ini!" : "No visitor data to export for this period!");
+                alert(currentLang === 'id' ? "Tidak ada data pengunjung untuk ditarik!" : "No visitor data to export!");
                 return;
             }
 
@@ -2761,7 +2778,7 @@
             let dataPinjam = getFilteredData().filter(item => item.bukuDipinjam && item.bukuDipinjam !== '-');
 
             if (dataPinjam.length === 0) {
-                alert(currentLang === 'id' ? "Tidak ada record peminjaman buku untuk ditarik pada periode ini!" : "No book loan records to export for this period!");
+                alert(currentLang === 'id' ? "Tidak ada record peminjaman buku!" : "No book loan records to export!");
                 return;
             }
 
@@ -2784,7 +2801,6 @@
             document.body.removeChild(link);
         }
 
-        // INITIAL LOAD
         updateTickerTeks();
         setPeriodMode('harian');
         renderLogKunjunganRingkas();
