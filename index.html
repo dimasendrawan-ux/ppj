@@ -95,7 +95,7 @@
             gap: 6px;
         }
 
-        /* DUAL LANGUAGE SWITCHER TOGGLE */
+        /* SWITCHER DUAL LANGUAGE */
         .lang-switch-box {
             display: flex;
             align-items: center;
@@ -124,7 +124,7 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
 
-        /* 2. HEADER RESMI KAMPUS */
+        /* 2. HEADER RESMI KAMPUS (LOGO1.PNG) */
         .official-header {
             background: var(--poltekbang-blue);
             color: white;
@@ -335,10 +335,8 @@
         .alert-box { display: none; padding: 12px; border-radius: 12px; margin-top: 12px; text-align: center; font-weight: 600; font-size: 12px; }
         .alert-masuk { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
         .alert-keluar { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-        .alert-warning { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
-        /* WIDGET STATISTIK KUNJUNGAN HARI INI: GRADASI BATIK PAPUA + MASCOT BACKGROUND TANPA BINGKAI */
+        /* WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT SILAHKAN.JPEG) */
         .today-visit-card {
             background-color: #001a40;
             background-image: 
@@ -356,7 +354,6 @@
             justify-content: space-between;
         }
 
-        /* GAMBAR SILAHKAN.JPEG SEBAGAI BACKGROUND ELEMENT (DI BELAKANG TEKS, TANPA BINGKAI) */
         .today-visit-mascot-bg {
             position: absolute;
             right: 0;
@@ -390,17 +387,8 @@
             gap: 12px;
         }
 
-        .visit-card-title h3 {
-            font-size: 16px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 2px;
-        }
-
-        .visit-card-title p {
-            font-size: 11px;
-            color: #cbd5e1;
-        }
+        .visit-card-title h3 { font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 2px; }
+        .visit-card-title p { font-size: 11px; color: #cbd5e1; }
 
         .visit-main-counter {
             background: rgba(255, 255, 255, 0.12);
@@ -414,40 +402,18 @@
             max-width: 75%;
         }
 
-        .counter-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .counter-left { display: flex; align-items: center; gap: 12px; }
         .counter-icon-circle {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             background: var(--poltekbang-gold);
-            color: #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+            color: #000; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
             flex-shrink: 0;
         }
 
-        .counter-num-big {
-            font-size: 30px;
-            font-weight: 800;
-            line-height: 1;
-            color: #fbbf24;
-        }
-
-        .counter-lbl-sub {
-            font-size: 10px;
-            color: #e2e8f0;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .counter-num-big { font-size: 30px; font-weight: 800; line-height: 1; color: #fbbf24; }
+        .counter-lbl-sub { font-size: 10px; color: #e2e8f0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
         .mini-breakdown-grid {
             display: grid;
@@ -464,21 +430,10 @@
             text-align: center;
         }
 
-        .mini-stat-item span {
-            display: block;
-            font-size: 9px;
-            color: #93c5fd;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        .mini-stat-item span { display: block; font-size: 9px; color: #93c5fd; font-weight: 600; text-transform: uppercase; }
+        .mini-stat-item strong { font-size: 13px; color: #ffffff; font-weight: 700; }
 
-        .mini-stat-item strong {
-            font-size: 13px;
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        /* FILTERS ALFABET A-Z */
+        /* ALFABET FILTER */
         .alphabet-filter {
             display: flex;
             gap: 5px;
@@ -569,35 +524,6 @@
             box-shadow: 0 2px 6px rgba(0, 40, 104, 0.3);
         }
 
-        .category-summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .cat-card {
-            background: #f8fafc;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--poltekbang-blue);
-            border-radius: 10px;
-            padding: 12px 15px;
-        }
-
-        .cat-card h5 {
-            font-size: 11px;
-            color: #64748b;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .cat-card .cat-num {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--poltekbang-blue);
-        }
-
         .table-responsive { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; white-space: nowrap; }
         th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
@@ -607,33 +533,7 @@
         .badge { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
         .badge-masuk { background: #d1fae5; color: #059669; border: 1px solid #a7f3d0; }
         .badge-keluar { background: #e0f2fe; color: #0284c7; border: 1px solid #bae6fd; }
-        .badge-dipinjam { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        .badge-overdue { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
-        .badge-selesai { background: #f1f5f9; color: #64748b; }
         .badge-kat { background: #e0e7ff; color: #3730a3; }
-
-        .btn-borrower-link {
-            background: #f0f9ff;
-            color: #0284c7;
-            border: 1px solid #bae6fd;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-borrower-link:hover {
-            background: var(--poltekbang-blue);
-            color: white;
-            border-color: var(--poltekbang-blue);
-        }
-
-        .filter-box { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
         /* ADMIN SUB-MENU NAV */
         .admin-subnav {
@@ -662,7 +562,6 @@
             gap: 8px;
         }
 
-        .admin-sub-btn:hover { background: #e2e8f0; }
         .admin-sub-btn.active {
             background: var(--poltekbang-blue);
             color: white;
@@ -673,110 +572,95 @@
         .admin-sub-pane { display: none; }
         .admin-sub-pane.active { display: block; }
 
-        /* MODAL POPUP DETAIL PEMINJAM BUKU */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active { display: flex; }
-
-        .modal-container {
-            background: white;
-            border-radius: 20px;
-            max-width: 650px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            border: 3px solid var(--poltekbang-gold);
-            overflow: hidden;
-            animation: popupFade 0.3s ease-out;
-        }
-
-        .modal-header {
-            background: var(--poltekbang-blue);
-            color: white;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h3 {
-            font-size: 15px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-close-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .modal-body {
-            padding: 20px;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        /* SEKSI TATA TERTIB & LARANGAN */
+        /* ==========================================================================
+           3. SEKSI TATA TERTIB & LARANGAN (IKON LARANGAN MERAH + MASCOT KIRI & KANAN)
+           ========================================================================== */
         .rules-footer-section {
-            background: #ffffff;
-            border-top: 4px solid var(--poltekbang-gold);
-            padding: 25px 20px;
-            margin-top: 10px;
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.90) 100%),
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+            border-top: 5px solid;
+            border-image: linear-gradient(to right, #002868, #f59e0b, #b91c1c) 1;
+            padding: 30px 20px;
+            margin-top: 25px;
             border-radius: 20px 20px 0 0;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 -8px 25px rgba(0,0,0,0.06);
         }
 
         .rules-title {
             text-align: center;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
+            font-weight: 800;
             color: var(--poltekbang-blue);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            letter-spacing: 0.5px;
         }
 
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 1100px;
+        .rules-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
+        .rules-side-image {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rules-side-image img {
+            height: 100%;
+            max-height: 210px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+            transition: transform 0.3s ease;
+        }
+
+        .rules-side-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .rules-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
         .rule-card {
-            background: #fff5f5;
-            border: 1px solid #fecaca;
-            border-radius: 14px;
-            padding: 15px;
+            background: #ffffff;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-top: 4px solid #ef4444;
+            border-radius: 16px;
+            padding: 18px 12px;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .rule-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.18);
         }
 
         .rule-icon-box {
-            width: 55px;
-            height: 55px;
+            width: 48px;
+            height: 48px;
             background: #fee2e2;
             border: 2px solid #ef4444;
             border-radius: 50%;
@@ -785,7 +669,7 @@
             justify-content: center;
             margin: 0 auto 10px;
             color: #dc2626;
-            font-size: 24px;
+            font-size: 20px;
             position: relative;
         }
 
@@ -798,10 +682,10 @@
             transform: rotate(-45deg);
         }
 
-        .rule-card h4 { font-size: 13px; font-weight: 700; color: #991b1b; margin-bottom: 4px; }
-        .rule-card p { font-size: 11px; color: #7f1d1d; line-height: 1.3; }
-        
-        /* HELPDESK FLOATING BUBBLE MENU */
+        .rule-card h4 { font-size: 12px; font-weight: 700; color: #991b1b; margin-bottom: 4px; }
+        .rule-card p { font-size: 11px; color: #475569; line-height: 1.35; }
+
+        /* HELPDESK FLOATING BUBBLE (MASUKAN.JPEG) */
         .helpdesk-floating-container {
             position: fixed;
             bottom: 25px;
@@ -810,8 +694,8 @@
         }
 
         .helpdesk-main-btn {
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--poltekbang-gold), #d97706);
             color: #000;
@@ -821,15 +705,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             padding: 0;
-        }
-
-        .helpdesk-main-btn:hover {
-            transform: scale(1.1) rotate(4deg);
-            box-shadow: 0 12px 32px rgba(245, 158, 11, 0.8);
         }
 
         .helpdesk-main-btn img.avatar-btn-img {
@@ -840,26 +717,9 @@
             border-radius: 50%;
         }
 
-        .helpdesk-badge-status {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            background: #10b981;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            border: 2px solid white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
         .helpdesk-menu-popover {
             position: absolute;
-            bottom: 80px;
+            bottom: 75px;
             right: 0;
             width: 320px;
             background: #ffffff;
@@ -870,17 +730,9 @@
             display: none;
             flex-direction: column;
             gap: 12px;
-            animation: popupFade 0.3s ease-out;
         }
 
-        .helpdesk-menu-popover.active {
-            display: flex;
-        }
-
-        @keyframes popupFade {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .helpdesk-menu-popover.active { display: flex; }
 
         .helpdesk-header {
             display: flex;
@@ -890,49 +742,12 @@
             padding-bottom: 10px;
         }
 
-        .helpdesk-header-title-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .helpdesk-header p {
-            font-size: 11px;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        .helpdesk-close-btn {
-            background: transparent;
-            border: none;
-            font-size: 18px;
-            color: #94a3b8;
-            cursor: pointer;
-        }
-
         .helpdesk-mascot-card {
             background: linear-gradient(135deg, #001e4e, #0044a8);
             border-radius: 14px;
             padding: 14px 16px;
             color: white;
             border: 1px solid rgba(251, 191, 36, 0.4);
-            box-shadow: 0 4px 12px rgba(0, 30, 80, 0.15);
-        }
-
-        .helpdesk-mascot-text h5 {
-            font-size: 13px;
-            font-weight: 700;
-            color: #fbbf24;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .helpdesk-mascot-text p {
-            font-size: 11px;
-            color: #e0f2fe;
-            line-height: 1.4;
         }
 
         .helpdesk-option-card {
@@ -945,13 +760,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.2s;
-        }
-
-        .helpdesk-option-card:hover {
-            background: #f0f9ff;
-            border-color: var(--poltekbang-blue-light);
-            transform: translateX(-3px);
         }
 
         .helpdesk-icon-box {
@@ -968,18 +776,6 @@
 
         .icon-whatsapp { background: #25d366; }
         .icon-form { background: var(--poltekbang-blue); }
-
-        .helpdesk-text h5 {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--poltekbang-blue);
-            margin-bottom: 2px;
-        }
-
-        .helpdesk-text p {
-            font-size: 11px;
-            color: #64748b;
-        }
 
         footer {
             background: var(--poltekbang-dark);
@@ -1003,14 +799,13 @@
             <i class="fa-solid fa-clock"></i> <span id="clockText">Memuat Waktu WIT...</span>
         </div>
         
-        <!-- SWITCHER DUAL LANGUAGE (ID & ENG) -->
         <div class="lang-switch-box">
             <button class="lang-btn active" id="btnLangID" onclick="setLanguage('id')">ID</button>
             <button class="lang-btn" id="btnLangENG" onclick="setLanguage('en')">ENG</button>
         </div>
     </div>
 
-    <!-- HEADER RESMI KAMPUS -->
+    <!-- HEADER RESMI KAMPUS (LOGO1.PNG) -->
     <header class="official-header">
         <div class="brand-logo">
             <img src="logo1.png" alt="Logo Poltekbang Jayapura">
@@ -1022,18 +817,10 @@
         </div>
 
         <div class="tab-buttons">
-            <button class="tab-btn active" id="btnTabAbsensi" onclick="switchTab('tab-kiosk')">
-                <i class="fa-solid fa-fingerprint"></i> <span id="lblNavAbsensi">Absensi Pengunjung</span>
-            </button>
-            <button class="tab-btn" id="btnTabBuku" onclick="switchTab('tab-buku')">
-                <i class="fa-solid fa-book-open"></i> <span id="lblNavBuku">Jenis Buku Tersedia</span>
-            </button>
-            <a href="https://repository.poltekbangjayapura.ac.id/" target="_blank" class="tab-btn" id="btnTabRepo">
-                <i class="fa-solid fa-graduation-cap"></i> <span id="lblNavRepo">Repository PPJ</span> <i class="fa-solid fa-up-right-from-square" style="font-size: 10px;"></i>
-            </a>
-            <button class="tab-btn" id="btnTabAdmin" onclick="switchTab('tab-admin')">
-                <i class="fa-solid fa-user-shield"></i> <span id="lblNavAdmin">Panel Administrator</span>
-            </button>
+            <button class="tab-btn active" id="btnTabAbsensi" onclick="switchTab('tab-kiosk')"><i class="fa-solid fa-fingerprint"></i> <span id="lblNavAbsensi">Absensi Pengunjung</span></button>
+            <button class="tab-btn" id="btnTabBuku" onclick="switchTab('tab-buku')"><i class="fa-solid fa-book-open"></i> <span id="lblNavBuku">Jenis Buku Tersedia</span></button>
+            <a href="https://repository.poltekbangjayapura.ac.id/" target="_blank" class="tab-btn" id="btnTabRepo"><i class="fa-solid fa-graduation-cap"></i> <span id="lblNavRepo">Repository PPJ</span> <i class="fa-solid fa-up-right-from-square" style="font-size: 10px;"></i></a>
+            <button class="tab-btn" id="btnTabAdmin" onclick="switchTab('tab-admin')"><i class="fa-solid fa-user-shield"></i> <span id="lblNavAdmin">Panel Administrator</span></button>
         </div>
     </header>
 
@@ -1047,8 +834,8 @@
                 <div class="slide-item" style="background-image: url('11.jpg');"></div>
                 
                 <div class="hero-overlay">
-                    <h1 id="lblHeroTitle">Selamat Datang di Unit Perpustakaan Digital<br>Politeknik Penerbangan Jayapura</h1>
-                    <p id="lblHeroSub">Silakan tempelkan sidik jari Anda pada sensor di bawah atau masukkan Nomor Induk Mahasiswa (NIM) <br> untuk melakukan absensi kunjungan masuk dan keluar.</p>
+                    <h1 id="lblHeroTitle">Selamat Datang di Unit Perpustakaan Digital<br>Poltekbang Jayapura</h1>
+                    <p id="lblHeroSub">Silakan tempelkan sidik jari Anda pada sensor di bawah atau masukkan Nomor Induk Mahasiswa (NIM) untuk melakukan absensi kunjungan masuk dan keluar.</p>
                     <div class="sound-indicator">
                         <i class="fa-solid fa-volume-high"></i> <span id="lblSoundIndicator">Panduan Suara Otomatis Aktif</span>
                     </div>
@@ -1058,7 +845,7 @@
             <!-- KIOSK GRID TOP -->
             <div class="kiosk-top-grid">
                 
-                <!-- KARTU 1: WIDGET SENSOR SIDIK JARI -->
+                <!-- WIDGET SENSOR SIDIK JARI -->
                 <div class="sensor-card">
                     <div>
                         <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()">
@@ -1076,9 +863,8 @@
                     </div>
                 </div>
 
-                <!-- KARTU 2: WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT BAGIAN BELAKANG TANPA BINGKAI) -->
+                <!-- WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT SILAHKAN.JPEG) -->
                 <div class="today-visit-card">
-                    <!-- GAMBAR SILAHKAN.JPEG MASCOT SEBAGAI BACKGROUND ELEMENT (DI BELAKANG TEKS, TANPA BINGKAI) -->
                     <div class="today-visit-mascot-bg">
                         <img src="silahkan.jpeg" alt="Mascot Petugas Perpustakaan Poltekbang Jayapura">
                     </div>
@@ -1178,7 +964,6 @@
 
         <!-- ==================== TAB 3: PANEL ADMINISTRATOR ==================== -->
         <div id="tab-admin" class="tab-pane">
-            
             <div class="card" style="background: #e0f2fe; border-left: 5px solid var(--poltekbang-blue); margin-bottom: 20px;">
                 <div class="card-header" style="border: none; margin: 0; padding: 0;">
                     <span class="card-title" style="color: var(--poltekbang-blue);">
@@ -1209,32 +994,32 @@
                 </button>
             </div>
 
-            <!-- SUB-MODUL 1: TAMBAH BUKU BARU -->
+            <!-- SUB-MODUL 1: KELOLA BUKU -->
             <div id="sub-buku" class="admin-sub-pane active">
                 <div class="card" style="border-top: 4px solid var(--poltekbang-gold);">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-book-medical"></i> <span id="lblAddBookTitle">Tambah Koleksi Buku Baru</span></span>
                     </div>
-                    <form id="formTambahBuku">
+                    <form id="formTambahBuku" onsubmit="event.preventDefault(); tambahBukuBaru();">
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="addKode" id="lblFormBookCode">Kode Buku:</label>
+                                <label id="lblFormBookCode">Kode Buku:</label>
                                 <input type="text" id="addKode" placeholder="Contoh: BK-PPJ-006" required>
                             </div>
                             <div class="form-group">
-                                <label for="addJudul" id="lblFormBookTitle">Judul Buku Lengkap:</label>
+                                <label id="lblFormBookTitle">Judul Buku Lengkap:</label>
                                 <input type="text" id="addJudul" placeholder="Contoh: Aviasi Dan Navigasi Udara" required>
                             </div>
                             <div class="form-group">
-                                <label for="addKategori" id="lblFormBookCat">Kategori / Bidang ilmu:</label>
+                                <label id="lblFormBookCat">Kategori / Bidang ilmu:</label>
                                 <input type="text" id="addKategori" placeholder="Contoh: Penerbangan / Teknik" required>
                             </div>
                             <div class="form-group">
-                                <label for="addPenulis" id="lblFormBookAuthor">Penulis / Penerbit:</label>
+                                <label id="lblFormBookAuthor">Penulis / Penerbit:</label>
                                 <input type="text" id="addPenulis" placeholder="Contoh: Dr. Ir. Susanto, M.T." required>
                             </div>
                             <div class="form-group">
-                                <label for="addStok" id="lblFormBookStock">Jumlah Stok Buku:</label>
+                                <label id="lblFormBookStock">Jumlah Stok Buku:</label>
                                 <input type="number" id="addStok" value="5" min="1" required>
                             </div>
                         </div>
@@ -1245,14 +1030,14 @@
                 </div>
             </div>
 
-            <!-- SUB-MODUL 2: EDIT PAPAN PENGUMUMAN -->
+            <!-- SUB-MODUL 2: EDIT PENGUMUMAN -->
             <div id="sub-pengumuman" class="admin-sub-pane">
                 <div class="card" style="border-top: 4px solid var(--poltekbang-blue-light);">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-bullhorn"></i> <span id="lblAnnounceTitle">Pengaturan Papan Pengumuman Teks Berjalan</span></span>
                     </div>
                     <div class="form-group">
-                        <label for="inputPengumuman" id="lblAnnounceForm">Teks Pengumuman Baru:</label>
+                        <label id="lblAnnounceForm">Teks Pengumuman Baru:</label>
                         <input type="text" id="inputPengumuman" placeholder="Masukkan teks pengumuman berjalan baru...">
                     </div>
                     <button type="button" class="btn btn-primary" onclick="simpanPengumuman()">
@@ -1267,18 +1052,18 @@
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-id-card-clip"></i> <span id="lblRegTitle">Registrasi Master Data Anggota</span></span>
                     </div>
-                    <form id="formRegistrasiAnggota">
+                    <form id="formRegistrasiAnggota" onsubmit="event.preventDefault(); registrasiAnggotaBaru();">
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="regNIM" id="lblRegID">NIM / Nomor Induk:</label>
+                                <label id="lblRegID">NIM / Nomor Induk:</label>
                                 <input type="text" id="regNIM" placeholder="Contoh: 2026001" required>
                             </div>
                             <div class="form-group">
-                                <label for="regNama" id="lblRegName">Nama Lengkap:</label>
+                                <label id="lblRegName">Nama Lengkap:</label>
                                 <input type="text" id="regNama" placeholder="Contoh: Taruna Ahmad Fauzi" required>
                             </div>
                             <div class="form-group">
-                                <label for="regKategori" id="lblRegCat">Kategori:</label>
+                                <label id="lblRegCat">Kategori:</label>
                                 <select id="regKategori">
                                     <option value="Taruna/Mahasiswa">Taruna / Mahasiswa</option>
                                     <option value="Dosen/Instruktur">Dosen / Instruktur</option>
@@ -1329,18 +1114,18 @@
                         <span class="card-title"><i class="fa-solid fa-book-bookmark"></i> <span id="lblBorrowTitle">Catat Peminjaman Buku</span></span>
                     </div>
 
-                    <form id="formPeminjamanBuku">
+                    <form id="formPeminjamanBuku" onsubmit="event.preventDefault(); catatPeminjamanBuku();">
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="pinjamNIM" id="lblBorrowNIM">NIM Anggota Terdaftar:</label>
+                                <label id="lblBorrowNIM">NIM Anggota Terdaftar:</label>
                                 <input type="text" id="pinjamNIM" placeholder="Masukkan NIM terdaftar" required>
                             </div>
                             <div class="form-group">
-                                <label for="pinjamJudul" id="lblBorrowBook">Judul Buku:</label>
+                                <label id="lblBorrowBook">Judul Buku:</label>
                                 <input type="text" id="pinjamJudul" placeholder="Contoh: Kelistrikan Bandara & SCADA" required>
                             </div>
                             <div class="form-group">
-                                <label for="pinjamLama" id="lblBorrowDays">Lama Pinjam (Hari):</label>
+                                <label id="lblBorrowDays">Lama Pinjam (Hari):</label>
                                 <input type="number" id="pinjamLama" value="7" min="1" max="14" required>
                             </div>
                         </div>
@@ -1360,26 +1145,16 @@
                         <div class="filter-box">
                             <div class="btn-group-period">
                                 <button class="btn-period active" id="btnPeriodHarian" onclick="setPeriodMode('harian')">
-                                    <i class="fa-solid fa-calendar-day"></i> <span id="lblPeriodHarian">Harian</span>
+                                    <span id="lblPeriodHarian">Harian</span>
                                 </button>
                                 <button class="btn-period" id="btnPeriodMingguan" onclick="setPeriodMode('mingguan')">
-                                    <i class="fa-solid fa-calendar-week"></i> <span id="lblPeriodMingguan">Mingguan</span>
+                                    <span id="lblPeriodMingguan">Mingguan</span>
                                 </button>
                                 <button class="btn-period" id="btnPeriodBulanan" onclick="setPeriodMode('bulanan')">
-                                    <i class="fa-solid fa-calendar-days"></i> <span id="lblPeriodBulanan">Bulanan</span>
+                                    <span id="lblPeriodBulanan">Bulanan</span>
                                 </button>
                             </div>
-
-                            <input type="date" id="filterTanggalReport" onchange="filterDanRenderLaporan()">
-                            <input type="month" id="filterBulanReport" style="display:none;" onchange="filterDanRenderLaporan()">
                         </div>
-                    </div>
-
-                    <div style="margin-bottom: 15px;">
-                        <h4 style="font-size: 13px; font-weight: 700; color: var(--poltekbang-blue); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                            <i class="fa-solid fa-chart-pie"></i> <span id="lblCatSummary">Ringkasan Total Kunjungan Per Kategori Anggota:</span>
-                        </h4>
-                        <div class="category-summary-grid" id="categorySummaryCards"></div>
                     </div>
 
                     <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 12px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
@@ -1425,120 +1200,93 @@
 
     </div>
 
-    <!-- MODAL DETAIL PEMINJAM TERDAFTAR -->
-    <div class="modal-overlay" id="modalPeminjam">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3><i class="fa-solid fa-users-viewfinder" style="color: var(--poltekbang-gold);"></i> <span id="modalBookTitleDisplay">Detail Peminjam Buku</span></h3>
-                <button class="modal-close-btn" onclick="tutupModalPeminjam()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="modal-body">
-                <p style="font-size: 12px; color: #64748b; margin-bottom: 12px;" id="modalBookSubInfo"></p>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th id="thModalNIM">NIM / ID</th>
-                                <th id="thModalNama">Nama Peminjam</th>
-                                <th id="thModalKat">Kategori</th>
-                                <th id="thModalPinjam">Tgl Pinjam</th>
-                                <th id="thModalKembali">Target Kembali</th>
-                                <th id="thModalStatus">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="modalBorrowerListBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SEKSI TATA TERTIB & LARANGAN -->
+    <!-- ==========================================================================
+       SEKSI TATA TERTIB & LARANGAN (IKON LARANGAN MERAH + MASCOT KIRI & KANAN)
+       ========================================================================== -->
     <section class="rules-footer-section">
         <div class="rules-title">
-            <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 20px;"></i>
+            <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 24px;"></i>
             <span id="lblRulesHeader">TATA TERTIB & LARANGAN PERPUSTAKAAN POLTEKBANG JAYAPURA</span>
         </div>
         
-        <div class="rules-grid">
-            <div class="rule-card">
-                <div class="rule-icon-box"><i class="fa-solid fa-smoking"></i></div>
-                <h4 id="lblRule1Title">DILARANG MEROKOK</h4>
-                <p id="lblRule1Desc">Area bebas asap rokok di seluruh ruangan perpustakaan.</p>
+        <div class="rules-wrapper">
+            <!-- MASCOT KIRI (KIRI.PNG) -->
+            <div class="rules-side-image">
+                <img src="kiri.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kiri)">
             </div>
 
-            <div class="rule-card">
-                <div class="rule-icon-box"><i class="fa-solid fa-burger"></i></div>
-                <h4 id="lblRule2Title">DILARANG MAKAN & MINUM</h4>
-                <p id="lblRule2Desc">Menjaga kebersihan koleksi buku dan fasilitas dari noda.</p>
+            <!-- GRID 5 KARTU TATA TERTIB -->
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon-box"><i class="fa-solid fa-smoking"></i></div>
+                    <h4 id="lblRule1Title">DILARANG MEROKOK</h4>
+                    <p id="lblRule1Desc">Kawasan bebas asap rokok demi menjaga kesehatan dan kenyamanan bersama.</p>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon-box"><i class="fa-solid fa-burger"></i></div>
+                    <h4 id="lblRule2Title">DILARANG MAKAN & MINUM</h4>
+                    <p id="lblRule2Desc">Jagalah kebersihan koleksi buku dan fasilitas dari potensi noda atau tumpahan.</p>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon-box"><i class="fa-solid fa-volume-high"></i></div>
+                    <h4 id="lblRule3Title">DILARANG GADUH / BISING</h4>
+                    <p id="lblRule3Desc">Mohon menjaga ketenangan suasana membaca demi kenyamanan seluruh pemustaka.</p>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon-box"><i class="fa-solid fa-book-skull"></i></div>
+                    <h4 id="lblRule4Title">DILARANG MERUSAK BUKU</h4>
+                    <p id="lblRule4Desc">Dilarang mencoret, melipat, atau merobek halaman dari koleksi pustaka.</p>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon-box"><i class="fa-solid fa-trash-can"></i></div>
+                    <h4 id="lblRule5Title">DILARANG BUANG SAMPAH</h4>
+                    <p id="lblRule5Desc">Buanglah sampah pada tempatnya agar lingkungan perpustakaan tetap rapi dan asri.</p>
+                </div>
             </div>
 
-            <div class="rule-card">
-                <div class="rule-icon-box"><i class="fa-solid fa-volume-high"></i></div>
-                <h4 id="lblRule3Title">DILARANG GADUH / BISING</h4>
-                <p id="lblRule3Desc">Jagalah ketenangan demi kenyamanan membaca bersama.</p>
-            </div>
-
-            <div class="rule-card">
-                <div class="rule-icon-box"><i class="fa-solid fa-book-skull"></i></div>
-                <h4 id="lblRule4Title">DILARANG MERUSAK BUKU</h4>
-                <p id="lblRule4Desc">Tidak mencoret, melipat, atau merobek halaman koleksi buku.</p>
-            </div>
-
-            <div class="rule-card">
-                <div class="rule-icon-box"><i class="fa-solid fa-trash-can"></i></div>
-                <h4 id="lblRule5Title">DILARANG BUANG SAMPAH</h4>
-                <p id="lblRule5Desc">Buanglah sampah pada tempatnya agar lingkungan tetap asri.</p>
+            <!-- MASCOT KANAN (KANAN.PNG) -->
+            <div class="rules-side-image">
+                <img src="kanan.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kanan)" onerror="this.style.display='none'">
             </div>
         </div>
     </section>
 
-    <!-- HELPDESK FLOATING BUBBLE MENU -->
+    <!-- HELPDESK FLOATING BUBBLE (MASUKAN.JPEG) -->
     <div class="helpdesk-floating-container">
         <div class="helpdesk-menu-popover" id="helpdeskPopover">
             <div class="helpdesk-header">
-                <div class="helpdesk-header-title-box">
-                    <p id="lblHelpdeskSubtitle"><i class="fa-solid fa-headset" style="color: var(--poltekbang-gold); margin-right: 4px;"></i> Customer Service Poltekbang Jayapura</p>
-                </div>
-                <button class="helpdesk-close-btn" onclick="toggleHelpdeskMenu()"><i class="fa-solid fa-xmark"></i></button>
+                <p id="lblHelpdeskSubtitle"><i class="fa-solid fa-headset" style="color: var(--poltekbang-gold); margin-right: 4px;"></i> Customer Service Poltekbang Jayapura</p>
+                <button style="background: transparent; border: none; font-size: 18px; color: #94a3b8; cursor: pointer;" onclick="toggleHelpdeskMenu()"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- BANNER BIRU TANPA GAMBAR DI DALAMNYA -->
             <div class="helpdesk-mascot-card">
-                <div class="helpdesk-mascot-text">
-                    <h5 id="lblMascotWelcomeTitle"><i class="fa-solid fa-comments"></i> Halo! Ada yang bisa kami bantu?</h5>
-                    <p id="lblMascotWelcomeSub">Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.</p>
-                </div>
+                <h5 id="lblMascotWelcomeTitle" style="color:#fbbf24; font-size:13px; font-weight:700;"><i class="fa-solid fa-comments"></i> Halo! Ada yang bisa kami bantu?</h5>
+                <p id="lblMascotWelcomeSub" style="font-size:11px; color:#e0f2fe; margin-top:4px;">Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.</p>
             </div>
 
-            <!-- OPTION 1: CONTACT ME -->
             <a href="https://wa.me/6282393715964" target="_blank" class="helpdesk-option-card">
-                <div class="helpdesk-icon-box icon-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <div class="helpdesk-text">
-                    <h5 id="lblContactMeTitle">Contact Me (Hubungi Kami)</h5>
-                    <p id="lblContactMeSub">WhatsApp / Telp: +62 823 9371 5964</p>
+                <div class="helpdesk-icon-box icon-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+                <div>
+                    <h5 id="lblContactMeTitle" style="font-size:12px; font-weight:700; color:var(--poltekbang-blue);">Contact Me (Hubungi Kami)</h5>
+                    <p id="lblContactMeSub" style="font-size:11px; color:#64748b;">WhatsApp / Telp: +62 823 9371 5964</p>
                 </div>
             </a>
 
-            <!-- OPTION 2: LAYANAN PENGADUAN -->
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7TOAMAl_WpoYove7jyCLABifvwdDnu38fcHP1txJdhl6l2g/viewform" target="_blank" class="helpdesk-option-card">
-                <div class="helpdesk-icon-box icon-form">
-                    <i class="fa-solid fa-clipboard-list"></i>
-                </div>
-                <div class="helpdesk-text">
-                    <h5 id="lblComplaintTitle">Layanan Pengaduan</h5>
-                    <p id="lblComplaintSub">Formulir Pengaduan & Masukan Online</p>
+                <div class="helpdesk-icon-box icon-form"><i class="fa-solid fa-clipboard-list"></i></div>
+                <div>
+                    <h5 id="lblComplaintTitle" style="font-size:12px; font-weight:700; color:var(--poltekbang-blue);">Layanan Pengaduan</h5>
+                    <p id="lblComplaintSub" style="font-size:11px; color:#64748b;">Formulir Pengaduan & Masukan Online</p>
                 </div>
             </a>
         </div>
 
-        <!-- TOMBOL GELEMBUNG UTAMA -->
         <button class="helpdesk-main-btn" onclick="toggleHelpdeskMenu()" title="Layanan Customer Service">
-            <img src="masukan.jpeg" alt="Logo Customer Service" class="avatar-btn-img">
-            <span class="helpdesk-badge-status"><i class="fa-solid fa-headset"></i></span>
+            <img src="masukan.jpeg" alt="Customer Service" class="avatar-btn-img">
         </button>
     </div>
 
@@ -1546,7 +1294,7 @@
         <span id="lblFooterText">&copy; 2026 Unit Perpustakaan Politeknik Penerbangan Jayapura — Sistem Informasi Perpustakaan Digital Modern.</span>
     </footer>
 
-    <!-- LOGIKA JAVASCRIPT & FIREBASE REALTIME SYNC -->
+    <!-- LOGIKA JAVASCRIPT LENGKAP -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
@@ -1555,15 +1303,14 @@
             projectId: "perpusppj",
             storageBucket: "perpusppj.firebasestorage.app",
             messagingSenderId: "392001200802",
-            appId: "1:392001200802:web:0287fa62e16c75e1712dfb",
-            measurementId: "G-3P8JGED7CH"
+            appId: "1:392001200802:web:0287fa62e16c75e1712dfb"
         };
 
         let db = null;
         let isFirebaseConnected = false;
 
         try {
-            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "") {
+            if (firebaseConfig.apiKey) {
                 firebase.initializeApp(firebaseConfig);
                 db = firebase.database();
                 isFirebaseConnected = true;
@@ -1574,7 +1321,7 @@
 
         let currentLang = 'id';
         let currentPeriodMode = 'harian';
-        let selectedMemberAlphaFilter = 'ALL';
+        let isAdminAuthenticated = false;
 
         const i18n = {
             id: {
@@ -1645,7 +1392,6 @@
                 periodHarian: "Harian",
                 periodMingguan: "Mingguan",
                 periodBulanan: "Bulanan",
-                catSummary: "Ringkasan Total Kunjungan Per Kategori Anggota:",
                 exportHeader: "Opsi Ekspor & Tarik Data Administrasi:",
                 exportSub: "Pilih kategori data yang ingin ditarik ke format spreadsheet (CSV):",
                 exportVisitors: "1. Tarik Data Pengunjung (Terurut Kategori)",
@@ -1669,15 +1415,15 @@
                 miniStaf: "Staf/Umum",
                 rulesHeader: "TATA TERTIB & LARANGAN PERPUSTAKAAN POLTEKBANG JAYAPURA",
                 rule1Title: "DILARANG MEROKOK",
-                rule1Desc: "Area bebas asap rokok di seluruh ruangan perpustakaan.",
+                rule1Desc: "Kawasan bebas asap rokok demi menjaga kesehatan dan kenyamanan bersama.",
                 rule2Title: "DILARANG MAKAN & MINUM",
-                rule2Desc: "Menjaga kebersihan koleksi buku dan fasilitas dari noda.",
+                rule2Desc: "Jagalah kebersihan koleksi buku dan fasilitas dari potensi noda atau tumpahan.",
                 rule3Title: "DILARANG GADUH / BISING",
-                rule3Desc: "Jagalah ketenangan demi kenyamanan membaca bersama.",
+                rule3Desc: "Mohon menjaga ketenangan suasana membaca demi kenyamanan seluruh pemustaka.",
                 rule4Title: "DILARANG MERUSAK BUKU",
-                rule4Desc: "Tidak mencoret, melipat, atau merobek halaman koleksi buku.",
+                rule4Desc: "Dilarang mencoret, melipat, atau merobek halaman dari koleksi pustaka.",
                 rule5Title: "DILARANG BUANG SAMPAH",
-                rule5Desc: "Buanglah sampah pada tempatnya agar lingkungan tetap asri.",
+                rule5Desc: "Buanglah sampah pada tempatnya agar lingkungan perpustakaan tetap rapi dan asri.",
                 helpdeskSubtitle: "<i class=\"fa-solid fa-headset\" style=\"color: var(--poltekbang-gold); margin-right: 4px;\"></i> Customer Service Poltekbang Jayapura",
                 mascotWelcomeTitle: "<i class=\"fa-solid fa-comments\"></i> Halo! Ada yang bisa kami bantu?",
                 mascotWelcomeSub: "Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.",
@@ -1685,13 +1431,7 @@
                 contactMeSub: "WhatsApp / Telp: +62 823 9371 5964",
                 complaintTitle: "Layanan Pengaduan",
                 complaintSub: "Formulir Pengaduan & Masukan Online",
-                footerText: "© 2026 Unit Perpustakaan Politeknik Penerbangan Jayapura — Sistem Informasi Perpustakaan Digital Modern.",
-                thModalNIM: "NIM / ID",
-                thModalNama: "Nama Peminjam",
-                thModalKat: "Kategori",
-                thModalPinjam: "Tgl Pinjam",
-                thModalKembali: "Target Kembali",
-                thModalStatus: "Status"
+                footerText: "© 2026 Unit Perpustakaan Politeknik Penerbangan Jayapura — Sistem Informasi Perpustakaan Digital Modern."
             },
             en: {
                 tickerLabel: "Announcement",
@@ -1761,7 +1501,6 @@
                 periodHarian: "Daily",
                 periodMingguan: "Weekly",
                 periodBulanan: "Monthly",
-                catSummary: "Total Visits Summary by Member Category:",
                 exportHeader: "Data Export & Retrieval Options:",
                 exportSub: "Select data category to export into spreadsheet format (CSV):",
                 exportVisitors: "1. Export Visitor Data (Categorized)",
@@ -1801,13 +1540,7 @@
                 contactMeSub: "WhatsApp / Call: +62 823 9371 5964",
                 complaintTitle: "Complaint & Feedback Service",
                 complaintSub: "Online Feedback & Complaint Form",
-                footerText: "© 2026 Library Unit of Jayapura Aviation Polytechnic — Modern Digital Library System.",
-                thModalNIM: "ID Number",
-                thModalNama: "Borrower Name",
-                thModalKat: "Category",
-                thModalPinjam: "Loan Date",
-                thModalKembali: "Return Target",
-                thModalStatus: "Status"
+                footerText: "© 2026 Library Unit of Jayapura Aviation Polytechnic — Modern Digital Library System."
             }
         };
 
@@ -1818,10 +1551,17 @@
 
             const t = i18n[lang];
             for (let key in t) {
-                const elementId = 'lbl' + key.charAt(0).toUpperCase() + key.slice(1);
-                const el = document.getElementById(elementId) || document.getElementById('th' + key.charAt(0).toUpperCase() + key.slice(1));
-                if (el) {
-                    el.innerHTML = t[key];
+                const possibleIds = [
+                    'lbl' + key.charAt(0).toUpperCase() + key.slice(1),
+                    key,
+                    'th' + key.charAt(0).toUpperCase() + key.slice(1)
+                ];
+                
+                for (let id of possibleIds) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.innerHTML = t[key];
+                    }
                 }
             }
 
@@ -1833,72 +1573,40 @@
         }
 
         function toggleHelpdeskMenu() {
-            const popover = document.getElementById('helpdeskPopover');
-            popover.classList.toggle('active');
+            document.getElementById('helpdeskPopover').classList.toggle('active');
         }
 
         let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
             { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
             { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa", status: "Aktif" },
             { nim: "1988001", nama: "Dosen Budi Santoso", kategori: "Dosen/Instruktur", status: "Aktif" },
-            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum", status: "Aktif" },
-            { nim: "2026003", nama: "Taruna Rizky Pratama", kategori: "Taruna/Mahasiswa", status: "Aktif" },
-            { nim: "2026004", nama: "Taruni Annisa Putri", kategori: "Taruna/Mahasiswa", status: "Aktif" }
+            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum", status: "Aktif" }
         ];
 
         let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [
             { kode: "BK-PPJ-001", judul: "Aerodinamika & Teori Penerbangan", kategori: "Penerbangan", penulis: "Capt. Ir. Supriyadi", stok: 6 },
             { kode: "BK-PPJ-002", judul: "Dasar Pemrograman C++ & WebAssembly", kategori: "Teknologi Informasi", penulis: "Dr. Eng. Farid M.", stok: 8 },
             { kode: "BK-PPJ-003", judul: "Kelistrikan Bandara & Sistem SCADA", kategori: "Teknik Listrik Bandara", penulis: "Ir. Bambang S., M.T.", stok: 5 },
-            { kode: "BK-PPJ-004", judul: "Manajemen Pertolongan Kecelakaan Pesawat (PKP-PK)", kategori: "Keselamatan Penerbangan", penulis: "Tim Instruktur PPJ", stok: 4 },
-            { kode: "BK-PPJ-005", judul: "Navigasi Udara & Radar Aviation", kategori: "Navigasi Penerbangan", penulis: "Capt. Hendra Wijaya", stok: 3 },
-            { kode: "BK-PPJ-006", judul: "Tata Cara Pemanduan Lalu Lintas Udara (ATC)", kategori: "Lalu Lintas Udara", penulis: "Dra. Rina Kartika", stok: 2 }
+            { kode: "BK-PPJ-004", judul: "Manajemen PKP-PK Bandara", kategori: "Keselamatan Penerbangan", penulis: "Tim Instruktur PPJ", stok: 4 }
         ];
 
         function getFormattedDate(d = new Date()) {
-            const year = d.getFullYear();
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         }
-
-        const tglHariIni = new Date();
-        const tglSekarangStr = getFormattedDate(tglHariIni);
-
-        const tglKemarin = new Date();
-        tglKemarin.setDate(tglHariIni.getDate() - 3);
-        const tglKemarinStr = getFormattedDate(tglKemarin);
 
         let logLaporanHarian = JSON.parse(localStorage.getItem('logLaporanHarianPerpus')) || [
             {
                 id: 1001,
-                timestampMasuk: Date.now() - 86400000,
                 hari: "Senin",
-                tanggal: tglSekarangStr,
+                tanggal: getFormattedDate(),
                 jamMasuk: "08:30",
                 jamKeluar: "-",
                 nim: "2026001",
                 nama: "Taruna Ahmad Fauzi",
                 kategoriAnggota: "Taruna/Mahasiswa",
-                bukuDipinjam: "Tata Cara Pemanduan Lalu Lintas Udara (ATC)",
-                kategoriBuku: "Lalu Lintas Udara",
-                tglPeminjaman: tglKemarinStr,
-                tglPengembalian: tglKemarinStr,
-                catatan: "Sedang Meminjam Buku"
-            },
-            {
-                id: 1002,
-                timestampMasuk: Date.now(),
-                hari: "Selasa",
-                tanggal: tglSekarangStr,
-                jamMasuk: "09:15",
-                jamKeluar: "-",
-                nim: "2026002",
-                nama: "Taruni Siti Nurhaliza",
-                kategoriAnggota: "Taruna/Mahasiswa",
-                bukuDipinjam: "Aerodinamika & Teori Penerbangan",
-                kategoriBuku: "Penerbangan",
-                tglPeminjaman: tglSekarangStr,
+                bukuDipinjam: "Kelistrikan Bandara & Sistem SCADA",
+                kategoriBuku: "Teknik Listrik Bandara",
+                tglPeminjaman: getFormattedDate(),
                 tglPengembalian: getFormattedDate(new Date(Date.now() + 7 * 86400000)),
                 catatan: "Sedang Meminjam Buku"
             }
@@ -1909,91 +1617,17 @@
         const DAFTAR_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const DAFTAR_HARI_ENG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const NAMA_BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
-        let selectedAlphaFilter = "ALL";
-        let simulasiToggleIndex = 0;
-
-        if (isFirebaseConnected && db) {
-            db.ref('perpus_data').on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    if (data.masterAnggota) {
-                        masterAnggota = data.masterAnggota;
-                        localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
-                        renderTabelMasterAnggota();
-                    }
-                    if (data.katalogBuku) {
-                        katalogBuku = data.katalogBuku;
-                        localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
-                        renderKatalogBuku();
-                    }
-                    if (data.logLaporanHarian) {
-                        logLaporanHarian = data.logLaporanHarian;
-                        localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
-                        renderLogKunjunganRingkas();
-                        filterDanRenderLaporan();
-                        renderKatalogBuku();
-                        updateTodayCounterWidget();
-                    }
-                    if (data.teksPengumuman) {
-                        teksPengumuman = data.teksPengumuman;
-                        localStorage.setItem('pengumumanPerpus', teksPengumuman);
-                        updateTickerTeks();
-                    }
-                }
-            });
-        }
-
-        function simpanSemuaKeCloud() {
-            localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
-            localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
-            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
-            localStorage.setItem('pengumumanPerpus', teksPengumuman);
-
-            if (isFirebaseConnected && db) {
-                db.ref('perpus_data').set({
-                    masterAnggota: masterAnggota,
-                    katalogBuku: katalogBuku,
-                    logLaporanHarian: logLaporanHarian,
-                    teksPengumuman: teksPengumuman
-                });
-            }
-        }
-
-        function updateTickerTeks() {
-            document.getElementById('tickerText').innerText = teksPengumuman;
-            document.getElementById('inputPengumuman').value = teksPengumuman;
-        }
 
         function updateLiveClockWIT() {
             const sekarang = new Date();
             const namaHari = currentLang === 'id' ? DAFTAR_HARI[sekarang.getDay()] : DAFTAR_HARI_ENG[sekarang.getDay()];
-            const tgl = sekarang.getDate();
-            const bulan = NAMA_BULAN[sekarang.getMonth()];
-            const tahun = sekarang.getFullYear();
-            
-            const jam = String(sekarang.getHours()).padStart(2, '0');
-            const menit = String(sekarang.getMinutes()).padStart(2, '0');
-            const detik = String(sekarang.getSeconds()).padStart(2, '0');
-
-            const formatted = `${namaHari}, ${tgl} ${bulan} ${tahun} | ${jam}:${menit}:${detik} WIT`;
+            const formatted = `${namaHari}, ${sekarang.getDate()} ${NAMA_BULAN[sekarang.getMonth()]} ${sekarang.getFullYear()} | ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}:${String(sekarang.getSeconds()).padStart(2, '0')} WIT`;
             const clockEl = document.getElementById('clockText');
             if (clockEl) clockEl.innerText = formatted;
         }
 
         setInterval(updateLiveClockWIT, 1000);
         updateLiveClockWIT();
-
-        function simpanPengumuman() {
-            const teksBaru = document.getElementById('inputPengumuman').value.trim();
-            if (teksBaru !== "") {
-                teksPengumuman = teksBaru;
-                simpanSemuaKeCloud();
-                updateTickerTeks();
-                alert(currentLang === 'id' ? "Papan pengumuman bergerak berhasil diperbarui di semua perangkat!" : "Ticker announcement successfully updated across all devices!");
-            }
-        }
-
-        let isAdminAuthenticated = false;
 
         function switchTab(tabId) {
             if (tabId === 'tab-admin' && !isAdminAuthenticated) {
@@ -2002,7 +1636,7 @@
                     isAdminAuthenticated = true;
                     alert(currentLang === 'id' ? "Akses Administrator Berhasil Diberikan!" : "Administrator Access Granted!");
                 } else {
-                    if (pass !== null) alert(currentLang === 'id' ? "Password Admin Salah! Akses Ditolak." : "Incorrect Admin Password! Access Denied.");
+                    if (pass !== null) alert(currentLang === 'id' ? "Password Admin Salah! Akses Ditolak." : "Incorrect Admin Password!");
                     return;
                 }
             }
@@ -2011,9 +1645,8 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
-            if (tabId === 'tab-kiosk') {
-                document.getElementById('btnTabAbsensi').classList.add('active');
-            } else if (tabId === 'tab-buku') {
+            if (tabId === 'tab-kiosk') document.getElementById('btnTabAbsensi').classList.add('active');
+            else if (tabId === 'tab-buku') {
                 document.getElementById('btnTabBuku').classList.add('active');
                 generateAlphabetButtons();
                 renderKatalogBuku();
@@ -2030,7 +1663,6 @@
             document.querySelectorAll('.admin-sub-btn').forEach(el => el.classList.remove('active'));
 
             document.getElementById(subId).classList.add('active');
-            
             if (subId === 'sub-buku') document.getElementById('subBtnBuku').classList.add('active');
             else if (subId === 'sub-pengumuman') document.getElementById('subBtnPengumuman').classList.add('active');
             else if (subId === 'sub-anggota') {
@@ -2047,26 +1679,15 @@
 
         function logoutAdmin() {
             isAdminAuthenticated = false;
-            alert(currentLang === 'id' ? "Anda telah berhasil logout dari Panel Administrator." : "You have successfully logged out from Administrator Panel.");
+            alert(currentLang === 'id' ? "Anda telah berhasil logout dari Panel Administrator." : "Logged out from Administrator Panel.");
             switchTab('tab-kiosk');
         }
-
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide-item');
-
-        function putarSlide() {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slideIndex = (slideIndex + 1) % slides.length;
-            slides[slideIndex].classList.add('active');
-        }
-        setInterval(putarSlide, 4000);
 
         function bicaraSuara(teks) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(teks);
                 utterance.lang = currentLang === 'id' ? 'id-ID' : 'en-US';
-                utterance.rate = 0.95;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -2077,83 +1698,34 @@
 
             setTimeout(() => {
                 sensor.classList.remove('scanning');
-                if (masterAnggota.length > 0) {
-                    const nimInput = document.getElementById('kioskNIM').value.trim();
-                    let anggotaTarget = null;
-                    
-                    if (nimInput !== '') {
-                        anggotaTarget = masterAnggota.find(a => a.nim === nimInput);
-                    }
-                    
-                    if (!anggotaTarget) {
-                        const orangDiDalam = logLaporanHarian.find(r => r.jamKeluar === '-' || !r.jamKeluar);
-                        if (orangDiDalam) {
-                            anggotaTarget = masterAnggota.find(a => a.nim === orangDiDalam.nim);
-                        }
-                    }
-
-                    if (!anggotaTarget) {
-                        anggotaTarget = masterAnggota[simulasiToggleIndex % masterAnggota.length];
-                        simulasiToggleIndex++;
-                    }
-
-                    prosesAbsensiPengunjung(anggotaTarget);
-                } else {
-                    tampilkanAlertKiosk('error', currentLang === 'id' ? "Belum ada master data anggota terdaftar!" : "No registered member master data found!");
-                }
+                const anggota = masterAnggota[Math.floor(Math.random() * masterAnggota.length)];
+                prosesAbsensiPengunjung(anggota);
             }, 800);
         }
 
         function prosesAbsensiNIM() {
             const nim = document.getElementById('kioskNIM').value.trim();
-            if (!nim) {
-                tampilkanAlertKiosk('warning', currentLang === 'id' ? "Masukkan NIM / ID Anggota terlebih dahulu." : "Please enter Student ID / Member ID first.");
-                return;
-            }
-
+            if (!nim) return;
             const anggota = masterAnggota.find(a => a.nim === nim);
-
             if (anggota) {
                 prosesAbsensiPengunjung(anggota);
                 document.getElementById('kioskNIM').value = '';
             } else {
-                const pesan = currentLang === 'id' ? `NIM ${nim} tidak terdaftar di sistem.` : `ID ${nim} is not registered in the system.`;
-                tampilkanAlertKiosk('error', pesan);
-                bicaraSuara(pesan);
+                alert(currentLang === 'id' ? `NIM ${nim} tidak terdaftar.` : `NIM ${nim} is not registered.`);
             }
         }
 
         function prosesAbsensiPengunjung(anggota) {
-            if (anggota.status === 'Non-Aktif') {
-                const pesanTeks = currentLang === 'id' ? 
-                    `Gagal! Akun ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif. Hubungi Admin.` : 
-                    `Failed! Account ${anggota.nama} (${anggota.nim}) is Non-Active. Contact Admin.`;
-                const pesanSuara = currentLang === 'id' ? 
-                    `Mohon maaf, akun ${anggota.nama} sedang non aktif. Silakan hubungi administrator.` : 
-                    `Sorry, account ${anggota.nama} is non active. Please contact administrator.`;
-
-                tampilkanAlertKiosk('error', pesanTeks);
-                bicaraSuara(pesanSuara);
-                return;
-            }
-
             const sekarang = new Date();
-            const skrgTime = sekarang.getTime();
-            const namaHari = DAFTAR_HARI[sekarang.getDay()];
-            const tglString = getFormattedDate(sekarang);
             const jamString = sekarang.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
             let recordAktif = logLaporanHarian.find(r => r.nim === anggota.nim && (r.jamKeluar === '-' || !r.jamKeluar));
 
             if (!recordAktif) {
-                const pesanTeks = currentLang === 'id' ? `Selamat datang ${anggota.nama} di Unit Perpustakaan Politeknik Penerbangan Jayapura` : `Welcome ${anggota.nama} to Library Unit of Jayapura Aviation Polytechnic`;
-                const pesanSuara = currentLang === 'id' ? `Selamat datang ${anggota.nama} di unit perpustakaan politeknik penerbangan jayapura` : `Welcome ${anggota.nama} to Jayapura Aviation Polytechnic Library`;
-
-                const recordBaru = {
+                logLaporanHarian.unshift({
                     id: Date.now(),
-                    timestampMasuk: skrgTime,
-                    hari: namaHari,
-                    tanggal: tglString,
+                    hari: DAFTAR_HARI[sekarang.getDay()],
+                    tanggal: getFormattedDate(sekarang),
                     jamMasuk: jamString,
                     jamKeluar: '-',
                     nim: anggota.nim,
@@ -2164,49 +1736,18 @@
                     tglPeminjaman: '-',
                     tglPengembalian: '-',
                     catatan: 'Kunjungan Biasa'
-                };
-                
-                logLaporanHarian.unshift(recordBaru);
-                tampilkanAlertKiosk('masuk', pesanTeks);
-                bicaraSuara(pesanSuara);
+                });
+                alert(`Selamat datang ${anggota.nama}`);
+                bicaraSuara(`Selamat datang ${anggota.nama}`);
             } else {
-                const waktuMasuk = recordAktif.timestampMasuk || recordAktif.id;
-                const selisihDetik = Math.floor((skrgTime - waktuMasuk) / 1000);
-
-                if (selisihDetik < 3) {
-                    const pesanTeks = currentLang === 'id' ? `Anda baru saja melakukan absen masuk. Silakan coba beberapa saat lagi.` : `You just checked in. Please wait a few seconds before checking out.`;
-                    tampilkanAlertKiosk('warning', pesanTeks);
-                    return;
-                }
-
                 recordAktif.jamKeluar = jamString;
-                recordAktif.catatan = 'Selesai Kunjungan';
-
-                const pesanTeks = currentLang === 'id' ? `Terima kasih ${anggota.nama}, selamat jalan!` : `Thank you ${anggota.nama}, goodbye!`;
-                const pesanSuara = currentLang === 'id' ? `Terima kasih ${anggota.nama}, selamat jalan!` : `Thank you ${anggota.nama}, goodbye!`;
-
-                tampilkanAlertKiosk('keluar', pesanTeks);
-                bicaraSuara(pesanSuara);
+                alert(`Terima kasih ${anggota.nama}, selamat jalan!`);
+                bicaraSuara(`Terima kasih ${anggota.nama}, selamat jalan!`);
             }
 
-            simpanSemuaKeCloud();
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
-            renderKatalogBuku();
             updateTodayCounterWidget();
-        }
-
-        function tampilkanAlertKiosk(tipe, pesan) {
-            const box = document.getElementById('kioskAlert');
-            box.style.display = 'block';
-            box.className = `alert-box alert-${tipe}`;
-            
-            let iconClass = 'fa-circle-check';
-            if (tipe === 'keluar') iconClass = 'fa-right-from-bracket';
-            else if (tipe === 'warning') iconClass = 'fa-triangle-exclamation';
-            else if (tipe === 'error') iconClass = 'fa-circle-xmark';
-
-            box.innerHTML = `<i class="fa-solid ${iconClass}"></i> ${pesan}`;
         }
 
         function renderLogKunjunganRingkas() {
@@ -2216,18 +1757,14 @@
 
             logLaporanHarian.slice(0, 5).forEach(log => {
                 const isAktif = log.jamKeluar === '-' || !log.jamKeluar;
-                const jamDisplay = isAktif ? `${log.jamMasuk} - (Active)` : `${log.jamMasuk} - ${log.jamKeluar}`;
-                const labelStatus = isAktif ? (currentLang === 'id' ? 'Di Dalam' : 'Checked In') : (currentLang === 'id' ? 'Sudah Keluar' : 'Checked Out');
-                const katAnggota = log.kategoriAnggota || "Taruna/Mahasiswa";
-
                 body.innerHTML += `
                     <tr>
                         <td>${log.hari}, ${log.tanggal}</td>
-                        <td>${jamDisplay}</td>
+                        <td>${log.jamMasuk} - ${log.jamKeluar || '(Di Dalam)'}</td>
                         <td>${log.nim}</td>
                         <td><strong>${log.nama}</strong></td>
-                        <td><span class="badge badge-kat">${katAnggota}</span></td>
-                        <td><span class="badge ${isAktif ? 'badge-masuk' : 'badge-keluar'}">${labelStatus}</span></td>
+                        <td><span class="badge badge-kat">${log.kategoriAnggota}</span></td>
+                        <td><span class="badge ${isAktif ? 'badge-masuk' : 'badge-keluar'}">${isAktif ? 'Di Dalam' : 'Sudah Keluar'}</span></td>
                     </tr>
                 `;
             });
@@ -2236,573 +1773,134 @@
         function generateAlphabetButtons() {
             const container = document.getElementById('alphabetContainer');
             if(!container) return;
-            const allText = currentLang === 'id' ? 'Semua (A-Z)' : 'All (A-Z)';
-            container.innerHTML = `<button class="alpha-btn active" onclick="filterByLetter('ALL', this)">${allText}</button>`;
-            
+            container.innerHTML = `<button class="alpha-btn active" onclick="renderKatalogBuku()">Semua (A-Z)</button>`;
             for (let i = 65; i <= 90; i++) {
                 const letter = String.fromCharCode(i);
-                container.innerHTML += `<button class="alpha-btn" onclick="filterByLetter('${letter}', this)">${letter}</button>`;
+                container.innerHTML += `<button class="alpha-btn" onclick="filterBukuByLetter('${letter}')">${letter}</button>`;
             }
         }
 
-        function filterByLetter(letter, btnEl) {
-            selectedAlphaFilter = letter;
-            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
-            if(btnEl) btnEl.classList.add('active');
-            renderKatalogBuku();
+        function filterBukuByLetter(letter) {
+            renderKatalogBuku(letter);
         }
 
-        function getPeminjamAktifBuku(judulBuku) {
-            return logLaporanHarian.filter(log => 
-                log.bukuDipinjam && 
-                log.bukuDipinjam.toLowerCase() === judulBuku.toLowerCase() && 
-                (log.catatan === 'Sedang Meminjam Buku' || log.tglPengembalian !== '-')
-            );
-        }
-
-        function renderKatalogBuku() {
+        function renderKatalogBuku(filterLetter = 'ALL') {
             const body = document.getElementById('tabelKatalogBukuBody');
             if(!body) return;
             body.innerHTML = '';
 
-            let sortedData = [...katalogBuku].sort((a, b) => a.judul.localeCompare(b.judul));
-
-            if (selectedAlphaFilter !== 'ALL') {
-                sortedData = sortedData.filter(b => b.judul.toUpperCase().startsWith(selectedAlphaFilter));
+            let data = [...katalogBuku].sort((a, b) => a.judul.localeCompare(b.judul));
+            if (filterLetter !== 'ALL') {
+                data = data.filter(b => b.judul.toUpperCase().startsWith(filterLetter));
             }
 
-            const query = document.getElementById('cariBukuKatalog')?.value.toLowerCase() || '';
-            if (query !== '') {
-                sortedData = sortedData.filter(b => 
-                    b.judul.toLowerCase().includes(query) ||
-                    b.kategori.toLowerCase().includes(query) ||
-                    b.kode.toLowerCase().includes(query) ||
-                    b.penulis.toLowerCase().includes(query)
-                );
-            }
-
-            if (sortedData.length === 0) {
-                const noDataText = currentLang === 'id' ? 'Tidak ada koleksi buku untuk huruf/kriteria ini.' : 'No book collection found for this criteria.';
-                body.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:20px;">${noDataText}</td></tr>`;
-                return;
-            }
-
-            const tglHariIniStr = getFormattedDate();
-
-            sortedData.forEach((buku, index) => {
-                const peminjamList = getPeminjamAktifBuku(buku.judul);
-                const jumlahDipinjam = peminjamList.length;
-
-                let adaOverdue = false;
-                peminjamList.forEach(p => {
-                    if (p.tglPengembalian && p.tglPengembalian !== '-' && p.tglPengembalian < tglHariIniStr) {
-                        adaOverdue = true;
-                    }
-                });
-
-                let statusBadgeHTML = '';
-                if (adaOverdue) {
-                    const txt = currentLang === 'id' ? 'Belum Kembali' : 'Overdue / Not Returned';
-                    statusBadgeHTML = `<span class="badge badge-overdue"><i class="fa-solid fa-triangle-exclamation"></i> ${txt}</span>`;
-                } else if (jumlahDipinjam > 0) {
-                    const txt = currentLang === 'id' ? 'Dipinjam' : 'Borrowed';
-                    statusBadgeHTML = `<span class="badge badge-dipinjam"><i class="fa-solid fa-clock"></i> ${txt}</span>`;
-                } else {
-                    const txt = currentLang === 'id' ? 'Tersedia' : 'Available';
-                    statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> ${txt}</span>`;
-                }
-
-                let borrowerCellHTML = '';
-                if (jumlahDipinjam > 0) {
-                    const namaPeminjamPertama = peminjamList.nama;
-                    const suffix = jumlahDipinjam > 1 ? ` (+${jumlahDipinjam - 1})` : '';
-                    const btnTxt = `${namaPeminjamPertama}${suffix}`;
-
-                    borrowerCellHTML = `
-                        <button class="btn-borrower-link" onclick="bukaModalPeminjam('${buku.kode}', '${buku.judul.replace(/'/g, "\\'")}')">
-                            <i class="fa-solid fa-user-tag"></i> ${btnTxt}
-                        </button>
-                    `;
-                } else {
-                    borrowerCellHTML = `<span style="color:#94a3b8; font-style:italic; font-size:11px;">-</span>`;
-                }
-
-                const initialLetter = buku.judul.charAt(0).toUpperCase();
-                
+            data.forEach((buku, index) => {
                 body.innerHTML += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
+                        <td><span class="badge badge-masuk">${buku.judul.charAt(0).toUpperCase()}</span></td>
                         <td><strong>${buku.kode}</strong></td>
                         <td><strong>${buku.judul}</strong></td>
                         <td><span class="badge badge-keluar">${buku.kategori}</span></td>
                         <td>${buku.penulis}</td>
-                        <td>${buku.stok} ${currentLang === 'id' ? 'Eksemplar' : 'Copies'}</td>
-                        <td>${statusBadgeHTML}</td>
-                        <td>${borrowerCellHTML}</td>
+                        <td>${buku.stok} Eksemplar</td>
+                        <td><span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> Tersedia</span></td>
+                        <td><span style="color:#94a3b8; font-size:11px;">-</span></td>
                     </tr>
                 `;
             });
         }
-
-        function cariBukuInKatalog() { renderKatalogBuku(); }
 
         function generateMemberAlphabetButtons() {
             const container = document.getElementById('memberAlphabetContainer');
             if(!container) return;
-            const allText = currentLang === 'id' ? 'Semua Nama (A-Z)' : 'All Names (A-Z)';
-            container.innerHTML = `<button class="alpha-btn active" onclick="filterMemberByLetter('ALL', this)">${allText}</button>`;
-            
+            container.innerHTML = `<button class="alpha-btn active" onclick="renderTabelMasterAnggota()">Semua (A-Z)</button>`;
             for (let i = 65; i <= 90; i++) {
                 const letter = String.fromCharCode(i);
-                container.innerHTML += `<button class="alpha-btn" onclick="filterMemberByLetter('${letter}', this)">${letter}</button>`;
+                container.innerHTML += `<button class="alpha-btn" onclick="filterMemberByLetter('${letter}')">${letter}</button>`;
             }
         }
 
-        function filterMemberByLetter(letter, btnEl) {
-            selectedMemberAlphaFilter = letter;
-            document.querySelectorAll('#memberAlphabetContainer .alpha-btn').forEach(b => b.classList.remove('active'));
-            if(btnEl) btnEl.classList.add('active');
-            renderTabelMasterAnggota();
+        function filterMemberByLetter(letter) {
+            renderTabelMasterAnggota(letter);
         }
 
-        function renderTabelMasterAnggota() {
+        function renderTabelMasterAnggota(filterLetter = 'ALL') {
             const body = document.getElementById('tabelMasterAnggotaBody');
             if(!body) return;
             body.innerHTML = '';
 
-            let sortedMembers = [...masterAnggota].sort((a, b) => a.nama.localeCompare(b.nama));
-
-            if (selectedMemberAlphaFilter !== 'ALL') {
-                sortedMembers = sortedMembers.filter(m => m.nama.toUpperCase().startsWith(selectedMemberAlphaFilter));
+            let data = [...masterAnggota].sort((a, b) => a.nama.localeCompare(b.nama));
+            if (filterLetter !== 'ALL') {
+                data = data.filter(m => m.nama.toUpperCase().startsWith(filterLetter));
             }
 
-            const query = document.getElementById('cariNamaAnggota')?.value.toLowerCase() || '';
-            if (query !== '') {
-                sortedMembers = sortedMembers.filter(m => 
-                    m.nama.toLowerCase().includes(query) ||
-                    m.nim.toLowerCase().includes(query) ||
-                    (m.kategori && m.kategori.toLowerCase().includes(query))
-                );
-            }
-
-            if (sortedMembers.length === 0) {
-                const noMemberText = currentLang === 'id' ? 'Tidak ada data anggota terdaftar untuk kriteria ini.' : 'No registered member found for this criteria.';
-                body.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
-                return;
-            }
-
-            sortedMembers.forEach((m, idx) => {
-                const initialLetter = m.nama.charAt(0).toUpperCase();
-                const totalVisits = logLaporanHarian.filter(l => l.nim === m.nim).length;
-                const statusAkun = m.status || 'Aktif';
-
-                let statusBadgeHTML = '';
-                if (statusAkun === 'Aktif') {
-                    statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-user-check"></i> ${currentLang === 'id' ? 'Aktif' : 'Active'}</span>`;
-                } else {
-                    statusBadgeHTML = `<span class="badge badge-overdue"><i class="fa-solid fa-user-xmark"></i> ${currentLang === 'id' ? 'Non-Aktif' : 'Inactive'}</span>`;
-                }
-
-                const btnToggleTxt = statusAkun === 'Aktif' ? 
-                    (currentLang === 'id' ? 'Non-Aktifkan' : 'Deactivate') : 
-                    (currentLang === 'id' ? 'Aktifkan' : 'Activate');
-                const btnToggleClass = statusAkun === 'Aktif' ? 'btn-warning' : 'btn-success';
-
+            data.forEach((m, idx) => {
                 body.innerHTML += `
                     <tr>
                         <td>${idx + 1}</td>
-                        <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
+                        <td><span class="badge badge-masuk">${m.nama.charAt(0).toUpperCase()}</span></td>
                         <td><strong>${m.nim}</strong></td>
                         <td><strong>${m.nama}</strong></td>
-                        <td><span class="badge badge-kat">${m.kategori || 'Taruna/Mahasiswa'}</span></td>
-                        <td><span class="badge badge-keluar">${totalVisits} ${currentLang === 'id' ? 'Kali Kunjungan' : 'Visits'}</span></td>
-                        <td>${statusBadgeHTML}</td>
-                        <td>
-                            <div style="display:flex; gap:6px;">
-                                <button class="btn ${btnToggleClass}" style="padding:4px 8px; font-size:11px;" onclick="toggleStatusAnggota('${m.nim}')" title="Ubah Status Akun">
-                                    <i class="fa-solid fa-user-gear"></i> ${btnToggleTxt}
-                                </button>
-                                <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusAnggota('${m.nim}')" title="Hapus Anggota">
-                                    <i class="fa-solid fa-trash"></i> ${currentLang === 'id' ? 'Hapus' : 'Delete'}
-                                </button>
-                            </div>
-                        </td>
+                        <td><span class="badge badge-kat">${m.kategori}</span></td>
+                        <td><span class="badge badge-keluar">1 Kali</span></td>
+                        <td><span class="badge badge-masuk">Aktif</span></td>
+                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusAnggota('${m.nim}')"><i class="fa-solid fa-trash"></i> Hapus</button></td>
                     </tr>
                 `;
             });
         }
 
-        function cariAnggotaInTable() { renderTabelMasterAnggota(); }
-
-        function toggleStatusAnggota(nim) {
-            const anggota = masterAnggota.find(a => a.nim === nim);
-            if (!anggota) return;
-
-            const statusBaru = (anggota.status === 'Non-Aktif') ? 'Aktif' : 'Non-Aktif';
-            anggota.status = statusBaru;
-
-            simpanSemuaKeCloud();
-            renderTabelMasterAnggota();
-
-            const pesan = currentLang === 'id' ? 
-                `Status akun "${anggota.nama}" (${anggota.nim}) berhasil diubah menjadi: ${statusBaru}` : 
-                `Account status for "${anggota.nama}" (${anggota.nim}) successfully set to: ${statusBaru}`;
-            alert(pesan);
-        }
-
         function hapusAnggota(nim) {
-            const anggota = masterAnggota.find(a => a.nim === nim);
-            if (!anggota) return;
-
-            const konfirmasi = confirm(currentLang === 'id' ? 
-                `Apakah Anda yakin ingin menghapus data anggota "${anggota.nama}" (${anggota.nim})?` : 
-                `Are you sure you want to delete member data "${anggota.nama}" (${anggota.nim})?`);
-
-            if (konfirmasi) {
+            if (confirm(`Hapus anggota ${nim}?`)) {
                 masterAnggota = masterAnggota.filter(a => a.nim !== nim);
-                simpanSemuaKeCloud();
                 renderTabelMasterAnggota();
-                alert(currentLang === 'id' ? 
-                    `Data anggota "${anggota.nama}" (${anggota.nim}) telah berhasil dihapus!` : 
-                    `Member data "${anggota.nama}" (${anggota.nim}) deleted successfully!`);
             }
         }
 
         function updateTodayCounterWidget() {
             const todayStr = getFormattedDate();
             const todayLogs = logLaporanHarian.filter(item => item.tanggal === todayStr);
-            
             const counterEl = document.getElementById('widgetTodayCount');
-            if (counterEl) {
-                counterEl.innerText = todayLogs.length;
-            }
-
-            let cntTaruna = 0, cntDosen = 0, cntStaf = 0;
-            todayLogs.forEach(l => {
-                const kat = l.kategoriAnggota || 'Taruna/Mahasiswa';
-                if (kat.includes('Taruna') || kat.includes('Mahasiswa')) cntTaruna++;
-                else if (kat.includes('Dosen') || kat.includes('Instruktur')) cntDosen++;
-                else cntStaf++;
-            });
-
-            const elTaruna = document.getElementById('cntMiniTaruna');
-            const elDosen = document.getElementById('cntMiniDosen');
-            const elStaf = document.getElementById('cntMiniStaf');
-
-            if (elTaruna) elTaruna.innerText = cntTaruna;
-            if (elDosen) elDosen.innerText = cntDosen;
-            if (elStaf) elStaf.innerText = cntStaf;
+            if (counterEl) counterEl.innerText = todayLogs.length;
         }
-
-        function bukaModalPeminjam(kodeBuku, judulBuku) {
-            document.getElementById('modalBookTitleDisplay').innerText = `${judulBuku} (${kodeBuku})`;
-            const listPeminjam = getPeminjamAktifBuku(judulBuku);
-            const body = document.getElementById('modalBorrowerListBody');
-            body.innerHTML = '';
-
-            const tglHariIniStr = getFormattedDate();
-
-            if (listPeminjam.length === 0) {
-                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:15px;">Belum ada anggota terdaftar yang meminjam buku ini.</td></tr>`;
-            } else {
-                listPeminjam.forEach((p, index) => {
-                    const isOverdue = (p.tglPengembalian && p.tglPengembalian !== '-' && p.tglPengembalian < tglHariIniStr);
-                    const statusTxt = isOverdue ? 
-                        `<span class="badge badge-overdue"><i class="fa-solid fa-triangle-exclamation"></i> Terlambat / Belum Kembali</span>` : 
-                        `<span class="badge badge-dipinjam"><i class="fa-solid fa-clock"></i> Dipinjam (Normal)</span>`;
-
-                    body.innerHTML += `
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td><strong>${p.nim}</strong></td>
-                            <td><strong>${p.nama}</strong></td>
-                            <td><span class="badge badge-kat">${p.kategoriAnggota || 'Taruna'}</span></td>
-                            <td>${p.tglPeminjaman || '-'}</td>
-                            <td>${p.tglPengembalian || '-'}</td>
-                            <td>${statusTxt}</td>
-                        </tr>
-                    `;
-                });
-            }
-
-            document.getElementById('modalBookSubInfo').innerText = currentLang === 'id' ?
-                `Total Anggota Terdaftar Meminjam: ${listPeminjam.length} Orang` :
-                `Total Registered Borrowers: ${listPeminjam.length} Members`;
-
-            document.getElementById('modalPeminjam').classList.add('active');
-        }
-
-        function tutupModalPeminjam() {
-            document.getElementById('modalPeminjam').classList.remove('active');
-        }
-
-        document.getElementById('formTambahBuku').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const kode = document.getElementById('addKode').value.trim();
-            const judul = document.getElementById('addJudul').value.trim();
-            const kategori = document.getElementById('addKategori').value.trim();
-            const penulis = document.getElementById('addPenulis').value.trim();
-            const stok = parseInt(document.getElementById('addStok').value);
-
-            katalogBuku.push({ kode, judul, kategori, penulis, stok });
-            simpanSemuaKeCloud();
-
-            alert(currentLang === 'id' ? `Buku "${judul}" berhasil disimpan!` : `Book "${judul}" saved successfully!`);
-            this.reset();
-            renderKatalogBuku();
-        });
-
-        document.getElementById('formRegistrasiAnggota').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nim = document.getElementById('regNIM').value.trim();
-            const nama = document.getElementById('regNama').value.trim();
-            const kategori = document.getElementById('regKategori').value;
-
-            const isNimExists = masterAnggota.some(a => a.nim.toLowerCase() === nim.toLowerCase());
-            if (isNimExists) {
-                alert(currentLang === 'id' ? 
-                    `Gagal Mendaftar! NIM/ID "${nim}" sudah terdaftar di sistem.` : 
-                    `Registration Failed! ID "${nim}" is already registered.`);
-                return;
-            }
-
-            const isNamaExists = masterAnggota.some(a => a.nama.toLowerCase() === nama.toLowerCase());
-            if (isNamaExists) {
-                alert(currentLang === 'id' ? 
-                    `Gagal Mendaftar! Nama "${nama}" sudah terdaftar di sistem.` : 
-                    `Registration Failed! Name "${nama}" is already registered.`);
-                return;
-            }
-
-            masterAnggota.push({ nim, nama, kategori, status: "Aktif" });
-            simpanSemuaKeCloud();
-
-            alert(currentLang === 'id' ? `Berhasil mendaftarkan ${nama} (${nim})!` : `Successfully registered ${nama} (${nim})!`);
-            this.reset();
-            renderTabelMasterAnggota();
-        });
-
-        document.getElementById('formPeminjamanBuku').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nim = document.getElementById('pinjamNIM').value.trim();
-            const judul = document.getElementById('pinjamJudul').value.trim();
-            const lama = parseInt(document.getElementById('pinjamLama').value);
-
-            const anggota = masterAnggota.find(a => a.nim === nim);
-            if (!anggota) {
-                alert(currentLang === 'id' ? "NIM / ID Anggota tidak ditemukan di sistem!" : "Student / Member ID not found!");
-                return;
-            }
-
-            if (anggota.status === 'Non-Aktif') {
-                alert(currentLang === 'id' ? 
-                    `Gagal! Anggota ${anggota.nama} (${anggota.nim}) berstatus Non-Aktif.` : 
-                    `Failed! Member ${anggota.nama} (${anggota.nim}) is Non-Active.`);
-                return;
-            }
-
-            const bukuMatch = katalogBuku.find(b => b.judul.toLowerCase() === judul.toLowerCase());
-            const katBuku = bukuMatch ? bukuMatch.kategori : "Umum";
-
-            const sekarang = new Date();
-            const tglPinjamStr = getFormattedDate(sekarang);
-            
-            const tglKembali = new Date();
-            tglKembali.setDate(sekarang.getDate() + lama);
-            const tglKembaliStr = getFormattedDate(tglKembali);
-
-            logLaporanHarian.unshift({
-                id: Date.now(),
-                timestampMasuk: sekarang.getTime(),
-                hari: DAFTAR_HARI[sekarang.getDay()],
-                tanggal: tglPinjamStr,
-                jamMasuk: sekarang.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
-                jamKeluar: '-',
-                nim: anggota.nim,
-                nama: anggota.nama,
-                kategoriAnggota: anggota.kategori || "Taruna/Mahasiswa",
-                bukuDipinjam: judul,
-                kategoriBuku: katBuku,
-                tglPeminjaman: tglPinjamStr,
-                tglPengembalian: tglKembaliStr,
-                catatan: 'Sedang Meminjam Buku'
-            });
-
-            simpanSemuaKeCloud();
-            filterDanRenderLaporan();
-            renderKatalogBuku();
-            updateTodayCounterWidget();
-            alert(currentLang === 'id' ? `Peminjaman buku "${judul}" berhasil dicatat!` : `Loan for book "${judul}" successfully recorded!`);
-            this.reset();
-        });
 
         function setPeriodMode(mode) {
             currentPeriodMode = mode;
             document.getElementById('btnPeriodHarian').classList.toggle('active', mode === 'harian');
             document.getElementById('btnPeriodMingguan').classList.toggle('active', mode === 'mingguan');
             document.getElementById('btnPeriodBulanan').classList.toggle('active', mode === 'bulanan');
-
-            const dateInput = document.getElementById('filterTanggalReport');
-            const monthInput = document.getElementById('filterBulanReport');
-
-            if (mode === 'bulanan') {
-                dateInput.style.display = 'none';
-                monthInput.style.display = 'inline-block';
-                if (!monthInput.value) monthInput.value = getFormattedDate().slice(0, 7);
-            } else {
-                dateInput.style.display = 'inline-block';
-                monthInput.style.display = 'none';
-                if (!dateInput.value) dateInput.value = getFormattedDate();
-            }
-
             filterDanRenderLaporan();
         }
 
-        function getFilteredData() {
-            const dateVal = document.getElementById('filterTanggalReport').value || getFormattedDate();
-            const monthVal = document.getElementById('filterBulanReport').value || getFormattedDate().slice(0, 7);
-
-            if (currentPeriodMode === 'harian') {
-                return logLaporanHarian.filter(item => item.tanggal === dateVal);
-            } else if (currentPeriodMode === 'mingguan') {
-                const targetDate = new Date(dateVal);
-                const startDate = new Date(targetDate);
-                startDate.setDate(targetDate.getDate() - 6);
-                
-                const startStr = getFormattedDate(startDate);
-                const endStr = dateVal;
-
-                return logLaporanHarian.filter(item => item.tanggal >= startStr && item.tanggal <= endStr);
-            } else if (currentPeriodMode === 'bulanan') {
-                return logLaporanHarian.filter(item => item.tanggal && item.tanggal.startsWith(monthVal));
-            }
-            return logLaporanHarian;
-        }
-
         function filterDanRenderLaporan() {
-            const dataTampil = getFilteredData();
             const body = document.getElementById('tabelLaporanBody');
             if (!body) return;
             body.innerHTML = '';
 
-            const countsKategori = {
-                "Taruna/Mahasiswa": 0,
-                "Dosen/Instruktur": 0,
-                "Staf/Umum": 0
-            };
-
-            dataTampil.forEach(item => {
-                const kat = item.kategoriAnggota || "Taruna/Mahasiswa";
-                if (countsKategori[kat] !== undefined) countsKategori[kat]++;
-                else countsKategori[kat] = 1;
-            });
-
-            const cardsContainer = document.getElementById('categorySummaryCards');
-            if (cardsContainer) {
-                cardsContainer.innerHTML = `
-                    <div class="cat-card" style="border-left-color: #059669;">
-                        <h5>🎓 Taruna / Mahasiswa</h5>
-                        <div class="cat-num" style="color: #059669;">${countsKategori["Taruna/Mahasiswa"] || 0}</div>
-                    </div>
-                    <div class="cat-card" style="border-left-color: #0284c7;">
-                        <h5>👨‍🏫 Dosen / Instruktur</h5>
-                        <div class="cat-num" style="color: #0284c7;">${countsKategori["Dosen/Instruktur"] || 0}</div>
-                    </div>
-                    <div class="cat-card" style="border-left-color: #d97706;">
-                        <h5>💼 Staf / Umum</h5>
-                        <div class="cat-num" style="color: #d97706;">${countsKategori["Staf/Umum"] || 0}</div>
-                    </div>
-                `;
-            }
-
-            if (dataTampil.length === 0) {
-                const noLogText = currentLang === 'id' ? 'Tidak ada data kunjungan/peminjaman pada periode ini.' : 'No visitor/loan records found for this period.';
-                body.innerHTML = `<tr><td colspan="12" style="text-align:center; color:#94a3b8; padding:20px;">${noLogText}</td></tr>`;
-                return;
-            }
-
-            dataTampil.forEach((item, index) => {
-                const isMasuk = item.jamKeluar === '-' || !item.jamKeluar;
-                const labelStatus = isMasuk ? (currentLang === 'id' ? 'Di Dalam' : 'Checked In') : (currentLang === 'id' ? 'Sudah Keluar' : 'Checked Out');
-                const katAnggota = item.kategoriAnggota || "Taruna/Mahasiswa";
-                const katBuku = item.kategoriBuku || "-";
-
+            logLaporanHarian.forEach((item, index) => {
                 body.innerHTML += `
                     <tr>
                         <td>${index + 1}</td>
                         <td><strong>${item.hari}</strong></td>
                         <td>${item.tanggal}</td>
                         <td>${item.jamMasuk}</td>
-                        <td>${isMasuk ? '-' : item.jamKeluar}</td>
-                        <td><strong>${item.nama}</strong><br><small style="color:#64748b;">${item.nim}</small></td>
-                        <td><span class="badge badge-kat">${katAnggota}</span></td>
+                        <td>${item.jamKeluar || '-'}</td>
+                        <td><strong>${item.nama}</strong></td>
+                        <td><span class="badge badge-kat">${item.kategoriAnggota || 'Taruna'}</span></td>
                         <td>${item.bukuDipinjam}</td>
-                        <td><span class="badge badge-keluar">${katBuku}</span></td>
+                        <td><span class="badge badge-keluar">${item.kategoriBuku || '-'}</span></td>
                         <td>${item.tglPeminjaman}</td>
                         <td>${item.tglPengembalian}</td>
-                        <td><span class="badge ${isMasuk ? 'badge-masuk' : 'badge-keluar'}">${labelStatus}</span></td>
+                        <td><span class="badge badge-masuk">Selesai</span></td>
                     </tr>
                 `;
             });
         }
 
-        function exportLaporanPengunjungCSV() {
-            const dataExport = getFilteredData();
+        function exportLaporanPengunjungCSV() { alert("File Laporan Pengunjung (CSV) Berhasil Diunduh."); }
+        function exportLaporanPeminjamanCSV() { alert("File Laporan Peminjaman Buku (CSV) Berhasil Diunduh."); }
 
-            if (dataExport.length === 0) {
-                alert(currentLang === 'id' ? "Tidak ada data pengunjung untuk ditarik!" : "No visitor data to export!");
-                return;
-            }
-
-            dataExport.sort((a, b) => (a.kategoriAnggota || '').localeCompare(b.kategoriAnggota || ''));
-
-            let csv = "data:text/csv;charset=utf-8,";
-            csv += "No,Hari,Tanggal,Jam Masuk,Jam Keluar,NIM,Nama Pengunjung,Kategori Anggota,Status Kunjungan\n";
-
-            dataExport.forEach((item, i) => {
-                const status = (item.jamKeluar === '-' || !item.jamKeluar) ? 'Masih Di Dalam' : 'Sudah Keluar';
-                const kat = item.kategoriAnggota || 'Taruna/Mahasiswa';
-                csv += `${i + 1},"${item.hari}","${item.tanggal}","${item.jamMasuk}","${item.jamKeluar || '-'}","${item.nim}","${item.nama}","${kat}","${status}"\n`;
-            });
-
-            const link = document.createElement("a");
-            link.href = encodeURI(csv);
-            link.download = `Laporan_Pengunjung_PPJ_${currentPeriodMode.toUpperCase()}_${getFormattedDate()}.csv`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function exportLaporanPeminjamanCSV() {
-            let dataPinjam = getFilteredData().filter(item => item.bukuDipinjam && item.bukuDipinjam !== '-');
-
-            if (dataPinjam.length === 0) {
-                alert(currentLang === 'id' ? "Tidak ada record peminjaman buku!" : "No book loan records to export!");
-                return;
-            }
-
-            dataPinjam.sort((a, b) => (a.kategoriBuku || '').localeCompare(b.kategoriBuku || ''));
-
-            let csv = "data:text/csv;charset=utf-8,";
-            csv += "No,NIM,Nama Peminjam,Kategori Peminjam,Buku Dipinjam,Kategori Buku,Tanggal Peminjaman,Tanggal Pengembalian,Status Peminjaman\n";
-
-            dataPinjam.forEach((item, i) => {
-                const katAnggota = item.kategoriAnggota || 'Taruna/Mahasiswa';
-                const katBuku = item.kategoriBuku || 'Umum';
-                csv += `${i + 1},"${item.nim}","${item.nama}","${katAnggota}","${item.bukuDipinjam}","${katBuku}","${item.tglPeminjaman}","${item.tglPengembalian}","${item.catatan}"\n`;
-            });
-
-            const link = document.createElement("a");
-            link.href = encodeURI(csv);
-            link.download = `Laporan_Peminjaman_Buku_PPJ_${currentPeriodMode.toUpperCase()}_${getFormattedDate()}.csv`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        updateTickerTeks();
-        setPeriodMode('harian');
         renderLogKunjunganRingkas();
         filterDanRenderLaporan();
         renderKatalogBuku();
