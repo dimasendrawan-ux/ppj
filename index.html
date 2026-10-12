@@ -6,12 +6,12 @@
     <title>Unit Perpustakaan - Politeknik Penerbangan Jayapura</title>
     
     <!-- GOOGLE FONTS & FONTAWESOME ICONS -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="[suspicious link removed]" rel="stylesheet">
+    <link rel="stylesheet" href="[suspicious link removed]">
     
     <!-- FIREBASE REALTIME DATABASE SDK (COMPAT MODE) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="[suspicious link removed]"></script>
+    <script src="[suspicious link removed]"></script>
 
     <style>
         :root {
@@ -332,15 +332,11 @@
         .nim-input-group input { flex: 1; padding: 10px 15px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 13px; text-align: center; font-weight: 600; }
         .nim-input-group button { padding: 10px 18px; background: var(--poltekbang-blue); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
 
-        .alert-box { display: none; padding: 12px; border-radius: 12px; margin-top: 12px; text-align: center; font-weight: 600; font-size: 12px; }
-        .alert-masuk { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-        .alert-keluar { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-
         /* WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT SILAHKAN.JPEG) */
         .today-visit-card {
             background-color: #001a40;
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='[suspicious link removed] fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
                 linear-gradient(135deg, #00183c 0%, #003278 50%, #09132c 100%);
             border-radius: 20px;
             padding: 22px 25px;
@@ -486,6 +482,14 @@
 
         .card-title { font-size: 16px; font-weight: 600; color: var(--poltekbang-blue); display: flex; align-items: center; gap: 10px; }
 
+        .filter-box input {
+            padding: 8px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 12px;
+            width: 250px;
+        }
+
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
         .form-group { margin-bottom: 10px; }
         label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #475569; }
@@ -572,14 +576,12 @@
         .admin-sub-pane { display: none; }
         .admin-sub-pane.active { display: block; }
 
-        /* ==========================================================================
-           3. SEKSI TATA TERTIB & LARANGAN (IKON LARANGAN MERAH + MASCOT KIRI & KANAN)
-           ========================================================================== */
+        /* SEKSI TATA TERTIB & LARANGAN */
         .rules-footer-section {
             background-color: #ffffff;
             background-image: 
                 linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.90) 100%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='[suspicious link removed] fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
             border-top: 5px solid;
             border-image: linear-gradient(to right, #002868, #f59e0b, #b91c1c) 1;
             padding: 30px 20px;
@@ -685,7 +687,7 @@
         .rule-card h4 { font-size: 12px; font-weight: 700; color: #991b1b; margin-bottom: 4px; }
         .rule-card p { font-size: 11px; color: #475569; line-height: 1.35; }
 
-        /* HELPDESK FLOATING BUBBLE (MASUKAN.JPEG) */
+        /* HELPDESK FLOATING BUBBLE */
         .helpdesk-floating-container {
             position: fixed;
             bottom: 25px;
@@ -819,14 +821,14 @@
         <div class="tab-buttons">
             <button class="tab-btn active" id="btnTabAbsensi" onclick="switchTab('tab-kiosk')"><i class="fa-solid fa-fingerprint"></i> <span id="lblNavAbsensi">Absensi Pengunjung</span></button>
             <button class="tab-btn" id="btnTabBuku" onclick="switchTab('tab-buku')"><i class="fa-solid fa-book-open"></i> <span id="lblNavBuku">Jenis Buku Tersedia</span></button>
-            <a href="https://repository.poltekbangjayapura.ac.id/" target="_blank" class="tab-btn" id="btnTabRepo"><i class="fa-solid fa-graduation-cap"></i> <span id="lblNavRepo">Repository PPJ</span> <i class="fa-solid fa-up-right-from-square" style="font-size: 10px;"></i></a>
+            <a href="[suspicious link removed]" target="_blank" class="tab-btn" id="btnTabRepo"><i class="fa-solid fa-graduation-cap"></i> <span id="lblNavRepo">Repository PPJ</span> <i class="fa-solid fa-up-right-from-square" style="font-size: 10px;"></i></a>
             <button class="tab-btn" id="btnTabAdmin" onclick="switchTab('tab-admin')"><i class="fa-solid fa-user-shield"></i> <span id="lblNavAdmin">Panel Administrator</span></button>
         </div>
     </header>
 
     <div class="main-content">
 
-        <!-- ==================== TAB 1: ABSENSI PENGUNJUNG ==================== -->
+        <!-- TAB 1: ABSENSI PENGUNJUNG -->
         <div id="tab-kiosk" class="tab-pane active">
             <div class="hero-slider-container">
                 <div class="slide-item active" style="background-image: url('1.png');"></div>
@@ -842,9 +844,7 @@
                 </div>
             </div>
 
-            <!-- KIOSK GRID TOP -->
             <div class="kiosk-top-grid">
-                
                 <!-- WIDGET SENSOR SIDIK JARI -->
                 <div class="sensor-card">
                     <div>
@@ -856,10 +856,9 @@
 
                     <div>
                         <div class="nim-input-group">
-                            <input type="text" id="kioskNIM" placeholder="Atau ketik NIM / ID Anggota">
+                            <input type="text" id="kioskNIM" placeholder="Atau ketik NIM / ID Anggota" onkeydown="if(event.key==='Enter') prosesAbsensiNIM()">
                             <button onclick="prosesAbsensiNIM()"><i class="fa-solid fa-arrow-right"></i> <span id="lblBtnProsesNIM">Proses</span></button>
                         </div>
-                        <div id="kioskAlert" class="alert-box"></div>
                     </div>
                 </div>
 
@@ -903,7 +902,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- LOG REAL-TIME HARIAN -->
@@ -929,7 +927,7 @@
             </div>
         </div>
 
-        <!-- ==================== TAB 2: JENIS BUKU TERSEDIA (A-Z) ==================== -->
+        <!-- TAB 2: JENIS BUKU TERSEDIA (A-Z) -->
         <div id="tab-buku" class="tab-pane">
             <div class="card">
                 <div class="card-header">
@@ -953,7 +951,7 @@
                                 <th id="thBookAuthor">Penulis / Penerbit</th>
                                 <th id="thBookStock">Stok</th>
                                 <th id="thBookStatus">Status Ketersediaan</th>
-                                <th id="thBookBorrowers">Peminjam Terdaftar</th>
+                                <th id="thBookAction">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="tabelKatalogBukuBody"></tbody>
@@ -962,7 +960,7 @@
             </div>
         </div>
 
-        <!-- ==================== TAB 3: PANEL ADMINISTRATOR ==================== -->
+        <!-- TAB 3: PANEL ADMINISTRATOR -->
         <div id="tab-admin" class="tab-pane">
             <div class="card" style="background: #e0f2fe; border-left: 5px solid var(--poltekbang-blue); margin-bottom: 20px;">
                 <div class="card-header" style="border: none; margin: 0; padding: 0;">
@@ -1038,7 +1036,7 @@
                     </div>
                     <div class="form-group">
                         <label id="lblAnnounceForm">Teks Pengumuman Baru:</label>
-                        <input type="text" id="inputPengumuman" placeholder="Masukkan teks pengumuman berjalan baru...">
+                        <input type="text" id="inputPengumuman" placeholder="Masukkan teks pengumuman berjalan baru..." onkeydown="if(event.key==='Enter') simpanPengumuman()">
                     </div>
                     <button type="button" class="btn btn-primary" onclick="simpanPengumuman()">
                         <i class="fa-solid fa-floppy-disk"></i> <span id="lblBtnSaveAnnounce">Simpan & Perbarui Ke Semua Device</span>
@@ -1200,9 +1198,7 @@
 
     </div>
 
-    <!-- ==========================================================================
-       SEKSI TATA TERTIB & LARANGAN (IKON LARANGAN MERAH + MASCOT KIRI & KANAN)
-       ========================================================================== -->
+    <!-- SEKSI TATA TERTIB & LARANGAN -->
     <section class="rules-footer-section">
         <div class="rules-title">
             <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 24px;"></i>
@@ -1250,7 +1246,7 @@
 
             <!-- MASCOT KANAN (KANAN.PNG) -->
             <div class="rules-side-image">
-                <img src="kanan.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kanan)" onerror="this.style.display='none'">
+                <img src="kanan.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kanan)">
             </div>
         </div>
     </section>
@@ -1268,7 +1264,7 @@
                 <p id="lblMascotWelcomeSub" style="font-size:11px; color:#e0f2fe; margin-top:4px;">Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.</p>
             </div>
 
-            <a href="https://wa.me/6282393715964" target="_blank" class="helpdesk-option-card">
+            <a href="[suspicious link removed]" target="_blank" class="helpdesk-option-card">
                 <div class="helpdesk-icon-box icon-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
                 <div>
                     <h5 id="lblContactMeTitle" style="font-size:12px; font-weight:700; color:var(--poltekbang-blue);">Contact Me (Hubungi Kami)</h5>
@@ -1276,7 +1272,7 @@
                 </div>
             </a>
 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7TOAMAl_WpoYove7jyCLABifvwdDnu38fcHP1txJdhl6l2g/viewform" target="_blank" class="helpdesk-option-card">
+            <a href="[suspicious link removed]" target="_blank" class="helpdesk-option-card">
                 <div class="helpdesk-icon-box icon-form"><i class="fa-solid fa-clipboard-list"></i></div>
                 <div>
                     <h5 id="lblComplaintTitle" style="font-size:12px; font-weight:700; color:var(--poltekbang-blue);">Layanan Pengaduan</h5>
@@ -1298,10 +1294,10 @@
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
-            authDomain: "perpusppj.firebaseapp.com",
-            databaseURL: "https://perpusppj-default-rtdb.asia-southeast1.firebasedatabase.app",
+            authDomain: "[suspicious link removed]",
+            databaseURL: "[suspicious link removed]",
             projectId: "perpusppj",
-            storageBucket: "perpusppj.firebasestorage.app",
+            storageBucket: "[link mencurigakan dihapus]",
             messagingSenderId: "392001200802",
             appId: "1:392001200802:web:0287fa62e16c75e1712dfb"
         };
@@ -1352,7 +1348,7 @@
                 thBookAuthor: "Penulis / Penerbit",
                 thBookStock: "Stok",
                 thBookStatus: "Status Ketersediaan",
-                thBookBorrowers: "Peminjam Terdaftar",
+                thBookAction: "Aksi",
                 adminBanner: "Panel Administrator Aktif",
                 adminLogout: "Logout Admin",
                 sub1: "1. Kelola Koleksi Buku",
@@ -1441,7 +1437,7 @@
                 navBuku: "Available Book Catalog",
                 navRepo: "PPJ Repository",
                 navAdmin: "Administrator Panel",
-                heroTitle: "Welcome to the Digital Library Unit<br>Jayapura Aviation Polytechnic",
+                heroTitle: "Welcome to Digital Library Unit<br>Jayapura Aviation Polytechnic",
                 heroSub: "Please touch your fingerprint on the sensor below or type your Student ID (NIM) to record check-in and check-out attendance.",
                 soundIndicator: "Automated Voice Guidance Active",
                 sensorInstruction: "Touch / Scan Fingerprint",
@@ -1461,7 +1457,7 @@
                 thBookAuthor: "Author / Publisher",
                 thBookStock: "Stock",
                 thBookStatus: "Availability Status",
-                thBookBorrowers: "Registered Borrowers",
+                thBookAction: "Action",
                 adminBanner: "Active Administrator Panel",
                 adminLogout: "Admin Logout",
                 sub1: "1. Manage Book Collection",
@@ -1538,7 +1534,7 @@
                 mascotWelcomeSub: "Official information & complaint center of Jayapura Aviation Polytechnic Library.",
                 contactMeTitle: "Contact Me",
                 contactMeSub: "WhatsApp / Call: +62 823 9371 5964",
-                complaintTitle: "Complaint & Feedback Service",
+                complaintTitle: "Complaint Service",
                 complaintSub: "Online Feedback & Complaint Form",
                 footerText: "© 2026 Library Unit of Jayapura Aviation Polytechnic — Modern Digital Library System."
             }
@@ -1565,6 +1561,15 @@
                 }
             }
 
+            const kioskNIM = document.getElementById('kioskNIM');
+            if (kioskNIM) kioskNIM.placeholder = lang === 'id' ? "Atau ketik NIM / ID Anggota" : "Or type Student ID / Member ID";
+
+            const cariBuku = document.getElementById('cariBukuKatalog');
+            if (cariBuku) cariBuku.placeholder = lang === 'id' ? "Cari judul, kategori, atau penulis..." : "Search title, category, or author...";
+
+            const cariNama = document.getElementById('cariNamaAnggota');
+            if (cariNama) cariNama.placeholder = lang === 'id' ? "Cari nama atau NIM anggota..." : "Search name or ID...";
+
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
             renderKatalogBuku();
@@ -1575,6 +1580,17 @@
         function toggleHelpdeskMenu() {
             document.getElementById('helpdeskPopover').classList.toggle('active');
         }
+
+        // AUTO SLIDER BANNER
+        let slideIndex = 0;
+        function autoSlideHero() {
+            const slides = document.querySelectorAll('.slide-item');
+            if (slides.length === 0) return;
+            slides.forEach(s => s.classList.remove('active'));
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+        setInterval(autoSlideHero, 4000);
 
         let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
             { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
@@ -1598,6 +1614,7 @@
             {
                 id: 1001,
                 hari: "Senin",
+                hariEng: "Monday",
                 tanggal: getFormattedDate(),
                 jamMasuk: "08:30",
                 jamKeluar: "-",
@@ -1607,7 +1624,7 @@
                 bukuDipinjam: "Kelistrikan Bandara & Sistem SCADA",
                 kategoriBuku: "Teknik Listrik Bandara",
                 tglPeminjaman: getFormattedDate(),
-                tglPengembalian: getFormattedDate(new Date(Date.now() + 7 * 86400000)),
+                tglPengembalian: getFormattedDate(new Date((new Date()).getTime() + 7 * 86400000)),
                 catatan: "Sedang Meminjam Buku"
             }
         ];
@@ -1617,11 +1634,14 @@
         const DAFTAR_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const DAFTAR_HARI_ENG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const NAMA_BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+        const NAMA_BULAN_ENG = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         function updateLiveClockWIT() {
             const sekarang = new Date();
-            const namaHari = currentLang === 'id' ? DAFTAR_HARI[sekarang.getDay()] : DAFTAR_HARI_ENG[sekarang.getDay()];
-            const formatted = `${namaHari}, ${sekarang.getDate()} ${NAMA_BULAN[sekarang.getMonth()]} ${sekarang.getFullYear()} | ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}:${String(sekarang.getSeconds()).padStart(2, '0')} WIT`;
+            const isID = currentLang === 'id';
+            const namaHari = isID ? DAFTAR_HARI[sekarang.getDay()] : DAFTAR_HARI_ENG[sekarang.getDay()];
+            const namaBulan = isID ? NAMA_BULAN[sekarang.getMonth()] : NAMA_BULAN_ENG[sekarang.getMonth()];
+            const formatted = `${namaHari}, ${sekarang.getDate()} ${namaBulan} ${sekarang.getFullYear()} | ${String(sekarang.getHours()).padStart(2, '0')}:${String(sekarang.getMinutes()).padStart(2, '0')}:${String(sekarang.getSeconds()).padStart(2, '0')} WIT`;
             const clockEl = document.getElementById('clockText');
             if (clockEl) clockEl.innerText = formatted;
         }
@@ -1704,14 +1724,15 @@
         }
 
         function prosesAbsensiNIM() {
-            const nim = document.getElementById('kioskNIM').value.trim();
+            const nimInput = document.getElementById('kioskNIM');
+            const nim = nimInput.value.trim();
             if (!nim) return;
             const anggota = masterAnggota.find(a => a.nim === nim);
             if (anggota) {
                 prosesAbsensiPengunjung(anggota);
-                document.getElementById('kioskNIM').value = '';
+                nimInput.value = '';
             } else {
-                alert(currentLang === 'id' ? `NIM ${nim} tidak terdaftar.` : `NIM ${nim} is not registered.`);
+                alert(currentLang === 'id' ? `NIM ${nim} tidak terdaftar.` : `Student ID ${nim} is not registered.`);
             }
         }
 
@@ -1723,8 +1744,9 @@
 
             if (!recordAktif) {
                 logLaporanHarian.unshift({
-                    id: Date.now(),
+                    id: (new Date()).getTime(),
                     hari: DAFTAR_HARI[sekarang.getDay()],
+                    hariEng: DAFTAR_HARI_ENG[sekarang.getDay()],
                     tanggal: getFormattedDate(sekarang),
                     jamMasuk: jamString,
                     jamKeluar: '-',
@@ -1737,14 +1759,17 @@
                     tglPengembalian: '-',
                     catatan: 'Kunjungan Biasa'
                 });
-                alert(`Selamat datang ${anggota.nama}`);
-                bicaraSuara(`Selamat datang ${anggota.nama}`);
+                const msg = currentLang === 'id' ? `Selamat datang ${anggota.nama}` : `Welcome ${anggota.nama}`;
+                alert(msg);
+                bicaraSuara(msg);
             } else {
                 recordAktif.jamKeluar = jamString;
-                alert(`Terima kasih ${anggota.nama}, selamat jalan!`);
-                bicaraSuara(`Terima kasih ${anggota.nama}, selamat jalan!`);
+                const msg = currentLang === 'id' ? `Terima kasih ${anggota.nama}, selamat jalan!` : `Thank you ${anggota.nama}, goodbye!`;
+                alert(msg);
+                bicaraSuara(msg);
             }
 
+            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
             updateTodayCounterWidget();
@@ -1757,14 +1782,19 @@
 
             logLaporanHarian.slice(0, 5).forEach(log => {
                 const isAktif = log.jamKeluar === '-' || !log.jamKeluar;
+                const isID = currentLang === 'id';
+                const hariStr = isID ? (log.hari || 'Senin') : (log.hariEng || log.hari || 'Monday');
+                const statusStr = isAktif ? (isID ? 'Di Dalam' : 'Checked In') : (isID ? 'Sudah Keluar' : 'Checked Out');
+                const insideLabel = isID ? '(Di Dalam)' : '(Inside)';
+
                 body.innerHTML += `
                     <tr>
-                        <td>${log.hari}, ${log.tanggal}</td>
-                        <td>${log.jamMasuk} - ${log.jamKeluar || '(Di Dalam)'}</td>
+                        <td>${hariStr}, ${log.tanggal}</td>
+                        <td>${log.jamMasuk} - ${log.jamKeluar || insideLabel}</td>
                         <td>${log.nim}</td>
                         <td><strong>${log.nama}</strong></td>
                         <td><span class="badge badge-kat">${log.kategoriAnggota}</span></td>
-                        <td><span class="badge ${isAktif ? 'badge-masuk' : 'badge-keluar'}">${isAktif ? 'Di Dalam' : 'Sudah Keluar'}</span></td>
+                        <td><span class="badge ${isAktif ? 'badge-masuk' : 'badge-keluar'}">${statusStr}</span></td>
                     </tr>
                 `;
             });
@@ -1773,7 +1803,8 @@
         function generateAlphabetButtons() {
             const container = document.getElementById('alphabetContainer');
             if(!container) return;
-            container.innerHTML = `<button class="alpha-btn active" onclick="renderKatalogBuku()">Semua (A-Z)</button>`;
+            const allLabel = currentLang === 'id' ? 'Semua (A-Z)' : 'All (A-Z)';
+            container.innerHTML = `<button class="alpha-btn active" onclick="renderKatalogBuku('ALL')">${allLabel}</button>`;
             for (let i = 65; i <= 90; i++) {
                 const letter = String.fromCharCode(i);
                 container.innerHTML += `<button class="alpha-btn" onclick="filterBukuByLetter('${letter}')">${letter}</button>`;
@@ -1784,7 +1815,12 @@
             renderKatalogBuku(letter);
         }
 
-        function renderKatalogBuku(filterLetter = 'ALL') {
+        function cariBukuInKatalog() {
+            const q = document.getElementById('cariBukuKatalog').value.toLowerCase();
+            renderKatalogBuku('ALL', q);
+        }
+
+        function renderKatalogBuku(filterLetter = 'ALL', searchQuery = '') {
             const body = document.getElementById('tabelKatalogBukuBody');
             if(!body) return;
             body.innerHTML = '';
@@ -1793,6 +1829,18 @@
             if (filterLetter !== 'ALL') {
                 data = data.filter(b => b.judul.toUpperCase().startsWith(filterLetter));
             }
+            if (searchQuery) {
+                data = data.filter(b => 
+                    b.judul.toLowerCase().includes(searchQuery) ||
+                    b.kategori.toLowerCase().includes(searchQuery) ||
+                    b.penulis.toLowerCase().includes(searchQuery) ||
+                    b.kode.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            const isID = currentLang === 'id';
+            const availableText = isID ? 'Tersedia' : 'Available';
+            const copiesText = isID ? 'Eksemplar' : 'Copies';
 
             data.forEach((buku, index) => {
                 body.innerHTML += `
@@ -1803,18 +1851,56 @@
                         <td><strong>${buku.judul}</strong></td>
                         <td><span class="badge badge-keluar">${buku.kategori}</span></td>
                         <td>${buku.penulis}</td>
-                        <td>${buku.stok} Eksemplar</td>
-                        <td><span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> Tersedia</span></td>
-                        <td><span style="color:#94a3b8; font-size:11px;">-</span></td>
+                        <td>${buku.stok} ${copiesText}</td>
+                        <td><span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> ${availableText}</span></td>
+                        <td><button class="btn btn-danger" style="padding:3px 8px; font-size:10px;" onclick="hapusBuku('${buku.kode}')"><i class="fa-solid fa-trash"></i> ${isID ? 'Hapus' : 'Delete'}</button></td>
                     </tr>
                 `;
             });
         }
 
+        function hapusBuku(kode) {
+            const confirmMsg = currentLang === 'id' ? `Hapus buku dengan kode ${kode}?` : `Delete book code ${kode}?`;
+            if (confirm(confirmMsg)) {
+                katalogBuku = katalogBuku.filter(b => b.kode !== kode);
+                localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+                renderKatalogBuku();
+            }
+        }
+
+        function tambahBukuBaru() {
+            const kode = document.getElementById('addKode').value.trim();
+            const judul = document.getElementById('addJudul').value.trim();
+            const kategori = document.getElementById('addKategori').value.trim();
+            const penulis = document.getElementById('addPenulis').value.trim();
+            const stok = parseInt(document.getElementById('addStok').value) || 1;
+
+            if (!kode || !judul) return;
+
+            katalogBuku.push({ kode, judul, kategori, penulis, stok });
+            localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+            renderKatalogBuku();
+            document.getElementById('formTambahBuku').reset();
+            alert(currentLang === 'id' ? 'Buku baru berhasil disimpan!' : 'New book added successfully!');
+        }
+
+        function simpanPengumuman() {
+            const input = document.getElementById('inputPengumuman');
+            const teks = input.value.trim();
+            if (!teks) return;
+
+            teksPengumuman = teks;
+            localStorage.setItem('pengumumanPerpus', teksPengumuman);
+            document.getElementById('tickerText').innerText = teksPengumuman;
+            input.value = '';
+            alert(currentLang === 'id' ? 'Pengumuman berhasil diperbarui!' : 'Announcement updated successfully!');
+        }
+
         function generateMemberAlphabetButtons() {
             const container = document.getElementById('memberAlphabetContainer');
             if(!container) return;
-            container.innerHTML = `<button class="alpha-btn active" onclick="renderTabelMasterAnggota()">Semua (A-Z)</button>`;
+            const allLabel = currentLang === 'id' ? 'Semua (A-Z)' : 'All (A-Z)';
+            container.innerHTML = `<button class="alpha-btn active" onclick="renderTabelMasterAnggota('ALL')">${allLabel}</button>`;
             for (let i = 65; i <= 90; i++) {
                 const letter = String.fromCharCode(i);
                 container.innerHTML += `<button class="alpha-btn" onclick="filterMemberByLetter('${letter}')">${letter}</button>`;
@@ -1825,7 +1911,12 @@
             renderTabelMasterAnggota(letter);
         }
 
-        function renderTabelMasterAnggota(filterLetter = 'ALL') {
+        function cariAnggotaInTable() {
+            const q = document.getElementById('cariNamaAnggota').value.toLowerCase();
+            renderTabelMasterAnggota('ALL', q);
+        }
+
+        function renderTabelMasterAnggota(filterLetter = 'ALL', searchQuery = '') {
             const body = document.getElementById('tabelMasterAnggotaBody');
             if(!body) return;
             body.innerHTML = '';
@@ -1834,8 +1925,20 @@
             if (filterLetter !== 'ALL') {
                 data = data.filter(m => m.nama.toUpperCase().startsWith(filterLetter));
             }
+            if (searchQuery) {
+                data = data.filter(m => 
+                    m.nama.toLowerCase().includes(searchQuery) ||
+                    m.nim.toLowerCase().includes(searchQuery) ||
+                    m.kategori.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            const isID = currentLang === 'id';
+            const activeText = isID ? 'Aktif' : 'Active';
+            const deleteText = isID ? 'Hapus' : 'Delete';
 
             data.forEach((m, idx) => {
+                const totalVisits = logLaporanHarian.filter(l => l.nim === m.nim).length;
                 body.innerHTML += `
                     <tr>
                         <td>${idx + 1}</td>
@@ -1843,19 +1946,73 @@
                         <td><strong>${m.nim}</strong></td>
                         <td><strong>${m.nama}</strong></td>
                         <td><span class="badge badge-kat">${m.kategori}</span></td>
-                        <td><span class="badge badge-keluar">1 Kali</span></td>
-                        <td><span class="badge badge-masuk">Aktif</span></td>
-                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusAnggota('${m.nim}')"><i class="fa-solid fa-trash"></i> Hapus</button></td>
+                        <td><span class="badge badge-keluar">${totalVisits} ${isID ? 'Kali' : 'Times'}</span></td>
+                        <td><span class="badge badge-masuk">${activeText}</span></td>
+                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusAnggota('${m.nim}')"><i class="fa-solid fa-trash"></i> ${deleteText}</button></td>
                     </tr>
                 `;
             });
         }
 
+        function registrasiAnggotaBaru() {
+            const nim = document.getElementById('regNIM').value.trim();
+            const nama = document.getElementById('regNama').value.trim();
+            const kategori = document.getElementById('regKategori').value;
+
+            if (!nim || !nama) return;
+
+            masterAnggota.push({ nim, nama, kategori, status: "Aktif" });
+            localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+            renderTabelMasterAnggota();
+            document.getElementById('formRegistrasiAnggota').reset();
+            alert(currentLang === 'id' ? `Anggota ${nama} berhasil didaftarkan!` : `Member ${nama} registered successfully!`);
+        }
+
         function hapusAnggota(nim) {
-            if (confirm(`Hapus anggota ${nim}?`)) {
+            const msg = currentLang === 'id' ? `Hapus anggota ${nim}?` : `Delete member ${nim}?`;
+            if (confirm(msg)) {
                 masterAnggota = masterAnggota.filter(a => a.nim !== nim);
+                localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
                 renderTabelMasterAnggota();
             }
+        }
+
+        function catatPeminjamanBuku() {
+            const nim = document.getElementById('pinjamNIM').value.trim();
+            const judul = document.getElementById('pinjamJudul').value.trim();
+            const lama = parseInt(document.getElementById('pinjamLama').value) || 7;
+
+            const anggota = masterAnggota.find(a => a.nim === nim);
+            if (!anggota) {
+                alert(currentLang === 'id' ? 'NIM anggota tidak ditemukan!' : 'Member ID not found!');
+                return;
+            }
+
+            const sekarang = new Date();
+            const tglPinjam = getFormattedDate(sekarang);
+            const tglKembali = getFormattedDate(new Date((new Date()).getTime() + lama * 86400000));
+
+            logLaporanHarian.unshift({
+                id: (new Date()).getTime(),
+                hari: DAFTAR_HARI[sekarang.getDay()],
+                hariEng: DAFTAR_HARI_ENG[sekarang.getDay()],
+                tanggal: tglPinjam,
+                jamMasuk: sekarang.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }),
+                jamKeluar: '-',
+                nim: anggota.nim,
+                nama: anggota.nama,
+                kategoriAnggota: anggota.kategori,
+                bukuDipinjam: judul,
+                kategoriBuku: 'Peminjaman Resmi',
+                tglPeminjaman: tglPinjam,
+                tglPengembalian: tglKembali,
+                catatan: 'Sedang Meminjam'
+            });
+
+            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+            document.getElementById('formPeminjamanBuku').reset();
+            filterDanRenderLaporan();
+            alert(currentLang === 'id' ? 'Peminjaman buku berhasil dicatat!' : 'Book loan recorded successfully!');
         }
 
         function updateTodayCounterWidget() {
@@ -1863,6 +2020,17 @@
             const todayLogs = logLaporanHarian.filter(item => item.tanggal === todayStr);
             const counterEl = document.getElementById('widgetTodayCount');
             if (counterEl) counterEl.innerText = todayLogs.length;
+
+            const cntTaruna = todayLogs.filter(l => (l.kategoriAnggota || '').includes('Taruna')).length;
+            const cntDosen = todayLogs.filter(l => (l.kategoriAnggota || '').includes('Dosen')).length;
+            const cntStaf = todayLogs.filter(l => (l.kategoriAnggota || '').includes('Staf') || (l.kategoriAnggota || '').includes('Umum')).length;
+
+            const elTaruna = document.getElementById('cntMiniTaruna');
+            if (elTaruna) elTaruna.innerText = cntTaruna;
+            const elDosen = document.getElementById('cntMiniDosen');
+            if (elDosen) elDosen.innerText = cntDosen;
+            const elStaf = document.getElementById('cntMiniStaf');
+            if (elStaf) elStaf.innerText = cntStaf;
         }
 
         function setPeriodMode(mode) {
@@ -1878,11 +2046,14 @@
             if (!body) return;
             body.innerHTML = '';
 
+            const isID = currentLang === 'id';
+
             logLaporanHarian.forEach((item, index) => {
+                const hariStr = isID ? (item.hari || 'Senin') : (item.hariEng || item.hari || 'Monday');
                 body.innerHTML += `
                     <tr>
                         <td>${index + 1}</td>
-                        <td><strong>${item.hari}</strong></td>
+                        <td><strong>${hariStr}</strong></td>
                         <td>${item.tanggal}</td>
                         <td>${item.jamMasuk}</td>
                         <td>${item.jamKeluar || '-'}</td>
@@ -1892,15 +2063,41 @@
                         <td><span class="badge badge-keluar">${item.kategoriBuku || '-'}</span></td>
                         <td>${item.tglPeminjaman}</td>
                         <td>${item.tglPengembalian}</td>
-                        <td><span class="badge badge-masuk">Selesai</span></td>
+                        <td><span class="badge badge-masuk">${item.catatan || 'Selesai'}</span></td>
                     </tr>
                 `;
             });
         }
 
-        function exportLaporanPengunjungCSV() { alert("File Laporan Pengunjung (CSV) Berhasil Diunduh."); }
-        function exportLaporanPeminjamanCSV() { alert("File Laporan Peminjaman Buku (CSV) Berhasil Diunduh."); }
+        function downloadCSV(csvContent, fileName) {
+            const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const downloadAnchor = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            downloadAnchor.setAttribute("href", url);
+            downloadAnchor.setAttribute("download", fileName);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor['click']();
+            document.body.removeChild(downloadAnchor);
+        }
 
+        function exportLaporanPengunjungCSV() {
+            let csv = "No,Hari,Tanggal,Jam Masuk,Jam Keluar,NIM/ID,Nama Pengunjung,Kategori Anggota,Catatan\n";
+            logLaporanHarian.forEach((item, index) => {
+                csv += `"${index + 1}","${item.hari}","${item.tanggal}","${item.jamMasuk}","${item.jamKeluar || '-'}","${item.nim}","${item.nama}","${item.kategoriAnggota || '-'}","${item.catatan || 'Kunjungan'}"\n`;
+            });
+            downloadCSV(csv, "Laporan_Pengunjung_PPJ.csv");
+        }
+
+        function exportLaporanPeminjamanCSV() {
+            let csv = "No,NIM/ID,Nama Peminjam,Judul Buku,Kategori Buku,Tanggal Pinjam,Tanggal Kembali\n";
+            const pinjamList = logLaporanHarian.filter(l => l.bukuDipinjam && l.bukuDipinjam !== '-');
+            pinjamList.forEach((item, index) => {
+                csv += `"${index + 1}","${item.nim}","${item.nama}","${item.bukuDipinjam}","${item.kategoriBuku || '-'}","${item.tglPeminjaman}","${item.tglPengembalian}"\n`;
+            });
+            downloadCSV(csv, "Laporan_Peminjaman_Buku_PPJ.csv");
+        }
+
+        // INITIAL LOAD
         renderLogKunjunganRingkas();
         filterDanRenderLaporan();
         renderKatalogBuku();
