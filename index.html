@@ -251,7 +251,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(0, 40, 104, 0.85), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(135deg, rgba(0, 40, 104, 0.88), rgba(15, 23, 42, 0.82));
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -312,7 +312,6 @@
             margin: 0 auto 12px;
             cursor: pointer;
             color: var(--poltekbang-blue);
-            font-size: 40px;
             transition: all 0.3s;
         }
 
@@ -336,13 +335,14 @@
         .today-visit-card {
             background-color: #001a40;
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='[suspicious link removed] fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.2) 0%, transparent 50%),
                 linear-gradient(135deg, #00183c 0%, #003278 50%, #09132c 100%);
             border-radius: 20px;
             padding: 22px 25px;
             color: white;
             box-shadow: 0 12px 32px rgba(0, 30, 80, 0.3);
-            border: 2px solid rgba(251, 191, 36, 0.45);
+            border: 2px solid rgba(251, 191, 36, 0.5);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -361,7 +361,7 @@
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         .today-visit-mascot-bg img {
@@ -578,10 +578,7 @@
 
         /* SEKSI TATA TERTIB & LARANGAN */
         .rules-footer-section {
-            background-color: #ffffff;
-            background-image: 
-                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.90) 100%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='[suspicious link removed] fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border-top: 5px solid;
             border-image: linear-gradient(to right, #002868, #f59e0b, #b91c1c) 1;
             padding: 30px 20px;
@@ -661,8 +658,8 @@
         }
 
         .rule-icon-box {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             background: #fee2e2;
             border: 2px solid #ef4444;
             border-radius: 50%;
@@ -673,15 +670,6 @@
             color: #dc2626;
             font-size: 20px;
             position: relative;
-        }
-
-        .rule-icon-box::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #dc2626;
-            transform: rotate(-45deg);
         }
 
         .rule-card h4 { font-size: 12px; font-weight: 700; color: #991b1b; margin-bottom: 4px; }
@@ -810,7 +798,7 @@
     <!-- HEADER RESMI KAMPUS (LOGO1.PNG) -->
     <header class="official-header">
         <div class="brand-logo">
-            <img src="logo1.png" alt="Logo Poltekbang Jayapura">
+            <img src="logo1.png" alt="Logo Poltekbang Jayapura" onerror="[link mencurigakan dihapus].display='none'">
             <div class="brand-text">
                 <h2 id="lblHeaderTitle">UNIT PERPUSTAKAAN<br>POLITEKNIK PENERBANGAN JAYAPURA</h2>
                 <p id="lblHeaderSub">Kementerian Perhubungan Republik Indonesia</p>
@@ -845,11 +833,17 @@
             </div>
 
             <div class="kiosk-top-grid">
-                <!-- WIDGET SENSOR SIDIK JARI -->
+                <!-- WIDGET SENSOR SIDIK JARI DENGAN INLINE SVG FINGERPRINT ICON -->
                 <div class="sensor-card">
                     <div>
-                        <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()">
-                            <i class="fa-solid fa-fingerprint"></i>
+                        <div class="fingerprint-scanner" id="sensorWidget" onclick="simulasiScanSidikJari()" title="Klik untuk Simulasi Scan Sidik Jari">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+                                <path d="M14 13.12c0 2.38-.2 4.19-.39 5.88"/>
+                                <path d="M17.29 21.02c.12-.6.43-2.3.43-5.02 0-3.18-2.22-6-5.72-6-3.87 0-6 2.82-6 6 0 1.62.24 3.12.56 4.31"/>
+                                <path d="M18.8 11.58A8.96 8.96 0 0 0 12 8c-4.19 0-7.5 3.01-7.5 8 0 1.48.2 2.87.56 4.11"/>
+                                <path d="M20.9 14.5c.1-.8.1-1.6.1-2.5 0-5.1-3.9-9-9-9s-9 3.9-9 9c0 1.8.3 3.5.9 5.1"/>
+                            </svg>
                         </div>
                         <p style="font-weight: 600; color: #475569;" id="lblSensorInstruction">Sentuh / Tempelkan Sidik Jari</p>
                     </div>
@@ -865,7 +859,7 @@
                 <!-- WIDGET STATISTIK KUNJUNGAN HARI INI (MASCOT SILAHKAN.JPEG) -->
                 <div class="today-visit-card">
                     <div class="today-visit-mascot-bg">
-                        <img src="silahkan.jpeg" alt="Mascot Petugas Perpustakaan Poltekbang Jayapura">
+                        <img src="silahkan.jpeg" alt="Mascot Petugas Perpustakaan Poltekbang Jayapura" onerror="[link mencurigakan dihapus].display='none'">
                     </div>
 
                     <div class="today-visit-body">
@@ -1157,7 +1151,7 @@
 
                     <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 12px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                         <div>
-                            <h4 style="font-size: 13px; font-weight: 700; color: #166534;"><i class="fa-solid fa-download"></i> <span id="lblExportHeader">Opsi Ekspor & Tarik Data Administrasi:</span></h4>
+                            <h4 style="font-size: 13px; font-weight: 700; color: #166534;"><i class="fa-solid fa-download"></i> <span id="lblExportHeader">Ospi Ekspor & Tarik Data Administrasi:</span></h4>
                             <p style="font-size: 11px; color: #15803d;" id="lblExportSub">Pilih kategori data yang ingin ditarik ke format spreadsheet (CSV):</p>
                         </div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -1198,55 +1192,92 @@
 
     </div>
 
-    <!-- SEKSI TATA TERTIB & LARANGAN -->
+    <!-- SEKSI TATA TERTIB & LARANGAN (DESAIN RESMI DENGAN ICON VECTOR) -->
     <section class="rules-footer-section">
         <div class="rules-title">
-            <i class="fa-solid fa-ban" style="color: #ef4444; font-size: 24px;"></i>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+            </svg>
             <span id="lblRulesHeader">TATA TERTIB & LARANGAN PERPUSTAKAAN POLTEKBANG JAYAPURA</span>
         </div>
         
         <div class="rules-wrapper">
-            <!-- MASCOT KIRI (KIRI.PNG) -->
+            <!-- MASCOT KIRI -->
             <div class="rules-side-image">
-                <img src="kiri.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kiri)">
+                <img src="kiri.png" alt="Petugas Kiri" onerror="this.src='silahkan.jpeg'">
             </div>
 
             <!-- GRID 5 KARTU TATA TERTIB -->
             <div class="rules-grid">
                 <div class="rule-card">
-                    <div class="rule-icon-box"><i class="fa-solid fa-smoking"></i></div>
+                    <div class="rule-icon-box">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="12" x2="22" y2="12"></line>
+                            <line x1="18" y1="15" x2="22" y2="15"></line>
+                            <path d="M18 9a3 3 0 0 0-3-3H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h11a3 3 0 0 0 3-3V9z"></path>
+                            <line x1="2.2" y1="2.2" x2="21.8" y2="21.8"></line>
+                        </svg>
+                    </div>
                     <h4 id="lblRule1Title">DILARANG MEROKOK</h4>
                     <p id="lblRule1Desc">Kawasan bebas asap rokok demi menjaga kesehatan dan kenyamanan bersama.</p>
                 </div>
 
                 <div class="rule-card">
-                    <div class="rule-icon-box"><i class="fa-solid fa-burger"></i></div>
+                    <div class="rule-icon-box">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path>
+                            <line x1="7" y1="2" x2="7" y2="22"></line>
+                            <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"></path>
+                            <line x1="2" y1="2" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
                     <h4 id="lblRule2Title">DILARANG MAKAN & MINUM</h4>
                     <p id="lblRule2Desc">Jagalah kebersihan koleksi buku dan fasilitas dari potensi noda atau tumpahan.</p>
                 </div>
 
                 <div class="rule-card">
-                    <div class="rule-icon-box"><i class="fa-solid fa-volume-high"></i></div>
+                    <div class="rule-icon-box">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <line x1="23" y1="9" x2="17" y2="15"></line>
+                            <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                    </div>
                     <h4 id="lblRule3Title">DILARANG GADUH / BISING</h4>
                     <p id="lblRule3Desc">Mohon menjaga ketenangan suasana membaca demi kenyamanan seluruh pemustaka.</p>
                 </div>
 
                 <div class="rule-card">
-                    <div class="rule-icon-box"><i class="fa-solid fa-book-skull"></i></div>
+                    <div class="rule-icon-box">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            <line x1="2" y1="2" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
                     <h4 id="lblRule4Title">DILARANG MERUSAK BUKU</h4>
                     <p id="lblRule4Desc">Dilarang mencoret, melipat, atau merobek halaman dari koleksi pustaka.</p>
                 </div>
 
                 <div class="rule-card">
-                    <div class="rule-icon-box"><i class="fa-solid fa-trash-can"></i></div>
+                    <div class="rule-icon-box">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                            <line x1="2" y1="2" x2="22" y2="22"></line>
+                        </svg>
+                    </div>
                     <h4 id="lblRule5Title">DILARANG BUANG SAMPAH</h4>
                     <p id="lblRule5Desc">Buanglah sampah pada tempatnya agar lingkungan perpustakaan tetap rapi dan asri.</p>
                 </div>
             </div>
 
-            <!-- MASCOT KANAN (KANAN.PNG) -->
+            <!-- MASCOT KANAN -->
             <div class="rules-side-image">
-                <img src="kanan.png" alt="Petugas Perpustakaan Poltekbang Jayapura (Kanan)">
+                <img src="kanan.png" alt="Petugas Kanan" onerror="this.src='masukan.jpeg'">
             </div>
         </div>
     </section>
@@ -1282,7 +1313,7 @@
         </div>
 
         <button class="helpdesk-main-btn" onclick="toggleHelpdeskMenu()" title="Layanan Customer Service">
-            <img src="masukan.jpeg" alt="Customer Service" class="avatar-btn-img">
+            <img src="masukan.jpeg" alt="Customer Service" class="avatar-btn-img" onerror="this.src='silahkan.jpeg'">
         </button>
     </div>
 
@@ -1306,7 +1337,7 @@
         let isFirebaseConnected = false;
 
         try {
-            if (firebaseConfig.apiKey) {
+            if (typeof firebase !== 'undefined' && firebaseConfig.apiKey) {
                 firebase.initializeApp(firebaseConfig);
                 db = firebase.database();
                 isFirebaseConnected = true;
@@ -1421,8 +1452,8 @@
                 rule4Desc: "Dilarang mencoret, melipat, atau merobek halaman dari koleksi pustaka.",
                 rule5Title: "DILARANG BUANG SAMPAH",
                 rule5Desc: "Buanglah sampah pada tempatnya agar lingkungan perpustakaan tetap rapi dan asri.",
-                helpdeskSubtitle: "<i class=\"fa-solid fa-headset\" style=\"color: var(--poltekbang-gold); margin-right: 4px;\"></i> Customer Service Poltekbang Jayapura",
-                mascotWelcomeTitle: "<i class=\"fa-solid fa-comments\"></i> Halo! Ada yang bisa kami bantu?",
+                helpdeskSubtitle: "Customer Service Poltekbang Jayapura",
+                mascotWelcomeTitle: "Halo! Ada yang bisa kami bantu?",
                 mascotWelcomeSub: "Pusat informasi dan layanan pengaduan resmi Unit Perpustakaan Politeknik Penerbangan Jayapura.",
                 contactMeTitle: "Contact Me (Hubungi Kami)",
                 contactMeSub: "WhatsApp / Telp: +62 823 9371 5964",
@@ -1530,8 +1561,8 @@
                 rule4Desc: "Do not mark, fold, or tear pages of library books.",
                 rule5Title: "NO LITTERING",
                 rule5Desc: "Dispose of trash properly to keep the environment clean.",
-                helpdeskSubtitle: "<i class=\"fa-solid fa-headset\" style=\"color: var(--poltekbang-gold); margin-right: 4px;\"></i> Customer Service Jayapura Aviation Polytechnic",
-                mascotWelcomeTitle: "<i class=\"fa-solid fa-comments\"></i> Hello! How can we help you?",
+                helpdeskSubtitle: "Customer Service Jayapura Aviation Polytechnic",
+                mascotWelcomeTitle: "Hello! How can we help you?",
                 mascotWelcomeSub: "Official information & complaint center of Jayapura Aviation Polytechnic Library.",
                 contactMeTitle: "Contact Me",
                 contactMeSub: "WhatsApp / Call: +62 823 9371 5964",
