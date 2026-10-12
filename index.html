@@ -336,7 +336,7 @@
         .today-visit-card {
             background-color: #001a40;
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='[suspicious link removed] fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='[suspicious link removed] fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40zM40 12L68 40L40 68L12 40z'/%3E%3Cpath d='M40 22L58 40L40 58L22 40z' fill='%2360a5fa' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23fbbf24' fill-opacity='0.12'/%3E%3Cpath d='M0 0l20 20L0 40zM80 0l-20 20L80 40zM0 80l20-20L0 40zM80 80l-20-20L80 40z' fill='%2338bdf8' fill-opacity='0.05'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
                 linear-gradient(135deg, #00183c 0%, #003278 50%, #09132c 100%);
             border-radius: 20px;
             padding: 22px 25px;
@@ -581,7 +581,7 @@
             background-color: #ffffff;
             background-image: 
                 linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.90) 100%),
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='[suspicious link removed] fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='[suspicious link removed] fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d97706' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M60 0L120 60L60 120L0 60zM60 18L102 60L60 102L18 60z'/%3E%3Cpath d='M60 32L88 60L60 88L32 60z' fill='%23002868' fill-opacity='0.06'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23b91c1c' fill-opacity='0.08'/%3E%3Cpath d='M0 0l30 30L0 60zM120 0l-30 30L120 60zM0 120l30-30L0 60zM120 120l-30-30L120 60z' fill='%23d97706' fill-opacity='0.06'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             border-top: 5px solid;
             border-image: linear-gradient(to right, #002868, #f59e0b, #b91c1c) 1;
             padding: 30px 20px;
@@ -1290,14 +1290,14 @@
         <span id="lblFooterText">&copy; 2026 Unit Perpustakaan Politeknik Penerbangan Jayapura — Sistem Informasi Perpustakaan Digital Modern.</span>
     </footer>
 
-    <!-- LOGIKA JAVASCRIPT LENGKAP -->
+    <!-- LOGIKA JAVASCRIPT LENGKAP DENGAN FIREBASE REALTIME SYNC -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
             authDomain: "[suspicious link removed]",
             databaseURL: "[suspicious link removed]",
             projectId: "perpusppj",
-            storageBucket: "[link mencurigakan dihapus]",
+            storageBucket: "[suspicious link removed]",
             messagingSenderId: "392001200802",
             appId: "1:392001200802:web:0287fa62e16c75e1712dfb"
         };
@@ -1310,6 +1310,7 @@
                 firebase.initializeApp(firebaseConfig);
                 db = firebase.database();
                 isFirebaseConnected = true;
+                console.log("Firebase Database Terhubung!");
             }
         } catch (e) {
             console.warn("Menggunakan LocalStorage fallback:", e);
@@ -1592,6 +1593,7 @@
         }
         setInterval(autoSlideHero, 4000);
 
+        // DATA DEFAULT INITIALIZATION
         let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
             { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
             { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa", status: "Aktif" },
@@ -1631,6 +1633,46 @@
 
         let teksPengumuman = localStorage.getItem('pengumumanPerpus') || "Selamat Datang di Unit Perpustakaan Politeknik Penerbangan Jayapura — Budayakan Membaca untuk Penerbangan Indonesia yang Selamat, Aman, dan Nyaman.";
 
+        // LISTENERS SINKRONISASI REALTIME FIREBASE CLOUD
+        if (isFirebaseConnected && db) {
+            db.ref('pengumuman').on('value', snap => {
+                if (snap.exists()) {
+                    teksPengumuman = snap.val();
+                    document.getElementById('tickerText').innerText = teksPengumuman;
+                    localStorage.setItem('pengumumanPerpus', teksPengumuman);
+                }
+            });
+
+            db.ref('katalogBuku').on('value', snap => {
+                if (snap.exists()) {
+                    const val = snap.val();
+                    katalogBuku = Array.isArray(val) ? val : Object.values(val);
+                    localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+                    renderKatalogBuku();
+                }
+            });
+
+            db.ref('masterAnggota').on('value', snap => {
+                if (snap.exists()) {
+                    const val = snap.val();
+                    masterAnggota = Array.isArray(val) ? val : Object.values(val);
+                    localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+                    renderTabelMasterAnggota();
+                }
+            });
+
+            db.ref('logLaporanHarian').on('value', snap => {
+                if (snap.exists()) {
+                    const val = snap.val();
+                    logLaporanHarian = Array.isArray(val) ? val : Object.values(val);
+                    localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+                    renderLogKunjunganRingkas();
+                    filterDanRenderLaporan();
+                    updateTodayCounterWidget();
+                }
+            });
+        }
+
         const DAFTAR_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const DAFTAR_HARI_ENG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const NAMA_BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
@@ -1648,6 +1690,13 @@
 
         setInterval(updateLiveClockWIT, 1000);
         updateLiveClockWIT();
+
+        function syncToFirebase(key, data) {
+            localStorage.setItem(key, typeof data === 'string' ? data : JSON.stringify(data));
+            if (isFirebaseConnected && db) {
+                db.ref(key).set(data);
+            }
+        }
 
         function switchTab(tabId) {
             if (tabId === 'tab-admin' && !isAdminAuthenticated) {
@@ -1769,7 +1818,7 @@
                 bicaraSuara(msg);
             }
 
-            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+            syncToFirebase('logLaporanHarian', logLaporanHarian);
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
             updateTodayCounterWidget();
@@ -1863,7 +1912,7 @@
             const confirmMsg = currentLang === 'id' ? `Hapus buku dengan kode ${kode}?` : `Delete book code ${kode}?`;
             if (confirm(confirmMsg)) {
                 katalogBuku = katalogBuku.filter(b => b.kode !== kode);
-                localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+                syncToFirebase('katalogBuku', katalogBuku);
                 renderKatalogBuku();
             }
         }
@@ -1878,10 +1927,10 @@
             if (!kode || !judul) return;
 
             katalogBuku.push({ kode, judul, kategori, penulis, stok });
-            localStorage.setItem('katalogBukuPerpus', JSON.stringify(katalogBuku));
+            syncToFirebase('katalogBuku', katalogBuku);
             renderKatalogBuku();
             document.getElementById('formTambahBuku').reset();
-            alert(currentLang === 'id' ? 'Buku baru berhasil disimpan!' : 'New book added successfully!');
+            alert(currentLang === 'id' ? 'Buku baru berhasil disimpan ke Cloud Firebase!' : 'New book saved to Firebase Cloud successfully!');
         }
 
         function simpanPengumuman() {
@@ -1890,10 +1939,10 @@
             if (!teks) return;
 
             teksPengumuman = teks;
-            localStorage.setItem('pengumumanPerpus', teksPengumuman);
+            syncToFirebase('pengumuman', teksPengumuman);
             document.getElementById('tickerText').innerText = teksPengumuman;
             input.value = '';
-            alert(currentLang === 'id' ? 'Pengumuman berhasil diperbarui!' : 'Announcement updated successfully!');
+            alert(currentLang === 'id' ? 'Pengumuman berhasil diperbarui di semua layar!' : 'Announcement updated across all screens!');
         }
 
         function generateMemberAlphabetButtons() {
@@ -1962,17 +2011,17 @@
             if (!nim || !nama) return;
 
             masterAnggota.push({ nim, nama, kategori, status: "Aktif" });
-            localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+            syncToFirebase('masterAnggota', masterAnggota);
             renderTabelMasterAnggota();
             document.getElementById('formRegistrasiAnggota').reset();
-            alert(currentLang === 'id' ? `Anggota ${nama} berhasil didaftarkan!` : `Member ${nama} registered successfully!`);
+            alert(currentLang === 'id' ? `Anggota ${nama} berhasil didaftarkan ke Cloud Firebase!` : `Member ${nama} registered to Cloud Firebase!`);
         }
 
         function hapusAnggota(nim) {
             const msg = currentLang === 'id' ? `Hapus anggota ${nim}?` : `Delete member ${nim}?`;
             if (confirm(msg)) {
                 masterAnggota = masterAnggota.filter(a => a.nim !== nim);
-                localStorage.setItem('masterAnggotaPerpus', JSON.stringify(masterAnggota));
+                syncToFirebase('masterAnggota', masterAnggota);
                 renderTabelMasterAnggota();
             }
         }
@@ -2009,10 +2058,10 @@
                 catatan: 'Sedang Meminjam'
             });
 
-            localStorage.setItem('logLaporanHarianPerpus', JSON.stringify(logLaporanHarian));
+            syncToFirebase('logLaporanHarian', logLaporanHarian);
             document.getElementById('formPeminjamanBuku').reset();
             filterDanRenderLaporan();
-            alert(currentLang === 'id' ? 'Peminjaman buku berhasil dicatat!' : 'Book loan recorded successfully!');
+            alert(currentLang === 'id' ? 'Peminjaman buku berhasil dicatat dan disinkronkan!' : 'Book loan recorded and synchronized!');
         }
 
         function updateTodayCounterWidget() {
@@ -2076,7 +2125,7 @@
             downloadAnchor.setAttribute("href", url);
             downloadAnchor.setAttribute("download", fileName);
             document.body.appendChild(downloadAnchor);
-            downloadAnchor['click']();
+            [link mencurigakan dihapus]();
             document.body.removeChild(downloadAnchor);
         }
 
@@ -2097,7 +2146,7 @@
             downloadCSV(csv, "Laporan_Peminjaman_Buku_PPJ.csv");
         }
 
-        // INITIAL LOAD
+        // INITIAL RENDER
         renderLogKunjunganRingkas();
         filterDanRenderLaporan();
         renderKatalogBuku();
