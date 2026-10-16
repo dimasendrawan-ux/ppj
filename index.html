@@ -1045,7 +1045,6 @@
                 <div class="slide-item active" style="background-image: url('1.png');"></div>
                 <div class="slide-item" style="background-image: url('3.png');"></div>
                 <div class="slide-item" style="background-image: url('11.jpg');"></div>
-                <div class="slide-item" style="background-image: url('4.jpg');"></div>
                 
                 <div class="hero-overlay">
                     <h1 id="lblHeroTitle">Selamat Datang di Unit Perpustakaan Digital<br>Poltekbang Jayapura</h1>
@@ -1164,11 +1163,9 @@
                                 <th id="thBookAlpha">Abjad</th>
                                 <th id="thBookCode">Kode Buku</th>
                                 <th id="thBookTitle">Judul Buku (A-Z)</th>
-                                <th id="thBookCat">Kategori / Bidang</th>
-                                <th id="thBookAuthor">Penulis / Penerbit</th>
-                                <th id="thBookStock">Stok</th>
-                                <th id="thBookStatus">Status Ketersediaan</th>
-                                <th id="thBookBorrowers">Peminjam Terdaftar</th>
+                                <th id="thBookPublisher">Penerbit</th>
+                                <th id="thBookLink">Link E-Book</th>
+                                <th id="thBookViews">Jumlah Dilihat</th>
                             </tr>
                         </thead>
                         <tbody id="tabelKatalogBukuBody"></tbody>
@@ -1227,20 +1224,16 @@
                                 <input type="text" id="addJudul" placeholder="Contoh: Aviasi Dan Navigasi Udara" required>
                             </div>
                             <div class="form-group">
-                                <label for="addKategori" id="lblFormBookCat">Kategori / Bidang ilmu:</label>
-                                <input type="text" id="addKategori" placeholder="Contoh: Penerbangan / Teknik" required>
+                                <label for="addPenerbit" id="lblFormBookPublisher">Penerbit:</label>
+                                <input type="text" id="addPenerbit" placeholder="Contoh: Poltekbang Press" required>
                             </div>
                             <div class="form-group">
-                                <label for="addPenulis" id="lblFormBookAuthor">Penulis / Penerbit:</label>
-                                <input type="text" id="addPenulis" placeholder="Contoh: Dr. Ir. Susanto, M.T." required>
-                            </div>
-                            <div class="form-group">
-                                <label for="addStok" id="lblFormBookStock">Jumlah Stok Buku:</label>
-                                <input type="number" id="addStok" value="5" min="1" required>
+                                <label for="addLink" id="lblFormBookLink">Link E-Book:</label>
+                                <input type="url" id="addLink" placeholder="Contoh: https://drive.google.com/... " required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success" style="margin-top: 8px;">
-                            <i class="fa-solid fa-plus-circle"></i> <span id="lblBtnSaveBook">Simpan Buku Baru Ke Cloud</span>
+                            <i class="fa-solid fa-plus-circle"></i> <span id="lblBtnSaveBook">Simpan Koleksi Baru</span>
                         </button>
                     </form>
                 </div>
@@ -1998,14 +1991,18 @@
 
         function switchTab(tabId) {
             if (tabId === 'tab-admin' && !isAdminAuthenticated) {
-                const pass = prompt(currentLang === 'id' ? "Masukkan Password Administrator Perpustakaan:" : "Enter Library Administrator Password:");
-                if (pass === "eperpusPPJ") {
-                    isAdminAuthenticated = true;
-                    alert(currentLang === 'id' ? "Akses Administrator Berhasil Diberikan!" : "Administrator Access Granted!");
-                } else {
-                    if (pass !== null) alert(currentLang === 'id' ? "Password Admin Salah! Akses Ditolak." : "Incorrect Admin Password! Access Denied.");
-                    return;
-                }
+                document.getElementById('modalAdminLogin').classList.add('active');
+                
+                const passInput = document.getElementById('adminPasswordInput');
+                passInput.value = '';
+                passInput.focus();
+                passInput.onkeydown = function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        verifikasiAdmin();
+                    }
+                };
+                return; 
             }
 
             document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
@@ -2024,6 +2021,35 @@
                 renderTabelMasterAnggota();
             }
             updateTodayCounterWidget();
+        }
+
+        function verifikasiAdmin() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === "eperpusPPJ") {
+                isAdminAuthenticated = true;
+                document.getElementById('modalAdminLogin').classList.remove('active');
+                alert(currentLang === 'id' ? "Akses Administrator Berhasil Diberikan!" : "Administrator Access Granted!");
+                switchTab('tab-admin');
+            } else {
+                alert(currentLang === 'id' ? "Password Admin Salah! Akses Ditolak." : "Incorrect Admin Password! Access Denied.");
+            }
+        }
+
+        function batalLoginAdmin() {
+            document.getElementById('modalAdminLogin').classList.remove('active');
+        }
+
+        function bukaEbook(kodeBuku, urlLink) {
+            const bukuIndex = katalogBuku.findIndex(b => b.kode === kodeBuku);
+            if (bukuIndex !== -1) {
+                katalogBuku[bukuIndex].views = (katalogBuku[bukuIndex].views || 0) + 1;
+                simpanSemuaKeCloud();
+                renderKatalogBuku();
+            }
+            window.open(urlLink, '_blank');
+        }
+        function batalLoginAdmin() {
+            document.getElementById('modalAdminLogin').classList.remove('active');
         }
 
         function switchAdminSub(subId) {
@@ -2275,59 +2301,21 @@
             const query = document.getElementById('cariBukuKatalog')?.value.toLowerCase() || '';
             if (query !== '') {
                 sortedData = sortedData.filter(b => 
-                    b.judul.toLowerCase().includes(query) ||
-                    b.kategori.toLowerCase().includes(query) ||
-                    b.kode.toLowerCase().includes(query) ||
-                    b.penulis.toLowerCase().includes(query)
+                    (b.judul && b.judul.toLowerCase().includes(query)) ||
+                    (b.kode && b.kode.toLowerCase().includes(query)) ||
+                    (b.penerbit && b.penerbit.toLowerCase().includes(query)) ||
+                    (b.kategori && b.kategori.toLowerCase().includes(query)) ||
+                    (b.penulis && b.penulis.toLowerCase().includes(query))
                 );
             }
 
             if (sortedData.length === 0) {
                 const noDataText = currentLang === 'id' ? 'Tidak ada koleksi buku untuk huruf/kriteria ini.' : 'No book collection found for this criteria.';
-                body.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:20px;">${noDataText}</td></tr>`;
+                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">${noDataText}</td></tr>`;
                 return;
             }
 
-            const tglHariIniStr = getFormattedDate();
-
             sortedData.forEach((buku, index) => {
-                const peminjamList = getPeminjamAktifBuku(buku.judul);
-                const jumlahDipinjam = peminjamList.length;
-
-                let adaOverdue = false;
-                peminjamList.forEach(p => {
-                    if (p.tglPengembalian && p.tglPengembalian !== '-' && p.tglPengembalian < tglHariIniStr) {
-                        adaOverdue = true;
-                    }
-                });
-
-                let statusBadgeHTML = '';
-                if (adaOverdue) {
-                    const txt = currentLang === 'id' ? 'Belum Kembali' : 'Overdue / Not Returned';
-                    statusBadgeHTML = `<span class="badge badge-overdue"><i class="fa-solid fa-triangle-exclamation"></i> ${txt}</span>`;
-                } else if (jumlahDipinjam > 0) {
-                    const txt = currentLang === 'id' ? 'Dipinjam' : 'Borrowed';
-                    statusBadgeHTML = `<span class="badge badge-dipinjam"><i class="fa-solid fa-clock"></i> ${txt}</span>`;
-                } else {
-                    const txt = currentLang === 'id' ? 'Tersedia' : 'Available';
-                    statusBadgeHTML = `<span class="badge badge-masuk"><i class="fa-solid fa-check-circle"></i> ${txt}</span>`;
-                }
-
-                let borrowerCellHTML = '';
-                if (jumlahDipinjam > 0) {
-                    const namaPeminjamPertama = peminjamList.nama;
-                    const suffix = jumlahDipinjam > 1 ? ` (+${jumlahDipinjam - 1})` : '';
-                    const btnTxt = `${namaPeminjamPertama}${suffix}`;
-
-                    borrowerCellHTML = `
-                        <button class="btn-borrower-link" onclick="bukaModalPeminjam('${buku.kode}', '${buku.judul.replace(/'/g, "\\'")}')">
-                            <i class="fa-solid fa-user-tag"></i> ${btnTxt}
-                        </button>
-                    `;
-                } else {
-                    borrowerCellHTML = `<span style="color:#94a3b8; font-style:italic; font-size:11px;">-</span>`;
-                }
-
                 const initialLetter = buku.judul.charAt(0).toUpperCase();
                 
                 body.innerHTML += `
@@ -2336,16 +2324,15 @@
                         <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
                         <td><strong>${buku.kode}</strong></td>
                         <td><strong>${buku.judul}</strong></td>
-                        <td><span class="badge badge-keluar">${buku.kategori}</span></td>
-                        <td>${buku.penulis}</td>
-                        <td>${buku.stok} ${currentLang === 'id' ? 'Eksemplar' : 'Copies'}</td>
-                        <td>${statusBadgeHTML}</td>
-                        <td>${borrowerCellHTML}</td>
+                        <td>${buku.penerbit || '-'}</td>
+                        <td>
+                            ${buku.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${buku.kode}', '${buku.link}')"><i class="fa-solid fa-book"></i> Buka E-Book</button>` : '<span style="color:#94a3b8; font-size:11px;">-</span>'}
+                        </td>
+                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-eye"></i> ${buku.views || 0} Kali Dilihat</span></td>
                     </tr>
                 `;
             });
         }
-
         function cariBukuInKatalog() { renderKatalogBuku(); }
 
         function generateMemberAlphabetButtons() {
@@ -2542,11 +2529,10 @@
             e.preventDefault();
             const kode = document.getElementById('addKode').value.trim();
             const judul = document.getElementById('addJudul').value.trim();
-            const kategori = document.getElementById('addKategori').value.trim();
-            const penulis = document.getElementById('addPenulis').value.trim();
-            const stok = parseInt(document.getElementById('addStok').value);
+            const penerbit = document.getElementById('addPenerbit').value.trim();
+            const link = document.getElementById('addLink').value.trim();
 
-            katalogBuku.push({ kode, judul, kategori, penulis, stok });
+            katalogBuku.push({ kode, judul, penerbit, link, views: 0 });
             simpanSemuaKeCloud();
 
             alert(currentLang === 'id' ? `Buku "${judul}" berhasil disimpan!` : `Book "${judul}" saved successfully!`);
@@ -2810,5 +2796,24 @@
         renderTabelMasterAnggota();
         updateTodayCounterWidget();
     </script>
+    <!-- MODAL POPUP LOGIN ADMINISTRATOR -->
+    <div class="modal-overlay" id="modalAdminLogin">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-shield" style="color: var(--poltekbang-gold);"></i> Login Administrator</h3>
+                <button class="modal-close-btn" onclick="batalLoginAdmin()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 25px;">
+                <p style="font-size: 13px; color: #475569; margin-bottom: 15px;">Masukkan password administrator untuk mengakses panel:</p>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <input type="password" id="adminPasswordInput" placeholder="Password Admin" style="text-align: center; font-size: 14px; font-weight: 600;">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn btn-primary" onclick="verifikasiAdmin()" style="flex: 1;"><i class="fa-solid fa-right-to-bracket"></i> Masuk</button>
+                    <button class="btn btn-danger" onclick="batalLoginAdmin()" style="flex: 1;"><i class="fa-solid fa-xmark"></i> Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
