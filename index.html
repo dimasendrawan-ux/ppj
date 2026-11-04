@@ -1207,9 +1207,9 @@
                 </button>
             </div>
 
-            <!-- SUB-MODUL 1: TAMBAH BUKU BARU -->
+           <!-- SUB-MODUL 1: TAMBAH BUKU BARU & KELOLA KOLEKSI -->
             <div id="sub-buku" class="admin-sub-pane active">
-                <div class="card" style="border-top: 4px solid var(--poltekbang-gold);">
+                <div class="card" style="border-top: 4px solid var(--poltekbang-gold); margin-bottom: 20px;">
                     <div class="card-header">
                         <span class="card-title"><i class="fa-solid fa-book-medical"></i> <span id="lblAddBookTitle">Tambah Koleksi Buku Baru</span></span>
                     </div>
@@ -1236,6 +1236,36 @@
                             <i class="fa-solid fa-plus-circle"></i> <span id="lblBtnSaveBook">Simpan Koleksi Baru</span>
                         </button>
                     </form>
+                </div>
+
+                <!-- DAFTAR KOLEKSI BUKU A-Z UNTUK ADMIN -->
+                <div class="card" style="border-top: 4px solid var(--poltekbang-blue);">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-book-open"></i> <span>Daftar Master Koleksi Buku (Urut Alfabet A-Z)</span></span>
+                        <div class="filter-box">
+                            <input type="text" id="cariBukuAdmin" placeholder="Cari judul atau kode buku..." onkeyup="cariBukuInAdminTable()">
+                        </div>
+                    </div>
+
+                    <div class="alphabet-filter" id="adminBookAlphabetContainer"></div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Abjad</th>
+                                    <th>Kode Buku</th>
+                                    <th>Judul Buku (A-Z)</th>
+                                    <th>Penerbit</th>
+                                    <th>Link E-Book</th>
+                                    <th>Jumlah Dilihat</th>
+                                    <th>Aksi & Pengaturan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelAdminBukuBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -1542,6 +1572,98 @@
 
     <!-- LOGIKA JAVASCRIPT & FIREBASE REALTIME SYNC -->
     <script>
+        // ==========================================
+        // FITUR KELOLA BUKU A-Z UNTUK ADMIN
+        // ==========================================
+        let selectedAdminBookAlphaFilter = 'ALL';
+
+        function generateAdminBookAlphabetButtons() {
+            const container = document.getElementById('adminBookAlphabetContainer');
+            if(!container) return;
+            const allText = currentLang === 'id' ? 'Semua Buku (A-Z)' : 'All Books (A-Z)';
+            container.innerHTML = `<button class="alpha-btn active" onclick="filterAdminBookByLetter('ALL', this)">${allText}</button>`;
+            
+            for (let i = 65; i <= 90; i++) {
+                const letter = String.fromCharCode(i);
+                container.innerHTML += `<button class="alpha-btn" onclick="filterAdminBookByLetter('${letter}', this)">${letter}</button>`;
+            }
+        }
+
+        function filterAdminBookByLetter(letter, btnEl) {
+            selectedAdminBookAlphaFilter = letter;
+            document.querySelectorAll('#adminBookAlphabetContainer .alpha-btn').forEach(b => b.classList.remove('active'));
+            if(btnEl) btnEl.classList.add('active');
+            renderTabelAdminBuku();
+        }
+
+        function renderTabelAdminBuku() {
+            const body = document.getElementById('tabelAdminBukuBody');
+            if(!body) return;
+            body.innerHTML = '';
+
+            let sortedBooks = [...katalogBuku].sort((a, b) => a.judul.localeCompare(b.judul));
+
+            if (selectedAdminBookAlphaFilter !== 'ALL') {
+                sortedBooks = sortedBooks.filter(b => b.judul.toUpperCase().startsWith(selectedAdminBookAlphaFilter));
+            }
+
+            const query = document.getElementById('cariBukuAdmin')?.value.toLowerCase() || '';
+            if (query !== '') {
+                sortedBooks = sortedBooks.filter(b => 
+                    b.judul.toLowerCase().includes(query) ||
+                    b.kode.toLowerCase().includes(query)
+                );
+            }
+
+            if (sortedBooks.length === 0) {
+                const noBookText = currentLang === 'id' ? 'Tidak ada data buku untuk kriteria ini.' : 'No book found for this criteria.';
+                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">${noBookText}</td></tr>`;
+                return;
+            }
+
+            sortedBooks.forEach((b, idx) => {
+                const initialLetter = b.judul.charAt(0).toUpperCase();
+                body.innerHTML += `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td><span class="badge badge-masuk" style="font-size:11px;">${initialLetter}</span></td>
+                        <td><strong>${b.kode}</strong></td>
+                        <td><strong>${b.judul}</strong></td>
+                        <td>${b.penerbit || '-'}</td>
+                        <td>
+                            ${b.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${b.kode}', '${b.link}')"><i class="fa-solid fa-book"></i> Buka</button>` : '-'}
+                        </td>
+                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-chart-simple"></i> ${b.views || 0} Klik</span></td>
+                        <td>
+                            <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusBuku('${b.kode}')" title="Hapus Buku">
+                                <i class="fa-solid fa-trash"></i> ${currentLang === 'id' ? 'Hapus' : 'Delete'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function cariBukuInAdminTable() { renderTabelAdminBuku(); }
+
+        function hapusBuku(kode) {
+            const buku = katalogBuku.find(b => b.kode === kode);
+            if (!buku) return;
+
+            const konfirmasi = confirm(currentLang === 'id' ? 
+                `Apakah Anda yakin ingin menghapus buku "${buku.judul}" (${buku.kode}) dari sistem?` : 
+                `Are you sure you want to delete the book "${buku.judul}" (${buku.kode})?`);
+
+            if (konfirmasi) {
+                katalogBuku = katalogBuku.filter(b => b.kode !== kode);
+                simpanSemuaKeCloud();
+                renderTabelAdminBuku(); // Refresh tabel admin
+                renderKatalogBuku();    // Refresh tabel pengunjung
+                alert(currentLang === 'id' ? 
+                    `Buku "${buku.judul}" telah berhasil dihapus!` : 
+                    `Book "${buku.judul}" deleted successfully!`);
+            }
+        }
         const firebaseConfig = {
             apiKey: "AIzaSyCDDVSFJBAAqkGbccJIRgj00TgZCxMOMF8",
             authDomain: "perpusppj.firebaseapp.com",
@@ -1831,24 +1953,9 @@
             popover.classList.toggle('active');
         }
 
-        let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [
-            { nim: "2026001", nama: "Taruna Ahmad Fauzi", kategori: "Taruna/Mahasiswa", status: "Aktif" },
-            { nim: "2026002", nama: "Taruni Siti Nurhaliza", kategori: "Taruna/Mahasiswa", status: "Aktif" },
-            { nim: "1988001", nama: "Dosen Budi Santoso", kategori: "Dosen/Instruktur", status: "Aktif" },
-            { nim: "1992002", nama: "Staf Herman PPJ", kategori: "Staf/Umum", status: "Aktif" },
-            { nim: "2026003", nama: "Taruna Rizky Pratama", kategori: "Taruna/Mahasiswa", status: "Aktif" },
-            { nim: "2026004", nama: "Taruni Annisa Putri", kategori: "Taruna/Mahasiswa", status: "Aktif" }
-        ];
-
-        let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [
-            { kode: "BK-PPJ-001", judul: "Aerodinamika & Teori Penerbangan", kategori: "Penerbangan", penulis: "Capt. Ir. Supriyadi", stok: 6 },
-            { kode: "BK-PPJ-002", judul: "Dasar Pemrograman C++ & WebAssembly", kategori: "Teknologi Informasi", penulis: "Dr. Eng. Farid M.", stok: 8 },
-            { kode: "BK-PPJ-003", judul: "Kelistrikan Bandara & Sistem SCADA", kategori: "Teknik Listrik Bandara", penulis: "Ir. Bambang S., M.T.", stok: 5 },
-            { kode: "BK-PPJ-004", judul: "Manajemen Pertolongan Kecelakaan Pesawat (PKP-PK)", kategori: "Keselamatan Penerbangan", penulis: "Tim Instruktur PPJ", stok: 4 },
-            { kode: "BK-PPJ-005", judul: "Navigasi Udara & Radar Aviation", kategori: "Navigasi Penerbangan", penulis: "Capt. Hendra Wijaya", stok: 3 },
-            { kode: "BK-PPJ-006", judul: "Tata Cara Pemanduan Lalu Lintas Udara (ATC)", kategori: "Lalu Lintas Udara", penulis: "Dra. Rina Kartika", stok: 2 }
-        ];
-
+        let masterAnggota = JSON.parse(localStorage.getItem('masterAnggotaPerpus')) || [];      
+    
+        let katalogBuku = JSON.parse(localStorage.getItem('katalogBukuPerpus')) || [];          
         function getFormattedDate(d = new Date()) {
             const year = d.getFullYear();
             const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -2034,20 +2141,21 @@
                 alert(currentLang === 'id' ? "Password Admin Salah! Akses Ditolak." : "Incorrect Admin Password! Access Denied.");
             }
         }
-
-        function batalLoginAdmin() {
-            document.getElementById('modalAdminLogin').classList.remove('active');
-        }
-
+        
         function bukaEbook(kodeBuku, urlLink) {
             const bukuIndex = katalogBuku.findIndex(b => b.kode === kodeBuku);
             if (bukuIndex !== -1) {
                 katalogBuku[bukuIndex].views = (katalogBuku[bukuIndex].views || 0) + 1;
                 simpanSemuaKeCloud();
-                renderKatalogBuku();
+                
+                renderKatalogBuku(); // Refresh tabel pengunjung
+                if (typeof renderTabelAdminBuku === 'function') {
+                    renderTabelAdminBuku(); // Refresh tabel admin secara realtime
+                }
             }
             window.open(urlLink, '_blank');
         }
+
         function batalLoginAdmin() {
             document.getElementById('modalAdminLogin').classList.remove('active');
         }
@@ -2058,9 +2166,15 @@
 
             document.getElementById(subId).classList.add('active');
             
-            if (subId === 'sub-buku') document.getElementById('subBtnBuku').classList.add('active');
-            else if (subId === 'sub-pengumuman') document.getElementById('subBtnPengumuman').classList.add('active');
-            else if (subId === 'sub-anggota') {
+            if (subId === 'sub-buku') {
+                document.getElementById('subBtnBuku').classList.add('active');
+                generateAdminBookAlphabetButtons();
+                renderTabelAdminBuku();
+            }
+            else if (subId === 'sub-pengumuman') { // (Opsional: tambahkan ini jika sebelumnya terhapus)
+                document.getElementById('subBtnPengumuman').classList.add('active');
+            }
+            else if (subId === 'sub-anggota') { // (Opsional: tambahkan ini jika sebelumnya terhapus)
                 document.getElementById('subBtnAnggota').classList.add('active');
                 generateMemberAlphabetButtons();
                 renderTabelMasterAnggota();
@@ -2526,18 +2640,19 @@
         }
 
         document.getElementById('formTambahBuku').addEventListener('submit', function(e) {
-            e.preventDefault();
+         e.preventDefault();
             const kode = document.getElementById('addKode').value.trim();
             const judul = document.getElementById('addJudul').value.trim();
             const penerbit = document.getElementById('addPenerbit').value.trim();
             const link = document.getElementById('addLink').value.trim();
 
-            katalogBuku.push({ kode, judul, penerbit, link, views: 0 });
+             katalogBuku.push({ kode, judul, penerbit, link, views: 0 });
             simpanSemuaKeCloud();
 
             alert(currentLang === 'id' ? `Buku "${judul}" berhasil disimpan!` : `Book "${judul}" saved successfully!`);
-            this.reset();
-            renderKatalogBuku();
+             this.reset();
+            renderKatalogBuku(); // Update sisi pengunjung
+            renderTabelAdminBuku(); // Update sisi admin yang baru kita tambahkan
         });
 
         document.getElementById('formRegistrasiAnggota').addEventListener('submit', function(e) {
