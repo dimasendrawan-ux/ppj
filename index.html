@@ -1630,10 +1630,10 @@
                         <td><strong>${b.kode}</strong></td>
                         <td><strong>${b.judul}</strong></td>
                         <td>${b.penerbit || '-'}</td>
-                        <td>
-                            ${b.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${b.kode}', '${b.link}')"><i class="fa-solid fa-book"></i> Buka</button>` : '-'}
+                       <td>
+                            ${b.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${b.kode}', '${b.link}')"><i class="fa-solid fa-book"></i> ${currentLang === 'id' ? 'Buka' : 'Open'}</button>` : '-'}
                         </td>
-                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-chart-simple"></i> ${b.views || 0} Klik</span></td>
+                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-chart-simple"></i> ${b.views || 0} ${currentLang === 'id' ? 'Klik' : 'Clicks'}</span></td>
                         <td>
                             <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="hapusBuku('${b.kode}')" title="Hapus Buku">
                                 <i class="fa-solid fa-trash"></i> ${currentLang === 'id' ? 'Hapus' : 'Delete'}
@@ -1717,11 +1717,11 @@
                 thBookAlpha: "Abjad",
                 thBookCode: "Kode Buku",
                 thBookTitle: "Judul Buku (A-Z)",
-                thBookCat: "Kategori / Bidang",
-                thBookAuthor: "Penulis / Penerbit",
-                thBookStock: "Stok",
-                thBookStatus: "Status Ketersediaan",
-                thBookBorrowers: "Peminjam Terdaftar",
+                thBookPublisher: "Penerbit",
+                thBookLink: "Link E-Book",
+                thBookViews: "Jumlah Dilihat",
+                thBookAction: "Aksi & Pengaturan",
+                lblAdminBookListTitle: "Daftar Master Koleksi Buku (Urut Alfabet A-Z)",
                 adminBanner: "Panel Administrator Aktif",
                 adminLogout: "Logout Admin",
                 sub1: "1. Kelola Koleksi Buku",
@@ -1732,10 +1732,9 @@
                 addBookTitle: "Tambah Koleksi Buku Baru",
                 formBookCode: "Kode Buku:",
                 formBookTitle: "Judul Buku Lengkap:",
-                formBookCat: "Kategori / Bidang ilmu:",
-                formBookAuthor: "Penulis / Penerbit:",
-                formBookStock: "Jumlah Stok Buku:",
-                btnSaveBook: "Simpan Buku Baru Ke Cloud",
+                formBookPublisher: "Penerbit:",
+                formBookLink: "Link E-Book:",
+                btnSaveBook: "Simpan Koleksi Baru",
                 announceTitle: "Pengaturan Papan Pengumuman Teks Berjalan",
                 announceForm: "Teks Pengumuman Baru:",
                 btnSaveAnnounce: "Simpan & Perbarui Ke Semua Device",
@@ -1833,11 +1832,11 @@
                 thBookAlpha: "Alphabet",
                 thBookCode: "Book Code",
                 thBookTitle: "Book Title (A-Z)",
-                thBookCat: "Category / Field",
-                thBookAuthor: "Author / Publisher",
-                thBookStock: "Stock",
-                thBookStatus: "Availability Status",
-                thBookBorrowers: "Registered Borrowers",
+                thBookPublisher: "Publisher",
+                thBookLink: "E-Book Link",
+                thBookViews: "Total Views",
+                thBookAction: "Action & Settings",
+                lblAdminBookListTitle: "Master Book Directory (A-Z Alphabetical Order)",
                 adminBanner: "Active Administrator Panel",
                 adminLogout: "Admin Logout",
                 sub1: "1. Manage Book Collection",
@@ -1848,10 +1847,9 @@
                 addBookTitle: "Add New Book Collection",
                 formBookCode: "Book Code:",
                 formBookTitle: "Full Book Title:",
-                formBookCat: "Category / Field:",
-                formBookAuthor: "Author / Publisher:",
-                formBookStock: "Stock Quantity:",
-                btnSaveBook: "Save New Book to Cloud",
+                formBookPublisher: "Publisher:",
+                formBookLink: "E-Book Link:",
+                btnSaveBook: "Save New Collection",
                 announceTitle: "Ticker Announcement Settings",
                 announceForm: "New Announcement Text:",
                 btnSaveAnnounce: "Save & Sync Across Devices",
@@ -1897,7 +1895,7 @@
                 cardSub: "Total library attendance recorded today",
                 counterSubText: "Visitors Today",
                 miniTaruna: "Cadets",
-                miniDosen: "Lecturers",
+                miniDensosn: "Lecturers",
                 miniStaf: "Staff/Public",
                 rulesHeader: "LIBRARY CODE OF CONDUCT & RULES — JAYAPURA AVIATION POLYTECHNIC",
                 rule1Title: "NO SMOKING",
@@ -1940,6 +1938,10 @@
                     el.innerHTML = t[key];
                 }
             }
+            // PERBARUI PLACEHOLDER INPUT PENCARIAN SECARA DINAMIS
+            document.getElementById('cariBukuKatalog').placeholder = lang === 'id' ? "Cari judul, kategori, atau penulis..." : "Search title, category, or author...";
+            document.getElementById('cariBukuAdmin').placeholder = lang === 'id' ? "Cari judul atau kode buku..." : "Search title or book code...";
+            document.getElementById('cariNamaAnggota').placeholder = lang === 'id' ? "Cari nama atau NIM anggota..." : "Search member name or ID...";
 
             renderLogKunjunganRingkas();
             filterDanRenderLaporan();
@@ -1947,7 +1949,7 @@
             renderTabelMasterAnggota();
             updateTodayCounterWidget();
         }
-
+        
         function toggleHelpdeskMenu() {
             const popover = document.getElementById('helpdeskPopover');
             popover.classList.toggle('active');
@@ -2440,9 +2442,9 @@
                         <td><strong>${buku.judul}</strong></td>
                         <td>${buku.penerbit || '-'}</td>
                         <td>
-                            ${buku.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${buku.kode}', '${buku.link}')"><i class="fa-solid fa-book"></i> Buka E-Book</button>` : '<span style="color:#94a3b8; font-size:11px;">-</span>'}
+                            ${buku.link ? `<button class="btn btn-primary" style="font-size:10px; padding:4px 8px;" onclick="bukaEbook('${buku.kode}', '${buku.link}')"><i class="fa-solid fa-book"></i> ${currentLang === 'id' ? 'Buka E-Book' : 'Open E-Book'}</button>` : '<span style="color:#94a3b8; font-size:11px;">-</span>'}
                         </td>
-                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-eye"></i> ${buku.views || 0} Kali Dilihat</span></td>
+                        <td><span class="badge badge-kat" style="background:#fef3c7; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-eye"></i> ${buku.views || 0} ${currentLang === 'id' ? 'Kali Dilihat' : 'Views'}</span></td>
                     </tr>
                 `;
             });
