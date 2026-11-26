@@ -1908,7 +1908,7 @@
                 cardSub: "Total library attendance recorded today",
                 counterSubText: "Visitors Today",
                 miniTaruna: "Cadets",
-                miniDensosn: "Lecturers",
+                miniDosen: "Lecturers",
                 miniStaf: "Staff/Public",
                 rulesHeader: "LIBRARY CODE OF CONDUCT & RULES — JAYAPURA AVIATION POLYTECHNIC",
                 rule1Title: "NO SMOKING",
@@ -2923,7 +2923,7 @@
         }
 
         // ==========================================
-        // INTEGRASI USB WEB SERIAL ESP32 & PEMETAAN SIDIK JARI
+        // INTEGRASI USB WEB SERIAL ESP32 & ENROLL LANGSUNG DARI WEB
         // ==========================================
         const STORAGE_FINGER_MAP_KEY = "perpus_nim_finger_map_v1";
 
@@ -2931,6 +2931,7 @@
         let usbReader = null;
         let usbKeepReading = false;
         let serialBuffer = "";
+        let activeEnrollSession = null; // { nim, nama, slotId }
 
         function ambilFingerMap() {
             try {
@@ -2954,6 +2955,14 @@
                 }
             }
             return null;
+        }
+
+        function cariSlotIdKosongBerikutnya() {
+            const map = ambilFingerMap();
+            for (let id = 1; id <= 127; id++) {
+                if (!map[String(id)]) return id;
+            }
+            return 1;
         }
 
         function hubungkanNimKeFingerId(nim, fingerId) {
@@ -2999,6 +3008,15 @@
             `;
         }
 
+        function setEnrollStatusBox(teks, bg, color) {
+            const box = document.getElementById("enrollStatusBox");
+            if (box) {
+                box.innerText = teks;
+                box.style.background = bg;
+                box.style.color = color;
+            }
+        }
+
         function bukaModalTambahSidikJari(nim) {
             const cleanNim = String(nim).trim();
             const anggota = masterAnggota.find(a => String(a.nim).trim() === cleanNim);
@@ -3010,28 +3028,74 @@
                 return;
             }
 
-            const idSaatIni = cariFingerIdByNim(cleanNim) || "";
-            const pesanInput = currentLang === 'id'
-                ? `Masukkan nomor ID slot sidik jari di modul JM-101B untuk:\n${anggota.nama} (${anggota.nim})`
-                : `Enter the JM-101B fingerprint slot ID for:\n${anggota.nama} (${anggota.nim})`;
+            const idSaatIni = cariFingerIdByNim(cleanNim) || cariSlotIdKosongBerikutnya();
+            activeEnrollSession = { nim: cleanNim, nama: anggota.nama, slotId: Number(idSaatIni) };
 
-            const inputId = prompt(pesanInput, idSaatIni);
-            if (inputId === null) return;
+            document.getElementById("enrollMemberLabel").innerText = `${anggota.nama} (${anggota.nim})`;
+            document.getElementById("enrollSlotIdInput").value = idSaatIni;
+            document.getElementById("btnMulaiEnroll").disabled = false;
 
-            const nomorId = Number(inputId.trim());
-            if (!Number.isInteger(nomorId) || nomorId <= 0) {
-                alert(currentLang === 'id'
-                    ? "Nomor ID sidik jari harus berupa angka bulat lebih dari 0."
-                    : "Fingerprint ID must be a positive whole number.");
+            if (!usbPort || !usbKeepReading) {
+                setEnrollStatusBox(
+                    "USB Serial belum terhubung. Klik 'Hubungkan Sensor USB' terlebih dahulu sebelum merekam jari.",
+                    "#fef3c7",
+                    "#92400e"
+                );
+            } else {
+                setEnrollStatusBox(
+                    "Sensor siap. Klik 'Mulai Rekam Jari' lalu tempelkan jari anggota ke sensor JM-101B.",
+                    "#e0f2fe",
+                    "#0369a1"
+                );
+            }
+
+            document.getElementById("modalEnrollSidikJari").classList.add("active");
+        }
+
+        function tutupModalEnroll() {
+            activeEnrollSession = null;
+            document.getElementById("modalEnrollSidikJari").classList.remove("active");
+        }
+
+        async function kirimPerintahKeESP32(teksPerintah) {
+            if (!usbPort || !usbPort.writable) return false;
+            const writer = usbPort.writable.getWriter();
+            try {
+                const encoder = new TextEncoder();
+                await writer.write(encoder.encode(teksPerintah + "\n"));
+                return true;
+            } finally {
+                writer.releaseLock();
+            }
+        }
+
+        async function mulaiRekamSidikJari() {
+            if (!activeEnrollSession) return;
+
+            if (!usbPort || !usbKeepReading || !usbPort.writable) {
+                setEnrollStatusBox(
+                    "Gagal: Port USB ESP32 belum terhubung. Hubungkan USB Serial terlebih dahulu.",
+                    "#fee2e2",
+                    "#991b1b"
+                );
                 return;
             }
 
-            hubungkanNimKeFingerId(cleanNim, nomorId);
-            renderTabelMasterAnggota();
+            const nomorId = Number(document.getElementById("enrollSlotIdInput").value.trim());
+            if (!Number.isInteger(nomorId) || nomorId < 1 || nomorId > 127) {
+                setEnrollStatusBox("Nomor ID slot harus angka bulat antara 1 sampai 127.", "#fee2e2", "#991b1b");
+                return;
+            }
 
-            alert(currentLang === 'id'
-                ? `Sidik jari ID #${nomorId} berhasil dihubungkan ke ${anggota.nama} (${anggota.nim}).`
-                : `Fingerprint ID #${nomorId} linked to ${anggota.nama} (${anggota.nim}).`);
+            activeEnrollSession.slotId = nomorId;
+            document.getElementById("btnMulaiEnroll").disabled = true;
+            setEnrollStatusBox(`Mengirim perintah rekam ID #${nomorId} ke sensor...`, "#e0f2fe", "#0369a1");
+
+            const terkirim = await kirimPerintahKeESP32(`ENROLL:${nomorId}`);
+            if (!terkirim) {
+                document.getElementById("btnMulaiEnroll").disabled = false;
+                setEnrollStatusBox("Gagal mengirim perintah ke ESP32.", "#fee2e2", "#991b1b");
+            }
         }
 
         function setSerialStatus(teks, warna) {
@@ -3044,7 +3108,57 @@
 
         function prosesBarisSerial(line) {
             const clean = line.trim();
-            if (!clean || !clean.startsWith("NIM:")) return;
+            if (!clean) return;
+
+            // 1. Tangani status proses pendaftaran (enroll) dari ESP32
+            if (clean.startsWith("ENROLL_STEP:")) {
+                const instruksi = clean.slice(12).trim();
+                setEnrollStatusBox(instruksi, "#fef3c7", "#92400e");
+                bicaraSuara(instruksi);
+                return;
+            }
+
+            if (clean.startsWith("ENROLL_ERR:")) {
+                const errMsg = clean.slice(11).trim();
+                setEnrollStatusBox(`Gagal: ${errMsg}`, "#fee2e2", "#991b1b");
+                const btn = document.getElementById("btnMulaiEnroll");
+                if (btn) btn.disabled = false;
+                return;
+            }
+
+            if (clean.startsWith("ENROLL_OK:")) {
+                const savedId = clean.slice(10).trim();
+                if (activeEnrollSession) {
+                    hubungkanNimKeFingerId(activeEnrollSession.nim, savedId);
+                    renderTabelMasterAnggota();
+                    const okMsg = `Berhasil! Sidik jari ID #${savedId} tersimpan & terhubung ke ${activeEnrollSession.nama}.`;
+                    setEnrollStatusBox(okMsg, "#dcfce7", "#166534");
+                    bicaraSuara("Pendaftaran sidik jari berhasil");
+                    const btn = document.getElementById("btnMulaiEnroll");
+                    if (btn) btn.disabled = false;
+                }
+                return;
+            }
+
+            if (clean.startsWith("ENROLL_BERHASIL:")) {
+                const info = clean.slice(16).trim();
+                const matchId = info.match(/#(\d+)/) || info.match(/(\d+)/);
+                const savedId = matchId ? matchId[1] : (activeEnrollSession ? activeEnrollSession.slotId : "");
+                if (activeEnrollSession && savedId) {
+                    hubungkanNimKeFingerId(activeEnrollSession.nim, savedId);
+                    renderTabelMasterAnggota();
+                    const okMsg = `Berhasil! Sidik jari ID #${savedId} tersimpan & terhubung ke ${activeEnrollSession.nama}.`;
+                    setEnrollStatusBox(okMsg, "#dcfce7", "#166534");
+                    bicaraSuara("Pendaftaran sidik jari berhasil");
+                    const btn = document.getElementById("btnMulaiEnroll");
+                    if (btn) btn.disabled = false;
+                }
+                return;
+            }
+            
+            // 2. Tangani pembacaan absensi normal (NIM:<id>)
+            if (!clean.startsWith("NIM:")) return;
+            if (activeEnrollSession) return; // Abaikan absensi saat modal rekam jari sedang terbuka
 
             const rawId = clean.slice(4).trim();
             const fingerMap = ambilFingerMap();
@@ -3140,6 +3254,36 @@
                 <div style="display: flex; gap: 10px; justify-content: center;">
                     <button class="btn btn-primary" onclick="verifikasiAdmin()" style="flex: 1;"><i class="fa-solid fa-right-to-bracket"></i> Masuk</button>
                     <button class="btn btn-danger" onclick="batalLoginAdmin()" style="flex: 1;"><i class="fa-solid fa-xmark"></i> Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL POPUP PENDAFTARAN SIDIK JARI LANGSUNG VIA USB -->
+    <div class="modal-overlay" id="modalEnrollSidikJari">
+        <div class="modal-container" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-fingerprint" style="color: var(--poltekbang-gold);"></i> Rekam Sidik Jari Anggota</h3>
+                <button class="modal-close-btn" onclick="tutupModalEnroll()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 22px;">
+                <p id="enrollMemberLabel" style="font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 12px;"></p>
+
+                <div class="form-group" style="text-align: left; margin-bottom: 14px;">
+                    <label for="enrollSlotIdInput">Nomor ID Slot Memori Sensor (1 - 127):</label>
+                    <input type="number" id="enrollSlotIdInput" min="1" max="127" style="text-align: center; font-size: 15px; font-weight: 700;">
+                </div>
+
+                <div id="enrollStatusBox" style="padding: 12px; border-radius: 10px; background: #f1f5f9; color: #334155; font-size: 12px; font-weight: 600; margin-bottom: 15px; min-height: 46px; display: flex; align-items: center; justify-content: center;">
+                    Pastikan Sensor USB sudah terhubung, lalu klik tombol Mulai Rekam Jari.
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button type="button" class="btn btn-primary" id="btnMulaiEnroll" onclick="mulaiRekamSidikJari()" style="flex: 1;">
+                        <i class="fa-solid fa-fingerprint"></i> Mulai Rekam Jari
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="tutupModalEnroll()" style="flex: 1;">
+                        <i class="fa-solid fa-xmark"></i> Tutup
+                    </button>
                 </div>
             </div>
         </div>
