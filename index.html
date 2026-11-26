@@ -1627,7 +1627,7 @@
 
             if (sortedBooks.length === 0) {
                 const noBookText = currentLang === 'id' ? 'Tidak ada data buku untuk kriteria ini.' : 'No book found for this criteria.';
-                body.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">${noBookText}</td></tr>`;
+                body.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">${noBookText}</td></tr>`;
                 return;
             }
 
@@ -2054,6 +2054,19 @@
                         teksPengumuman = data.teksPengumuman;
                         localStorage.setItem('pengumumanPerpus', teksPengumuman);
                         updateTickerTeks();
+                    }
+                }
+            });
+
+            db.ref('perpus_finger_map').on('value', (snapshot) => {
+                const cloudMap = snapshot.val();
+                if (cloudMap && typeof cloudMap === 'object') {
+                    localStorage.setItem(STORAGE_FINGER_MAP_KEY, JSON.stringify(cloudMap));
+                    renderTabelMasterAnggota();
+                } else {
+                    const localMap = ambilFingerMap();
+                    if (Object.keys(localMap).length > 0) {
+                        db.ref('perpus_finger_map').set(localMap);
                     }
                 }
             });
@@ -2944,6 +2957,10 @@
 
         function simpanFingerMap(map) {
             localStorage.setItem(STORAGE_FINGER_MAP_KEY, JSON.stringify(map));
+            if (isFirebaseConnected && db) {
+                db.ref('perpus_finger_map').set(map)
+                    .catch(err => console.error("Gagal menyinkronkan fingerMap ke Firebase:", err));
+            }
         }
 
         function cariFingerIdByNim(nim) {
