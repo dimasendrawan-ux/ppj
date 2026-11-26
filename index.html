@@ -1073,6 +1073,15 @@
                             <button onclick="prosesAbsensiNIM()"><i class="fa-solid fa-arrow-right"></i> <span id="lblBtnProsesNIM">Proses</span></button>
                         </div>
                         <div id="kioskAlert" class="alert-box"></div>
+                        <!-- TAMBAHAN KONTROL USB SERIAL ESP32 -->
+                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #cbd5e1; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <button type="button" class="btn btn-primary" id="btnConnectSerial" onclick="hubungkanSerialESP32()" style="font-size: 11px; padding: 6px 12px;">
+                                <i class="fa-brands fa-usb"></i> Hubungkan Sensor USB
+                            </button>
+                            <span id="serialStatusText" style="font-size: 11px; font-weight: 700; color: #64748b;">
+                                USB Serial: Terputus
+                            </span>
+                        </div> 
                     </div>
                 </div>
 
@@ -1337,6 +1346,7 @@
                                     <th id="thMemCat">Kategori Anggota</th>
                                     <th id="thMemVisits">Total Riwayat Kunjungan</th>
                                     <th id="thMemStatus">Status Akun</th>
+                                    <th>Sidik Jari</th>
                                     <th id="thMemAction">Aksi & Pengaturan</th>
                                 </tr>
                             </thead>
@@ -2498,7 +2508,7 @@
 
             if (sortedMembers.length === 0) {
                 const noMemberText = currentLang === 'id' ? 'Tidak ada data anggota terdaftar untuk kriteria ini.' : 'No registered member found for this criteria.';
-                body.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
+                body.innerHTML = `<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:20px;">${noMemberText}</td></tr>`;
                 return;
             }
 
@@ -2528,6 +2538,7 @@
                         <td><span class="badge badge-kat">${m.kategori || 'Taruna/Mahasiswa'}</span></td>
                         <td><span class="badge badge-keluar">${totalVisits} ${currentLang === 'id' ? 'Kali Kunjungan' : 'Visits'}</span></td>
                         <td>${statusBadgeHTML}</td>
+                        <td>${renderTombolSidikJari(m.nim)}</td>
                         <td>
                             <div style="display:flex; gap:6px;">
                                 <button class="btn ${btnToggleClass}" style="padding:4px 8px; font-size:11px;" onclick="toggleStatusAnggota('${m.nim}')" title="Ubah Status Akun">
@@ -2911,6 +2922,201 @@
             document.body.removeChild(link);
         }
 
+        // ==========================================
+        // INTEGRASI USB WEB SERIAL ESP32 & PEMETAAN SIDIK JARI
+        // ==========================================
+        const STORAGE_FINGER_MAP_KEY = "perpus_nim_finger_map_v1";
+
+        let usbPort = null;
+        let usbReader = null;
+        let usbKeepReading = false;
+        let serialBuffer = "";
+
+        function ambilFingerMap() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_FINGER_MAP_KEY) || "{}");
+            } catch (err) {
+                console.error("Gagal membaca pemetaan sidik jari:", err);
+                return {};
+            }
+        }
+
+        function simpanFingerMap(map) {
+            localStorage.setItem(STORAGE_FINGER_MAP_KEY, JSON.stringify(map));
+        }
+
+        function cariFingerIdByNim(nim) {
+            const cleanNim = String(nim).trim();
+            const map = ambilFingerMap();
+            for (const [fingerId, mappedNim] of Object.entries(map)) {
+                if (String(mappedNim).trim() === cleanNim) {
+                    return fingerId;
+                }
+            }
+            return null;
+        }
+
+        function hubungkanNimKeFingerId(nim, fingerId) {
+            const cleanNim = String(nim).trim();
+            const cleanId = String(fingerId).trim();
+            if (!cleanNim || !cleanId) return false;
+
+            const map = ambilFingerMap();
+            for (const [existingId, existingNim] of Object.entries(map)) {
+                if (String(existingNim).trim() === cleanNim || existingId === cleanId) {
+                    delete map[existingId];
+                }
+            }
+
+            map[cleanId] = cleanNim;
+            simpanFingerMap(map);
+            return true;
+        }
+
+        function renderTombolSidikJari(nim) {
+            const cleanNim = String(nim).trim();
+            const fingerId = cariFingerIdByNim(cleanNim);
+
+            if (fingerId) {
+                return `
+                    <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap;">
+                        <span class="badge badge-masuk" style="font-size:11px;">
+                            <i class="fa-solid fa-fingerprint"></i> ID #${fingerId}
+                        </span>
+                        <button type="button" data-nim="${cleanNim}" onclick="bukaModalTambahSidikJari(this.dataset.nim)"
+                                style="font-size:11px; padding:3px 7px; border-radius:6px; border:1px solid #cbd5e1; background:#fff; cursor:pointer; font-weight:600;">
+                            ${currentLang === 'id' ? 'Ubah' : 'Edit'}
+                        </button>
+                    </div>
+                `;
+            }
+
+            return `
+                <button type="button" data-nim="${cleanNim}" onclick="bukaModalTambahSidikJari(this.dataset.nim)"
+                        style="font-size:11px; padding:4px 8px; border-radius:6px; border:none; background:#2563eb; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:4px;">
+                    <i class="fa-solid fa-fingerprint"></i> ${currentLang === 'id' ? '+ Sidik Jari' : '+ Fingerprint'}
+                </button>
+            `;
+        }
+
+        function bukaModalTambahSidikJari(nim) {
+            const cleanNim = String(nim).trim();
+            const anggota = masterAnggota.find(a => String(a.nim).trim() === cleanNim);
+
+            if (!anggota) {
+                alert(currentLang === 'id'
+                    ? `Anggota dengan NIM/ID "${cleanNim}" tidak ditemukan.`
+                    : `Member with NIM/ID "${cleanNim}" was not found.`);
+                return;
+            }
+
+            const idSaatIni = cariFingerIdByNim(cleanNim) || "";
+            const pesanInput = currentLang === 'id'
+                ? `Masukkan nomor ID slot sidik jari di modul JM-101B untuk:\n${anggota.nama} (${anggota.nim})`
+                : `Enter the JM-101B fingerprint slot ID for:\n${anggota.nama} (${anggota.nim})`;
+
+            const inputId = prompt(pesanInput, idSaatIni);
+            if (inputId === null) return;
+
+            const nomorId = Number(inputId.trim());
+            if (!Number.isInteger(nomorId) || nomorId <= 0) {
+                alert(currentLang === 'id'
+                    ? "Nomor ID sidik jari harus berupa angka bulat lebih dari 0."
+                    : "Fingerprint ID must be a positive whole number.");
+                return;
+            }
+
+            hubungkanNimKeFingerId(cleanNim, nomorId);
+            renderTabelMasterAnggota();
+
+            alert(currentLang === 'id'
+                ? `Sidik jari ID #${nomorId} berhasil dihubungkan ke ${anggota.nama} (${anggota.nim}).`
+                : `Fingerprint ID #${nomorId} linked to ${anggota.nama} (${anggota.nim}).`);
+        }
+
+        function setSerialStatus(teks, warna) {
+            const el = document.getElementById("serialStatusText");
+            if (el) {
+                el.innerText = teks;
+                el.style.color = warna;
+            }
+        }
+
+        function prosesBarisSerial(line) {
+            const clean = line.trim();
+            if (!clean || !clean.startsWith("NIM:")) return;
+
+            const rawId = clean.slice(4).trim();
+            const fingerMap = ambilFingerMap();
+            const nimTarget = fingerMap[rawId] || rawId;
+
+            const anggotaTarget = masterAnggota.find(a => String(a.nim).trim() === String(nimTarget).trim());
+
+            if (anggotaTarget) {
+                prosesAbsensiPengunjung(anggotaTarget);
+            } else {
+                const pesan = currentLang === 'id'
+                    ? `Sidik jari (ID ${rawId}) belum terhubung ke anggota mana pun di daftar.`
+                    : `Fingerprint (ID ${rawId}) is not linked to any registered member.`;
+                tampilkanAlertKiosk('error', pesan);
+                bicaraSuara(pesan);
+            }
+        }
+
+        async function bacaLoopSerial() {
+            const textDecoder = new TextDecoder();
+            while (usbPort && usbPort.readable && usbKeepReading) {
+                usbReader = usbPort.readable.getReader();
+                try {
+                    while (true) {
+                        const { value, done } = await usbReader.read();
+                        if (done) break;
+                        if (value) {
+                            serialBuffer += textDecoder.decode(value, { stream: true });
+                            const lines = serialBuffer.split(/\r?\n/);
+                            serialBuffer = lines.pop() || "";
+                            for (const line of lines) {
+                                prosesBarisSerial(line);
+                            }
+                        }
+                    }
+                } catch (err) {
+                    console.error("Kesalahan baca Web Serial:", err);
+                } finally {
+                    usbReader.releaseLock();
+                }
+            }
+        }
+
+        async function hubungkanSerialESP32() {
+            if (!("serial" in navigator)) {
+                alert(currentLang === 'id'
+                    ? "Browser ini tidak mendukung Web Serial API. Gunakan Google Chrome atau Microsoft Edge."
+                    : "This browser does not support Web Serial API. Use Google Chrome or Microsoft Edge.");
+                return;
+            }
+
+            try {
+                if (usbPort && usbKeepReading) {
+                    usbKeepReading = false;
+                    if (usbReader) await usbReader.cancel();
+                    await usbPort.close();
+                    usbPort = null;
+                    setSerialStatus("USB Serial: Terputus", "#64748b");
+                    return;
+                }
+
+                usbPort = await navigator.serial.requestPort();
+                await usbPort.open({ baudRate: 115200 });
+                usbKeepReading = true;
+                setSerialStatus("USB Serial: Terhubung", "#059669");
+                bacaLoopSerial();
+            } catch (err) {
+                console.error("Gagal membuka port serial:", err);
+                setSerialStatus("USB Serial: Gagal/Batal", "#dc2626");
+            }
+        }
+        
         updateTickerTeks();
         setPeriodMode('harian');
         renderLogKunjunganRingkas();
